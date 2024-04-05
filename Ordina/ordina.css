@@ -1,14 +1,77 @@
-body {
-    background-color: green;
+.corpoOrdina {
+    margin-top: 40px;
+    padding: 20px;
 
-    display: flex;
-    justify-content: center;
-    vertical-align: center;
+    display: grid;
+    grid-template: 'a a a a b b' 10px
+                   'a a a a b b' 10px
+                   'a a a a b b' 10px;
 }
 
-.container {
-    height: 70vh;
-    width: 70vw;
-    margin-top: 14vh;
-    background: red;
+.listaOrdina {
+    grid-area: 'a';
+}
+
+.riepilogo {
+    grid-area: 'b';
+    background-color: #fff;
+    border-radius: 10px;
+    height: 60vh;
+    width: 15vw;
+    margin-top: 60px;
+    position: fixed;
+    left: 65vw;
+}
+
+h2 {
+    font-size: 30px;
+    text-align: center;
+    margin-top: 35px;
+    color: #000000;
+}
+
+h3 {
+    font-size: 20px;
+    margin-top: 35px;
+    color: #000000;
+}
+
+.flexbox {
+    display: block;
+    justify-content: space-evenly;
+    padding: 10px;
+}
+
+.flexitem {
+    flex-grow: 1;
+    width: 40vw;
+    background-color: #ffffff;
+    padding: 25px;
+    justify-content: space-evenly;
+    margin: 5px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    box-shadow: 5px 5px 3px rgba(0, 0, 0, 0.1);
+}
+
+.Oggetto {
+    font-size: 20px;
+    font-style: italic;
+    font-weight: bold;
+    text-align: left;
+    padding-top: 10px;
+    grid-area: b;
+    padding-left: 10px;
+}
+
+.Descrizione {
+    font-size: 15px;
+    font-style: normal;
+    color: #7b1c1c;
+    padding-top: 10px;
+    text-align: left;
+    margin-top: 25px;
+    padding-top: 20px;
+    grid-area: c;
+    padding-left: 10px;
 }
