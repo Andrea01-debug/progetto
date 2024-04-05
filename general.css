@@ -109,6 +109,7 @@ body {
 
 .MenuImgCont img{
    width: 65vw;
+   
    height: 65vh;
 }
 
@@ -125,7 +126,7 @@ body {
     border-radius: 30px;
     padding: 2%;
     text-align: center;
-    
+        
 }
 
 .modal {
