@@ -1,0 +1,67 @@
+.Oggetto {
+    font-size: 20px;
+    font-style: italic;
+    font-weight: bold;
+    text-align: center;
+    padding-top: 10px;
+    grid-area: b;
+}
+
+.Descrizione {
+    font-size: 15px;
+    font-style: normal;
+    color: #7b1c1c;
+    padding-top: 10px;
+    text-align: center;
+    margin-top: 25px;
+    padding-top: 20px;
+    grid-area: c;
+}
+
+.immagine{
+    grid-area: a;
+}
+
+.bodyMenu {
+    padding-top: 60px;
+}
+
+h2 {
+    font-size: 50px;
+    text-align: center;
+    margin-top: 35px;
+    color: #4462cf;
+}
+
+h3 {
+    font-size: 30px;
+    text-align: center;
+    margin-top: 35px;
+    color: #ff00d0;
+}
+
+.flexbox {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    padding: 10px;
+}
+
+.flexitem {
+    flex-grow: 1;
+    background-color: #ffffff;
+    padding: 25px;
+    justify-content: space-evenly;
+    margin: 5px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    box-shadow: 5px 5px 3px rgba(0, 0, 0, 0.1);
+
+    display: grid;
+    grid-template:  'a a a b b b b' 10px
+                    'a a a b b b b' 10px
+                    'a a a c c c c' 5px
+                    'a a a c c c c'/ 5px;
+}
+
+

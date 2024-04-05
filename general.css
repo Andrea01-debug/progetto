@@ -1,0 +1,228 @@
+body { 
+    background: none;
+    overflow: hidden;
+    display: flex;
+    justify-content:center;
+}
+
+#container {
+    font-size: 20px;
+    background-color: #857f69e1;
+    width: 65vw;
+    height: 70vh;
+    border: 10px solid gray;
+    border-radius: 50px;
+    margin-top: 14vh;
+/*     top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); */
+    
+    display: block;
+    justify-content: center;
+    align-items: center;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    position: fixed;
+}
+
+.header {
+  font-size: 20px;
+	height: 50px;
+	width: 64vw;
+  padding: 10px;
+	background-color: rgba(133, 127, 105, 0.883);
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  z-index: 1000;
+  position: fixed;
+  
+  left: auto;
+  
+}
+
+.headimg {
+  font-size: 20px;
+	position: fixed;
+	height: auto;
+	width: auto;
+	object-fit: contain;
+}
+
+.MainBlock{
+  padding-top: 60px;
+}
+
+.b1 {
+    margin: 15px;
+    border: none;
+    padding: 1rem 2rem;
+    margin: 0;
+    text-decoration: none;
+    background: #3a8cf171;
+    color: #ffffff;
+    font-family: Montserrat, Sans-serif;
+    font-size: 1rem;
+    cursor: pointer;
+    text-align: center;
+    transition: background 250ms ease-in-out, /* rallenta quando passi */
+                transform 150ms ease;    /* rallenta animazione quando premi */
+}
+
+.b1:hover,
+.b1:focus {
+  background: #0053ba;
+}
+
+.b1:active {
+  transform: scale(0.9);
+} 
+
+.navigat {
+    display: block;
+    float: right;
+    line-height: 45px; 
+    margin-right: 5px; 
+    color: white; 
+    font-family: Montserrat, Sans-serif;
+    font-size: 18px; 
+    font-weight: 600; 
+    text-transform: uppercase;
+    text-decoration: none; 
+}
+
+.navigat:hover {
+  color: #ec8a00;
+}
+
+.BloccoMenu {
+    position: relative;
+    padding-top: 10px;
+}
+
+.MenuImgCont{
+    position: relative;
+    max-width: 20%;
+}
+
+.MenuImgCont img{
+   width: 65vw;
+   height: 65vh;
+}
+
+.MenuButtonCont {
+    height: 150px;
+    width: 200px;
+    color: rgb(0, 0, 0);
+    font-size: 12px;
+    position: absolute; /* Posiziona il contenitore dei pulsanti sopra l'immagine */
+    top: 50%; /* Posiziona il contenitore dei pulsanti a metà altezza del contenitore padre */
+    left: 75%; /* Posiziona il contenitore dei pulsanti a metà larghezza del contenitore padre */
+    transform: translate(-50%, -50%);
+    background-color: #ffffffdc;
+    border-radius: 30px;
+    padding: 2%;
+    text-align: center;
+    
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4);
+  z-index: 1001
+}
+
+.modal-content {
+  background-color: #ffffffdc;
+  margin: 15% auto;
+  padding: 20px;
+  border-radius: 30px;
+  border: 1px solid #888;
+  width: 40%; 
+  text-align: center;
+  box-shadow: 8px 8px 6px rgba(0, 0, 0, 0.1);
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.access-link {
+    cursor: pointer;
+    color: #fff;
+    text-decoration: none;
+}
+
+.access-link:hover {
+    color: #ec8a00;
+}
+
+.circle-button {
+    display: inline-block;
+    width: 50px; /* Imposta la larghezza del pulsante */
+    height: 50px; /* Imposta l'altezza del pulsante */
+    border-radius: 50%; /* Rende il pulsante a forma di cerchio */
+    background-color: #ec8a00; /* Colore di sfondo del pulsante */
+    color: #fff; /* Colore del testo del pulsante */
+    border: none; /* Rimuove il bordo del pulsante */
+    font-size: 20px; /* Dimensione del testo del pulsante */
+    cursor: pointer; /* Cambia il cursore quando si passa sopra al pulsante */
+  }
+
+.circle-button:hover {
+  background-color: #bd6e00; /* Cambia colore quando il pulsante è in hover */
+}
+
+.MenumapCont{
+  grid-area: a;
+  position: relative; 
+  margin-left: 15px;
+}
+.MenuContactCont{
+  padding: 25px; 
+  text-align:center; 
+  background-color: rgba(240, 248, 255, 0.553); 
+  color: black;
+  grid-area: b;
+}
+
+
+.ContainerContatti {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  padding: 10px;
+}
+
+.BloccoMenuCont{
+  flex-grow: 1;
+  background-color: #ffffff00;
+  padding: 5px;
+  justify-content: space-evenly;
+  margin: 5px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+
+  display: grid;
+  grid-template:  'a a a a b b b' 
+                  'a a a a b b b' 
+                  'a a a a b b b' /5px;
+}

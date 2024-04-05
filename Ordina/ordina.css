@@ -1,0 +1,14 @@
+body {
+    background-color: green;
+
+    display: flex;
+    justify-content: center;
+    vertical-align: center;
+}
+
+.container {
+    height: 70vh;
+    width: 70vw;
+    margin-top: 14vh;
+    background: red;
+}

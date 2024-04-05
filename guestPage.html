@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="it">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" href="general.css">
+        <script src="modal.js"></script>
+    </head>
+    <body>
+        <div id="container">
+            <div class="header">
+                <a href="guestPage.html" draggable="false">
+                    <img src="BurgerShot-HDLogo.svg" width="180px" style="margin-top: -2px;" draggable="false">
+                </a>
+                <nav class="navigat" style="text-align: right;">
+                    
+                    <li class="navigat"><a href="#" data-target="#modalLogin" data-toggle="modal" class="access-link" onclick="openModal()">Accedi</a></li>
+                    <li class="navigat"><a href="#IdContatti" class="navigat">Contatti</a></li>
+                    <li class="navigat"><a href="Prenota/prenota.html" class="navigat">Prenota</a></li>
+                    <li class="navigat"><a href="Ordina/ordina.html" class="navigat">Ordina</a></li>
+                    <li class="navigat"><a href="Menu/menu.html" class="navigat">Menu</a></li>
+
+                </nav>
+                <!--a href="google.com" style="float: right; line-height: 45px; margin-right: 10px; text-decoration: none; color: white; font-family: Montserrat, Sans-serif;font-size: 14px; font-weight: 600; text-transform: uppercase;"> Accedi </a-->
+            </div>
+            <div class="MainBlock">
+                <div class="BloccoMenu" id="IdMenu">
+                    <div class="MenuImgCont">
+                        <img src="Menu/menu.png" draggable="false">
+                    </div>
+                    <div class="MenuButtonCont">
+                        <p>Esplodi il nostro fantastico menù, non potrai fare a meno di prendere qualcosa, anche perché se non lo fai veniamo a cercarti a casa :D</p>
+                        <a href="Menu/menu.html">
+                            <button class="b1">Menu</button>
+                        </a>
+                    </div>
+                </div>
+                <div class="BloccoMenu" id="IdOrdina">
+                    <div class="MenuImgCont">
+                        <img src="Ordina/ordina.jpeg" draggable="false">
+                    </div>
+                    <div class="MenuButtonCont">
+                        <p>Siamo affilitati con JustEat e Deliveroo, possibile che devi venire a romprere a noi  > (</p>
+                        <a href="Ordina/ordina.html">
+                            <button class="b1">Ordina</button>
+                        </a>
+                    </div>
+                </div>
+                <div class="BloccoMenu" id="IdPrenota">
+                    <div class="MenuImgCont">
+                        <img src="Prenota/prenota.avif" draggable="false">
+                    </div>
+                    <div class="MenuButtonCont">
+                        <p>Vuoi venire a mangiare da noi? Chiama al telefono :D</p>
+                        <a href="Prenota/prenota.html">
+                            <button class="b1">Prenota</button>
+                        </a>
+                    </div>
+                </div>
+                <div class="ContainerContatti">
+                    <div class="BloccoMenuCont" id="IdContatti">
+                        <div class="MenumapCont">
+                            <iframe src="https://gta-5-map.com?locationIds=12864" height="500px" width = "700px"></iframe>
+                        </div>
+                        <div class="MenuContactCont">
+                            <p>Telefono: <a href="tel:33333333333"> 33333333333 </a></p>
+                            <p>Email: <a href="mailto:info@burgershot.com">info@burgershot.com</a></p>
+                            <p>Indirizzo: <a href="#" onclick="SetNavigatore()">San Andreas Avenue, 333</a></p>  <!--TODO STessa cosa per telefono ed email-->
+                            Social
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <!-- Finestra modale -->
+            <div id="myModal" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal()">&times;</span>
+                    <h2>Accedi</h2>
+                    <form id="loginForm" action="login" method="post">
+                        <p>
+                            Username: <input type="text" name="username" placeholder="Username"><br><br>
+                            Password: <input type="password" name="password" placeholder="Password"><br><br>
+                            Ricordami <input type="checkbox" name="checkbox"><br><br>
+                            
+                            LOGIN &emsp; <button class="circle-button" type="submit" style="border-radius: 50%;">→</button><br><br>
+                            
+                            <a href="#" class="registrati" style="float: left;">Registrati</a> 
+                            <a href="#" class="forgotpsw" style="float: right;">Password dimenticata?</a>
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
