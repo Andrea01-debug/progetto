@@ -34,6 +34,7 @@
                 <div class="flexbox">
                     <div class="flexitem">
                         <div class="Oggetto">Hamburger</div>
+                        <div class="Prezzo">5</div>
                         <div class="Descrizione">Panino, Insalata, Pomodoro, Hamburger</div>
                         <div class = "bottoni">
                             <button class = "add"> + </button>
@@ -107,43 +108,53 @@
     $(".add").click(function() {
         var flexitem = $(this).closest('.flexitem');
         var itemName = flexitem.find('.Oggetto').text(); // Ottieni il nome dell'oggetto dalla classe
+        var priceElement = flexitem.find('.Prezzo');
+        var price = parseInt(priceElement.text());
+        var prezzo = 0;
+        prezzo += price;
+        priceElement.text(price)
         var quantityElement = flexitem.find(".quantity");
         var quantity = parseInt(quantityElement.text());
         quantity++;
         quantityElement.text(quantity);
-
-        updateRiepilogo(itemName, quantity);
+        console.log(quantity);
+        updateRiepilogo(itemName, quantity, prezzo);
     });
 
     $(".sub").click(function() {
         var flexitem = $(this).closest('.flexitem');
         var itemName = flexitem.find('.Oggetto').text(); // Ottieni il nome dell'oggetto dalla classe
+        var priceElement = flexitem.find('.Prezzo');
+        var price = parseInt(priceElement.text());
+        priceElement.text(price)
         var quantityElement = flexitem.find(".quantity");
         var quantity = parseInt(quantityElement.text());
         if (quantity > 0) {
             quantity--;
             quantityElement.text(quantity);
-
-            updateRiepilogo(itemName, quantity);
+            var prezzo = 0;
+            prezzo += price;
+            
+            console.log(quantity);
+            updateRiepilogo(itemName, quantity, prezzo);
         }
     });
 });
 
-function updateRiepilogo(itemName, quantity) {
+function updateRiepilogo(itemName, quantity, price) {
     var riepilogoList = $("#riepilogoLista");
     var listItem = riepilogoList.find("li[data-item='" + itemName + "']");
 
     if (quantity === 0) {
         listItem.remove();
     } else {
-        var newItem = "<li data-item='" + itemName + "'>" + itemName + ": " + quantity + "</li>";
+        var newItem = "<li data-item='" + itemName + "'>" + itemName + ": " + quantity +" $"+ price + "</li>";
 
         if (listItem.length === 0) {
             riepilogoList.append(newItem);
         } else {
-            var currentQuantity = parseInt(listItem.text().split(": ")[1]);
-            var newQuantity = currentQuantity + 1;
-            newItem = "<li data-item='" + itemName + "'>" + itemName + ": " + newQuantity + "</li>";
+            var newPrice = quantity * price;
+            newItem = "<li data-item='" + itemName + "'>" + itemName + ": " + quantity +" $"+ newPrice + "</li>";
             listItem.replaceWith(newItem);
         }
     }
