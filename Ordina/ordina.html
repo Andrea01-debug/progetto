@@ -1,105 +1,105 @@
 <!DOCTYPE html>
 <html lang="it">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="../general.css">
-    <link rel="stylesheet" href="ordina.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-</head>
-<body>
-    <div id="container" style="background-color: #f77a0d;">
-        <div class="header">
-            <a href="../guestPage.html" draggable="false">
-                <img src="../BurgerShot-HDLogo.svg" width="180px" style="margin-top: -2px;" draggable="false">
-            </a>
-            <nav class="navigat" style="text-align: right;">
-                
-                <li class="navigat"><a href="#" data-target="#modalLogin" data-toggle="modal" class="access-link" onclick="openModal()">Accedi</a></li>
-                <li class="navigat"><a href="../guestPage.html#IdContatti" class="navigat">Contatti</a></li>
-                <li class="navigat"><a href="../Prenota/prenota.html" class="navigat">Prenota</a></li>
-                <li class="navigat"><a href="../Ordina/ordina.html" class="navigat">Ordina</a></li>
-                <li class="navigat"><a href="../Menu/menu.html" class="navigat">Menu</a></li>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" href="../general.css">
+        <link rel="stylesheet" href="ordina.css">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    </head>
+    <body>
+        <div id="container" style="background-color: #f77a0d;">
+            <div class="header">
+                <a href="../guestPage.html" draggable="false">
+                    <img src="../BurgerShot-HDLogo.svg" width="180px" style="margin-top: -2px;" draggable="false">
+                </a>
+                <nav class="navigat" style="text-align: right;">
+                    
+                    <li class="navigat"><a href="#" data-target="#modalLogin" data-toggle="modal" class="access-link" onclick="openModal()">Accedi</a></li>
+                    <li class="navigat"><a href="../guestPage.html#IdContatti" class="navigat">Contatti</a></li>
+                    <li class="navigat"><a href="../Prenota/prenota.html" class="navigat">Prenota</a></li>
+                    <li class="navigat"><a href="../Ordina/ordina.html" class="navigat">Ordina</a></li>
+                    <li class="navigat"><a href="../Menu/menu.html" class="navigat">Menu</a></li>
 
-            </nav>
-        </div>
-        
-        <div class="corpoOrdina">
-            <div class="listaOrdina">
-                <h2>Ordina dal nostro menu</h2>
+                </nav>
+            </div>
+            
+            <div class="corpoOrdina">
+                <div class="listaOrdina">
+                    <h2>Ordina dal nostro menu</h2>
 
-                <h3>Panini</h3>
+                    <h3>Panini</h3>
 
-                <div class="flexbox">
-                    <div class="flexitem">
-                        <div class="Oggetto">Hamburger</div>
-                        <div class="Prezzo">5</div>
-                        <div class="Descrizione">Panino, Insalata, Pomodoro, Hamburger</div>
-                        <div class = "bottoni">
-                            <button class = "add"> + </button>
-                            <span class="quantity">0</span>
-                            <button class = "sub"> - </button>
+                    <div class="flexbox">
+                        <div class="flexitem">
+                            <div class="Oggetto">Hamburger</div>
+                            <div class="Prezzo">5</div>
+                            <div class="Descrizione">Panino, Insalata, Pomodoro, Hamburger</div>
+                            <div class = "bottoni">
+                                <button class = "add"> + </button>
+                                <span class="quantity">0</span>
+                                <button class = "sub"> - </button>
+                            </div>
                         </div>
-                    </div>
-                    <div class="flexitem">
-                        <div class="Oggetto">Cheeseburger</div>
-                        <div class="Prezzo">6.90</div>
-                        <div class="Descrizione">Panino, Insalata, Pomodoro, Hamburger, Cheddar</div>
-                        <div class = "bottoni">
-                            <button class = "add"> + </button>
-                            <span class="quantity">0</span>
-                            <button class = "sub"> - </button>
+                        <div class="flexitem">
+                            <div class="Oggetto">Cheeseburger</div>
+                            <div class="Prezzo">6.90</div>
+                            <div class="Descrizione">Panino, Insalata, Pomodoro, Hamburger, Cheddar</div>
+                            <div class = "bottoni">
+                                <button class = "add"> + </button>
+                                <span class="quantity">0</span>
+                                <button class = "sub"> - </button>
+                            </div>
                         </div>
-                    </div>
-                    <div class="flexitem">
-                        <div class="Oggetto">Double Cheeseburger</div>
-                        <div class="Descrizione">Panino, Insalata, Pomodoro, Doppio Hamburger, Doppio Cheddar</div>
-                        <div class = "bottoni">
-                            <button class = "add"> + </button>
-                            <span class="quantity">0</span>
-                            <button class = "sub"> - </button>
+                        <div class="flexitem">
+                            <div class="Oggetto">Double Cheeseburger</div>
+                            <div class="Descrizione">Panino, Insalata, Pomodoro, Doppio Hamburger, Doppio Cheddar</div>
+                            <div class = "bottoni">
+                                <button class = "add"> + </button>
+                                <span class="quantity">0</span>
+                                <button class = "sub"> - </button>
+                            </div>
                         </div>
-                    </div>
-                    <div class="flexitem">
-                        <div class="Oggetto">Bacon Cheeseburger</div>
-                        <div class="Descrizione">Panino, Insalata, Pomodoro, Hamburger, Cheddar, Bacon</div>
-                        <div class = "bottoni">
-                            <button class = "add"> + </button>
-                            <span class="quantity">0</span>
-                            <button class = "sub"> - </button>
+                        <div class="flexitem">
+                            <div class="Oggetto">Bacon Cheeseburger</div>
+                            <div class="Descrizione">Panino, Insalata, Pomodoro, Hamburger, Cheddar, Bacon</div>
+                            <div class = "bottoni">
+                                <button class = "add"> + </button>
+                                <span class="quantity">0</span>
+                                <button class = "sub"> - </button>
+                            </div>
                         </div>
-                    </div>
-                    <div class="flexitem">
-                        <div class="Oggetto">Chicken Burger</div>
-                        <div class="Descrizione">Panino, Insalata, Pomodoro, Petto di pollo</div>
-                        <div class = "bottoni">
-                            <button class = "add"> + </button>
-                            <span class="quantity">0</span>
-                            <button class = "sub"> - </button>
+                        <div class="flexitem">
+                            <div class="Oggetto">Chicken Burger</div>
+                            <div class="Descrizione">Panino, Insalata, Pomodoro, Petto di pollo</div>
+                            <div class = "bottoni">
+                                <button class = "add"> + </button>
+                                <span class="quantity">0</span>
+                                <button class = "sub"> - </button>
+                            </div>
                         </div>
-                    </div>
-                    <div class="flexitem">
-                        <div class="Oggetto">Chicken Burger BBQ</div>
-                        <div class="Descrizione">Panino, Insalata, Pomodoro, Petto di Pollo, Salsa BBQ</div>
-                        <div class = "bottoni">
-                            <button class = "add"> + </button>
-                            <span class="quantity">0</span>
-                            <button class = "sub"> - </button>
+                        <div class="flexitem">
+                            <div class="Oggetto">Chicken Burger BBQ</div>
+                            <div class="Descrizione">Panino, Insalata, Pomodoro, Petto di Pollo, Salsa BBQ</div>
+                            <div class = "bottoni">
+                                <button class = "add"> + </button>
+                                <span class="quantity">0</span>
+                                <button class = "sub"> - </button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="riepilogo">
-                <h2>Riepilogo Ordine</h2>
-                <ul id="riepilogoLista"></ul>
-            </div>
-            
+                <div class="riepilogo">
+                    <h2>Riepilogo Ordine</h2>
+                    <ul id="riepilogoLista"></ul>
+                </div>
+                
 
+            </div>
+        
         </div>
-    
-    </div>
-</body>
+    </body>
 </html>
 
 

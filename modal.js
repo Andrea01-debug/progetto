@@ -15,22 +15,34 @@ function closeModalRegister() {
     document.getElementById("ModalRegister").style.display = "none";
 }
 
-$("#registerForm").submit(function(event) {
-    console.log("We")
-    event.preventDefault();
-    let Nome = $("#nome").val();
-    let Cognome = $("#cognome").val();
-    let Data = $("#data").val();
-    let Username = $("#username").val();
-    let Password = $("#password").val();
-    console.log(Nome)
+window.onload=function(){
+    document.getElementById("registerForm").addEventListener("submit", function(e) {
+        console.log("We")
+        e.preventDefault();
+        let Nome = $("#nome").val();
+        let Cognome = $("#cognome").val();
+        let Data = $("#data").val();
+        let Username = $("#username").val();
+        let Password = $("#password").val();
+        console.log(Nome)
 
-    $.post("https://LTW/RegistraUtente", JSON.stringify({
-        nome: Nome,
-        cognome: Cognome,
-        data: Data,
-        username: Username,
-        password: Password
-    }));
+        fetch("https://LTW/RegistraUtente", {
+            method: "POST",
+            body: JSON.stringify({
+                nome: Nome,
+                cognome: Cognome,
+                data: Data,
+                username: Username,
+                password: Password
+            }),
+        })
 
-});
+        $.post("https://LTW/RegistraUtente", JSON.stringify({
+            nome: Nome,
+            cognome: Cognome,
+            data: Data,
+            username: Username,
+            password: Password
+        }));
+    })
+  }
