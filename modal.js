@@ -1,21 +1,36 @@
-function openModal() {
-    document.getElementById("myModal").style.display = "block";
+function openModalLogin() {
+    document.getElementById("myModalLogin").style.display = "block";
 }
 
-function closeModal() {
-    document.getElementById("myModal").style.display = "none";
+function closeModalLogin() {
+    document.getElementById("myModalLogin").style.display = "none";
 }
 
-function SetNavigatore() {
-    
+function openModalRegister() {
+    document.getElementById("ModalRegister").style.display = "block";
+    console.log("Ciao")
 }
 
+function closeModalRegister() {
+    document.getElementById("ModalRegister").style.display = "none";
+}
 
+$("#registerForm").submit(function(event) {
+    console.log("We")
+    event.preventDefault();
+    let Nome = $("#nome").val();
+    let Cognome = $("#cognome").val();
+    let Data = $("#data").val();
+    let Username = $("#username").val();
+    let Password = $("#password").val();
+    console.log(Nome)
 
-document.getElementById('modal-toggle').addEventListener('click', function() {
-    document.getElementById('modal').style.display = 'block'; // Mostra il modal quando il link viene cliccato
-});
+    $.post("https://LTW/RegistraUtente", JSON.stringify({
+        nome: Nome,
+        cognome: Cognome,
+        data: Data,
+        username: Username,
+        password: Password
+    }));
 
-document.querySelector('.modal-overlay').addEventListener('click', function() {
-    document.getElementById('modal').style.display = 'none'; // Nascondi il modal quando l'overlay viene cliccato
 });

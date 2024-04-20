@@ -6,6 +6,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="../general.css">
     <link rel="stylesheet" href="ordina.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <div id="container" style="background-color: #f77a0d;">
@@ -34,31 +35,62 @@
                     <div class="flexitem">
                         <div class="Oggetto">Hamburger</div>
                         <div class="Descrizione">Panino, Insalata, Pomodoro, Hamburger</div>
+                        <div class = "bottoni">
+                            <button class = "add"> + </button>
+                            <span class="quantity">0</span>
+                            <button class = "sub"> - </button>
+                        </div>
                     </div>
                     <div class="flexitem">
                         <div class="Oggetto">Cheeseburger</div>
                         <div class="Descrizione">Panino, Insalata, Pomodoro, Hamburger, Cheddar</div>
+                        <div class = "bottoni">
+                            <button class = "add"> + </button>
+                            <span class="quantity">0</span>
+                            <button class = "sub"> - </button>
+                        </div>
                     </div>
                     <div class="flexitem">
                         <div class="Oggetto">Double Cheeseburger</div>
                         <div class="Descrizione">Panino, Insalata, Pomodoro, Doppio Hamburger, Doppio Cheddar</div>
+                        <div class = "bottoni">
+                            <button class = "add"> + </button>
+                            <span class="quantity">0</span>
+                            <button class = "sub"> - </button>
+                        </div>
                     </div>
                     <div class="flexitem">
                         <div class="Oggetto">Bacon Cheeseburger</div>
                         <div class="Descrizione">Panino, Insalata, Pomodoro, Hamburger, Cheddar, Bacon</div>
+                        <div class = "bottoni">
+                            <button class = "add"> + </button>
+                            <span class="quantity">0</span>
+                            <button class = "sub"> - </button>
+                        </div>
                     </div>
                     <div class="flexitem">
                         <div class="Oggetto">Chicken Burger</div>
                         <div class="Descrizione">Panino, Insalata, Pomodoro, Petto di pollo</div>
+                        <div class = "bottoni">
+                            <button class = "add"> + </button>
+                            <span class="quantity">0</span>
+                            <button class = "sub"> - </button>
+                        </div>
                     </div>
                     <div class="flexitem">
                         <div class="Oggetto">Chicken Burger BBQ</div>
                         <div class="Descrizione">Panino, Insalata, Pomodoro, Petto di Pollo, Salsa BBQ</div>
+                        <div class = "bottoni">
+                            <button class = "add"> + </button>
+                            <span class="quantity">0</span>
+                            <button class = "sub"> - </button>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="riepilogo">
-                
+                <h2>Riepilogo Ordine</h2>
+                <ul id="riepilogoLista"></ul>
             </div>
             
 
@@ -67,3 +99,53 @@
     </div>
 </body>
 </html>
+
+
+
+<script>
+   $(document).ready(function() {
+    $(".add").click(function() {
+        var flexitem = $(this).closest('.flexitem');
+        var itemName = flexitem.find('.Oggetto').text(); // Ottieni il nome dell'oggetto dalla classe
+        var quantityElement = flexitem.find(".quantity");
+        var quantity = parseInt(quantityElement.text());
+        quantity++;
+        quantityElement.text(quantity);
+
+        updateRiepilogo(itemName, quantity);
+    });
+
+    $(".sub").click(function() {
+        var flexitem = $(this).closest('.flexitem');
+        var itemName = flexitem.find('.Oggetto').text(); // Ottieni il nome dell'oggetto dalla classe
+        var quantityElement = flexitem.find(".quantity");
+        var quantity = parseInt(quantityElement.text());
+        if (quantity > 0) {
+            quantity--;
+            quantityElement.text(quantity);
+
+            updateRiepilogo(itemName, quantity);
+        }
+    });
+});
+
+function updateRiepilogo(itemName, quantity) {
+    var riepilogoList = $("#riepilogoLista");
+    var listItem = riepilogoList.find("li[data-item='" + itemName + "']");
+
+    if (quantity === 0) {
+        listItem.remove();
+    } else {
+        var newItem = "<li data-item='" + itemName + "'>" + itemName + ": " + quantity + "</li>";
+
+        if (listItem.length === 0) {
+            riepilogoList.append(newItem);
+        } else {
+            var currentQuantity = parseInt(listItem.text().split(": ")[1]);
+            var newQuantity = currentQuantity + 1;
+            newItem = "<li data-item='" + itemName + "'>" + itemName + ": " + newQuantity + "</li>";
+            listItem.replaceWith(newItem);
+        }
+    }
+}
+</script>

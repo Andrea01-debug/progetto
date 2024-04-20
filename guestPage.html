@@ -5,7 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
         <link rel="stylesheet" href="general.css">
-        <script src="modal.js"></script> 
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="modal.js"></script>
     </head>
     <body>
         <div id="container">
@@ -15,7 +16,7 @@
                 </a>
                 <nav class="navigat" style="text-align: right;">
                     
-                    <li class="navigat"><a href="#" data-target="#modalLogin" data-toggle="modal" class="access-link" onclick="openModal()">Accedi</a></li>
+                    <li class="navigat"><a href="#" data-target="#myModalLogin" data-toggle="modal" class="access-link" onclick="openModalLogin()">Accedi</a></li>
                     <li class="navigat"><a href="#IdContatti" class="navigat">Contatti</a></li>
                     <li class="navigat"><a href="Prenota/prenota.html" class="navigat">Prenota</a></li>
                     <li class="navigat"><a href="Ordina/ordina.html" class="navigat">Ordina</a></li>
@@ -73,12 +74,12 @@
                 </div>
             </div>
             <br>
-            <!-- Finestra modale -->
-            <div id="myModal" class="modal">
+            <!-- Finestra modale Login -->
+            <div id="myModalLogin" class="modal">
                 <div class="modal-content">
-                    <span class="close" onclick="closeModal()">&times;</span>
+                    <span class="close" onclick="closeModalLogin()">&times;</span>
                     <h2>Accedi</h2>
-                    <form id="loginForm" action="login" method="post">
+                    <form id="loginForm" method="post">
                         <p>
                             Username: <input type="text" name="username" placeholder="Username"><br><br>
                             Password: <input type="password" name="password" placeholder="Password"><br><br>
@@ -86,8 +87,27 @@
                             
                             LOGIN &emsp; <button class="circle-button" type="submit" style="border-radius: 50%;">→</button><br><br>
                             
-                            <a href="#" class="registrati" style="float: left;">Registrati</a> 
+                            <a href='#' class="registrati" style="float: left;" onclick="closeModalLogin(); openModalRegister()">Registrati</a> 
                             <a href="#" class="forgotpsw" style="float: right;">Password dimenticata?</a>
+                        </p>
+                    </form>
+                </div>
+            </div>
+            <!-- Finestra modale Register -->
+            <div id="ModalRegister" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModalRegister()">&times;</span>
+                    <h2>Registrati</h2>
+                    <form id="registerForm" method="post">
+                        <p>
+                            Nome: <input type="text" id="nome" name="nome" placeholder="Mario" required><br><br>
+                            Cognome: <input type="text" id="cognome" name="cognome" placeholder="Rossi" required><br><br>
+                            Data di Nascita: <input type="date" id="data" name="data" required><br><br>
+                            Username: <input type="text" id="username" name="username" placeholder="Username" required><br><br>
+                            Password: <input type="password" id="password" name="password" placeholder="Password" required><br><br>
+                            
+                            REGISTRATI &emsp; <button class="circle-button" type="submit" style="border-radius: 50%;" onclick="closeModalLogin()">→</button><br><br>
+                            
                         </p>
                     </form>
                 </div>
