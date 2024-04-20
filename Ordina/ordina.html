@@ -44,6 +44,7 @@
                     </div>
                     <div class="flexitem">
                         <div class="Oggetto">Cheeseburger</div>
+                        <div class="Prezzo">6.90</div>
                         <div class="Descrizione">Panino, Insalata, Pomodoro, Hamburger, Cheddar</div>
                         <div class = "bottoni">
                             <button class = "add"> + </button>
@@ -109,10 +110,10 @@
         var flexitem = $(this).closest('.flexitem');
         var itemName = flexitem.find('.Oggetto').text(); // Ottieni il nome dell'oggetto dalla classe
         var priceElement = flexitem.find('.Prezzo');
-        var price = parseInt(priceElement.text());
+        var price = parseFloat(priceElement.text());
         var prezzo = 0;
-        prezzo += price;
-        priceElement.text(price)
+        prezzo = (prezzo + price).toFixed(2);
+        priceElement.text(price);
         var quantityElement = flexitem.find(".quantity");
         var quantity = parseInt(quantityElement.text());
         quantity++;
@@ -125,15 +126,15 @@
         var flexitem = $(this).closest('.flexitem');
         var itemName = flexitem.find('.Oggetto').text(); // Ottieni il nome dell'oggetto dalla classe
         var priceElement = flexitem.find('.Prezzo');
-        var price = parseInt(priceElement.text());
-        priceElement.text(price)
+        var price = parseFloat(priceElement.text());
+        priceElement.text(price);
         var quantityElement = flexitem.find(".quantity");
         var quantity = parseInt(quantityElement.text());
         if (quantity > 0) {
             quantity--;
             quantityElement.text(quantity);
             var prezzo = 0;
-            prezzo += price;
+            prezzo = (prezzo + price).toFixed(2);
             
             console.log(quantity);
             updateRiepilogo(itemName, quantity, prezzo);
@@ -148,13 +149,13 @@ function updateRiepilogo(itemName, quantity, price) {
     if (quantity === 0) {
         listItem.remove();
     } else {
-        var newItem = "<li data-item='" + itemName + "'>" + itemName + ": " + quantity +" $"+ price + "</li>";
+        var newItem = "<li data-item='" + itemName + "'>" + quantity + " x " + itemName + " $"+ price + "</li>";
 
         if (listItem.length === 0) {
             riepilogoList.append(newItem);
         } else {
-            var newPrice = quantity * price;
-            newItem = "<li data-item='" + itemName + "'>" + itemName + ": " + quantity +" $"+ newPrice + "</li>";
+            var newPrice = (quantity * price).toFixed(2);
+            newItem = "<li data-item='" + itemName + "'>" + quantity + " x "  + itemName + " $"+ newPrice + "</li>";
             listItem.replaceWith(newItem);
         }
     }
