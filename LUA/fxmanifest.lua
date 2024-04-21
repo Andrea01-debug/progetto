@@ -9,27 +9,20 @@ lua54 'yes'
 
 server_scripts{
     'server.lua',
+	'@oxmysql/lib/MySQL.lua',
 } 
 
 client_scripts{
-    'nui.lua',
+	'client.lua',
 } 
 
-ui_page 'html/index.html'
+ui_page 'html/guestPage.html'
 
 files {
-	'img.png',
-	'html/index.html',
-	'html/index.css',
-	'html/index.js',
-	'html/reset.css',
-	'html/aluminum.png',
-	'html/copper.png',
-	'html/glass.png',
-	'html/iron.png',
-	'html/plastic.png',
-	'html/rubber.png',
-	'html/steel.png',
-	'html/aluminumoxide.png',
-	'html/ironoxide.png',
+	
+	'html/*',
+	'html/Menu/*',
+	'html/Ordina/*',
+	'html/Prenota/*',
+	
 }

@@ -81,14 +81,14 @@
                     <h2>Accedi</h2>
                     <form id="loginForm" method="post">
                         <p>
-                            Username: <input type="text" name="username" placeholder="Username"><br><br>
-                            Password: <input type="password" name="password" placeholder="Password"><br><br>
+                            Username: <input type="text" id="username" name="username" placeholder="Username" required><br><br>
+                            Password: <input type="password" id="password" name="password" placeholder="Password" required><br><br>
                             Ricordami <input type="checkbox" name="checkbox"><br><br>
                             
                             LOGIN &emsp; <button class="circle-button" type="submit" style="border-radius: 50%;">→</button><br><br>
                             
                             <a href='#' class="registrati" style="float: left;" onclick="closeModalLogin(); openModalRegister()">Registrati</a> 
-                            <a href="#" class="forgotpsw" style="float: right;">Password dimenticata?</a>
+                            <a href="#" class="forgotpsw" style="float: right;" onclick="closeModalLogin(); openModalFgPsw()" >Password dimenticata?</a>
                         </p>
                     </form>
                 </div>
@@ -103,11 +103,54 @@
                             Nome: <input type="text" id="nome" name="nome" placeholder="Mario" required><br><br>
                             Cognome: <input type="text" id="cognome" name="cognome" placeholder="Rossi" required><br><br>
                             Data di Nascita: <input type="date" id="data" name="data" required><br><br>
-                            Username: <input type="text" id="username" name="username" placeholder="Username" required><br><br>
-                            Password: <input type="password" id="password" name="password" placeholder="Password" required><br><br>
+                            Username: <input type="text" id="usernamelog" name="usernamelog" placeholder="Username" required><br><br>
+                            Password: <input type="password" id="passwordlog" name="passwordlog" placeholder="Password" required><br><br>
+                            Domanda di sicurezza: 
+                            <select id="domanda" name="domanda" required onchange="toggleRisposta()"> <!-- Attiva cella delle risposte -->
+                                <option value="">Seleziona una domanda...</option> <!-- Default -->
+                                <option value="primo cane">Qual è il nome del tuo primo cane?</option>
+                                <option value="città natale">Qual è la tua città natale?</option>
+                                <option value="migliore amico">Chi è stato il tuo migliore amico d'infanzia?</option>
+                                <option value="scuola superiore">Qual è stato il nome della tua scuola superiore?</option>
+                            </select><br><br>
+                            
+                            
+                            <div id="risposta-div" style="display: none;">
+                                Risposta: <input type="text" id="risposta" name="risposta" placeholder="Inserisci risposta" required><br><br>
+                            </div>
                             
                             REGISTRATI &emsp; <button class="circle-button" type="submit" style="border-radius: 50%;">→</button><br><br>
+
+                            <a href="#" data-target="#myModalLogin" data-toggle="modal" style="float: left;" onclick="closeModalRegister(); openModalLogin()">Login</a>
+                            <a href='#' class="forgotpsw" style="float: right;" onclick="closeModalRegister(); openModalFgPsw()">Password dimenticata?</a> 
+                        </p>
+                    </form>
+                </div>
+            </div>
+            <!-- Finestra modale Password dimenticata -->
+            <div id="ModalFgPsw" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModalFgPsw()">&times;</span>
+                    <h2>Password Dimenticata</h2>
+                    <form id="FgPswForm" method="post">
+                        <p>
+                            Username: <input type="text" id="usernamepsw" name="usernamepsw" placeholder="Username"><br><br>
+                            Data di Nascita: <input type="date" id="datapsw" name="datapsw" required><br><br>
+                            Domanda di sicurezza: 
+                            <select id="domandapsw" name="domandapsw" required onchange="toggleRisposta()"> <!-- Attiva cella delle risposte -->
+                                <option value="">Seleziona una domanda...</option> <!-- Default -->
+                                <option value="primo cane">Qual è il nome del tuo primo cane?</option>
+                                <option value="città natale">Qual è la tua città natale?</option>
+                                <option value="migliore amico">Chi è stato il tuo migliore amico d'infanzia?</option>
+                                <option value="scuola superiore">Qual è stato il nome della tua scuola superiore?</option>
+                            </select><br><br>
+                            Risposta: <input type="text" id="rispostapsw" name="rispostapsw" placeholder="Inserisci risposta" required><br><br>
+                            Nuova password: <input type="password" id="passwordfgpsw" name="passwordfgpsw" placeholder="Password" required><br><br>
+
+                            RESET PASSWORD &emsp; <button class="circle-button" type="submit" style="border-radius: 50%;">→</button><br><br>
                             
+                            <a href='#' class="registrati" style="float: left;" onclick="closeModalFgPsw(); openModalRegister()">Registrati</a> 
+                            <a href="#" class="logn" style="float: right;" onclick="closeModalFgPsw(); openModalLogin()" >Login</a>
                         </p>
                     </form>
                 </div>
