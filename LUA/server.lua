@@ -148,11 +148,12 @@ RegisterNetEvent("LTW:PrenotaUnTavolo", function(nome, numero, data, ora)
                 ['@ora'] = ora,
             }, function(result) 
                 if #result == 0 then
-                    MySQL.Async.insert("INSERT INTO ltwPrenota (Nome, Numero, Data, Ora) VALUES (?, ?, ?, ?)", {
+                    MySQL.Async.insert("INSERT INTO ltwPrenota (Nome, Numero, Data, Ora, Tavolo) VALUES (?, ?, ?, ?, ?)", {
                         nome,
                         numero,
                         data,
-                        ora
+                        ora,
+                        i
                     })
                     TriggerClientEvent("QBCore:Notify", src, "Tavolo prenotato!", 'success')
                     check = false
