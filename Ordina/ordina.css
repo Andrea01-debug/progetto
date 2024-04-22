@@ -23,10 +23,16 @@
     left: 65vw;
 }
 
+.corpoLista {
+    height: 30vh;  /* Altezza fissa per la scrollability */
+    overflow-y: auto;  /* Abilita lo scorrimento verticale */
+    padding: 10px;  /* Facoltativo: aggiunge un po' di spazio interno */
+    background-color: #490909;  /* Facoltativo: imposta il colore di sfondo */
+    border: 1px solid #00d80b;  /* Facoltativo: aggiunge un bordo */
+}
+
 .bottoni{
     grid-area: 'c';
-    
-    
 }
 
 .add, .sub {

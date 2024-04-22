@@ -34,3 +34,36 @@ RegisterNUICallback("exit", function(data)
     --chat("exited", {0,255,0})
     SetDisplay(false)
 end)
+
+RegisterNetEvent("LTW:ErroreRegistrazione")
+AddEventHandler("LTW:ErroreRegistrazione", function(message)
+    -- Invia un messaggio NUI al JavaScript
+    SendNUIMessage({
+        type = "registrationError",
+        message = message
+    })
+end)
+RegisterNetEvent("LTW:InvalidLogin")
+AddEventHandler("LTW:InvalidLogin", function(message)
+    -- Invia un messaggio NUI al JavaScript
+    SendNUIMessage({
+        type = "invalidLogin",
+        message = message
+    })
+end)
+
+RegisterNetEvent("LTW:CloseRegisterWindow")
+AddEventHandler("LTW:CloseRegisterWindow", function()
+    -- Invia un messaggio NUI al JavaScript
+    SendNUIMessage({
+        type = "closeRegisterWindow"
+    })
+end)
+RegisterNetEvent("LTW:CloseLoginWindow")
+AddEventHandler("LTW:CloseLoginWindow", function()
+    -- Invia un messaggio NUI al JavaScript
+    SendNUIMessage({
+        type = "closeLoginWindow"
+    })
+end)
+

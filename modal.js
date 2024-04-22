@@ -45,8 +45,31 @@ window.onload=function(){
 			domanda : Domanda,
 			risposta : Risposta,
 		}));
-		closeModalRegister();  // messo qui per chiudere il register SOLO se sono stati riempiti tutti i campi
+		//closeModalRegister();  // messo qui per chiudere il register SOLO se sono stati riempiti tutti i campi
 	});
+
+	window.addEventListener("message", function(event) {
+		if (event.data.type === "registrationError") {
+			Swal.fire({
+				icon: 'error',
+				title: 'Errore',
+				text: event.data.message,
+				confirmButtonText: 'OK'
+			});
+		} else if (event.data.type === "closeRegisterWindow") {
+			closeModalRegister();
+		} else if (event.data.type === "invalidLogin"){
+			Swal.fire({
+				icon: 'error',
+				title: 'Errore',
+				text: event.data.message,
+				confirmButtonText: 'OK'
+			});
+		}else if (event.data.type === "closeLoginWindow") {
+			closeModalLogin();
+		}
+	});
+
 
 	document.getElementById('loginForm').addEventListener('submit', function(event){
 		event.preventDefault();/* 
@@ -63,7 +86,7 @@ window.onload=function(){
 			username: Username,
 			password: Password
 		}));
-		closeModalLogin();  // messo qui per chiudere il login SOLO se sono stati riempiti tutti i campi
+		//closeModalLogin();  // messo qui per chiudere il login SOLO se sono stati riempiti tutti i campi
 	});
 	
 	document.getElementById('FgPswForm').addEventListener('submit', function(event){

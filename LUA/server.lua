@@ -6,6 +6,8 @@ RegisterNetEvent("LTW:RegistraServer", function(username, password, nome, cognom
         ['@username'] = username,
     }, function(result)
         if result and #result > 0 then
+            print(QBCore.Debug(result))
+            TriggerClientEvent("LTW:ErroreRegistrazione", src, 'Nome utente già in uso')
             TriggerClientEvent("QBCore:Notify", src, "Nome utente già in uso", 'error')
         else
             MySQL.Async.insert("INSERT INTO ltwtable (NomeUtente, Password, CitizenID, Nome, Cognome, Data, Domanda, Risposta) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", {
@@ -18,7 +20,8 @@ RegisterNetEvent("LTW:RegistraServer", function(username, password, nome, cognom
                 domanda,
                 risposta
                 })
-                TriggerClientEvent("QBCore:Notify", source, "Ti sei registrato con successo!", 'success')
+            TriggerClientEvent("QBCore:Notify", src, "Ti sei registrato con successo!", 'success')
+            TriggerClientEvent("LTW:CloseRegisterWindow", src)
         end
     end)
 end)
@@ -32,10 +35,12 @@ RegisterNetEvent("LTW:LoginServer", function(username, password)
         if result and #result > 0 then
             print("Login riuscito")
             print("source:", src)
+            TriggerClientEvent("LTW:CloseLoginWindow", src)
             TriggerClientEvent("QBCore:Notify", src, "Login riuscito", 'success')
         else
             print("Nome utente o password errati")
             print("source:", src)
+            TriggerClientEvent("LTW:InvalidLogin", src, 'Nome utente o password errati')
             TriggerClientEvent("QBCore:Notify", src, "Nome utente o password errati", 'error')
         end
     end)
