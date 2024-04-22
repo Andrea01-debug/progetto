@@ -10,60 +10,60 @@ local sessionTable = {}
 local i = 1
 local tavoli = {
     [1] = {
-        numero = 1,
-        dim = 2
+        ["numero"] = 1,
+        ["dim"] = 2
     },
     [2] = {
-        numero = 2,
-        dim = 2
+        ["numero"] = 2,
+        ["dim"] = 2
     },
     [3] = {
-        numero = 3,
-        dim = 2
+        ["numero"] = 3,
+        ["dim"] = 2
     },
     [4] = {
-        numero = 4,
-        dim = 2
+        ["numero"] = 4,
+        ["dim"] = 2
     },
     [5] = {
-        numero = 5,
-        dim = 3
+        ["numero"] = 5,
+        ["dim"] = 3
     },
     [6] = {
-        numero = 6,
-        dim = 3
+        ["numero"] = 6,
+        ["dim"] = 3
     },
     [7] = {
-        numero = 7,
-        dim = 4
+        ["numero"] = 7,
+        ["dim"] = 4
     },
     [8] = {
-        numero = 8,
-        dim = 4
+        ["numero"] = 8,
+        ["dim"] = 4
     },
     [9] = {
-        numero = 9,
-        dim = 4
+        ["numero"] = 9,
+        ["dim"] = 4
     },
     [10] = {
-        numero = 10,
-        dim = 4
+        ["numero"] = 10,
+        ["dim"] = 4
     },
     [11] = {
-        numero = 11,
-        dim = 4
+        ["numero"] = 11,
+        ["dim"] = 4
     },
     [12] = {
-        numero = 12,
-        dim = 4
+        ["numero"] = 12,
+        ["dim"] = 4
     },
     [13] = {
-        numero = 13,
-        dim = 5
+        ["numero"] = 13,
+        ["dim"] = 5
     },
     [14] = {
-        numero = 14,
-        dim = 5
+        ["numero"] = 14,
+        ["dim"] = 5
     },
     
 }
@@ -139,11 +139,11 @@ end)
 RegisterNetEvent("LTW:PrenotaUnTavolo", function(nome, numero, data, ora)
     local src = source
     local check = true
-    local i = 0 
-    while(check and i < #tavoli) do
-        if numero <= tavoli[i].dim then
+    local j = 0 
+    while(check and j < #tavoli) do
+        if numero <= tavoli[j]["dim"] then
             MySQL.Async.fetchAll('SELECT * FROM ltwPrenota WHERE data = @data AND ora = @ora AND tavolo = @tavolo', {
-                ['@tavolo'] = i,
+                ['@tavolo'] = j,
                 ['@data'] = data,
                 ['@ora'] = ora,
             }, function(result) 
@@ -153,14 +153,14 @@ RegisterNetEvent("LTW:PrenotaUnTavolo", function(nome, numero, data, ora)
                         numero,
                         data,
                         ora,
-                        i
+                        j
                     })
                     TriggerClientEvent("QBCore:Notify", src, "Tavolo prenotato!", 'success')
                     check = false
                 end
             end)
         end
-        i = i + 1;
+        j = j + 1;
     end
     if check == true then
         TriggerClientEvent("QBCore:Notify", src, "Non è stato possibile prenotare un tavolo, cambia giorno o ora", 'error')

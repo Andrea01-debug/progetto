@@ -8,6 +8,9 @@
 
     <script src="../modal.js"></script>
     <script src="prenota.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
 </head>
 <body>
     <div id="container" style="background-color: orange;">
@@ -33,14 +36,14 @@
             <!--a href="google.com" style="float: right; line-height: 45px; margin-right: 10px; text-decoration: none; color: white; font-family: Montserrat, Sans-serif;font-size: 14px; font-weight: 600; text-transform: uppercase;"> Accedi </a-->
             <h2 style="text-align: center;">Prenota un tavolo</h2>
 
-            <form id="FormPrenotaziona" method="post">
+            <form id="FormPrenotazione" method="post">
                 <p style="padding-left: 5%;">
-                    Nome Prenotazione: <input type="text" id="nome" name="nome" placeholder="Mario" required><br><br>
-                    Numero di persone: <input type="number" id="numero" name="numero" placeholder="4" required><br><br>
-                    Data: <input type="date" id="data" name="data" required><br><br>
-                    Ora: <input type="time" id="time" name="time" placeholder="20:00" min="19:00" max="23:00" required><br><br>                    
+                    Nome Prenotazione: <input type="text" id="nomepren" name="nome" placeholder="Mario" required><br><br>
+                    Numero di persone: <input type="number" id="numeropren" name="numero" placeholder="4" required><br><br>
+                    Data: <input type="date" id="datapren" name="data" required><br><br>
+                    Ora: <input type="time" id="timepren" name="time" placeholder="20:00" min="19:00" max="23:00" required><br><br>                    
                 </p>
-                <button> Prenota </button>
+                <button type="submit"> Prenota </button>
             </form>
         
         
