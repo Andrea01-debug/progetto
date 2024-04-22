@@ -5,7 +5,19 @@ body {
     justify-content:center;
 }
 
+.modal-content h2{
+  color: rgb(0, 0, 0);
+  font-size: 35px;
+}
+
+.modal-content p{
+  color: rgb(0, 0, 0);
+  font-size: 20px;
+}
+
+
 #container {
+    top: 0;
     font-size: 20px;
     background-color: #857f69e1;
     width: 65vw;

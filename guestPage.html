@@ -5,6 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
         <link rel="stylesheet" href="general.css">
+        
+
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="modal.js"></script>
@@ -17,7 +19,12 @@
                 </a>
                 <nav class="navigat" style="text-align: right;">
                     
-                    <li class="navigat"><a href="#" data-target="#myModalLogin" data-toggle="modal" class="access-link" onclick="openModalLogin()">Accedi</a></li>
+                    <li class="navigat"><a id="Accedi" href="#" data-target="#myModalLogin" data-toggle="modal" class="access-link" onclick="openModalLogin()">Accedi</a></li>
+                    <li class="navigat"><a id="Profilo" style="display: none;" onclick="toggleProfiloTendina()">Profilo</a></li>
+                    <div class="profiloTendina" id="MenuATendina" style="display: none;">
+                        <a id="Logout" href="#" data-target="#myModalLogin" data-toggle="modal" class="access-link" onclick="openLogout()">Logout</a>
+                    </div>
+                    
                     <li class="navigat"><a href="#IdContatti" class="navigat">Contatti</a></li>
                     <li class="navigat"><a href="Prenota/prenota.html" class="navigat">Prenota</a></li>
                     <li class="navigat"><a href="Ordina/ordina.html" class="navigat">Ordina</a></li>

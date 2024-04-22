@@ -24,5 +24,6 @@ files {
 	'html/Menu/*',
 	'html/Ordina/*',
 	'html/Prenota/*',
+	'html/Main/*',
 	
 }
