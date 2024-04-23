@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prenota un tavolo</title>
     <link rel="stylesheet" href="../general.css">
+    <link rel="stylesheet" href="prenota.css">
 
     <script src="../modal.js"></script>
     <script src="prenota.js"></script>
@@ -13,7 +14,7 @@
     
 </head>
 <body>
-    <div id="container" style="background-color: orange;">
+    <div id="container" style="background-color: rgb(255, 222, 161);">
         <div class="header">
             <a href="../guestPage.html" draggable="false">
                 <img src="../BurgerShot-HDLogo.svg" width="180px" style="margin-top: -2px;" draggable="false">
@@ -32,25 +33,25 @@
 
             </nav>
 
-            <p> <a href="https://www.gta5-mods.com/maps/gtaiv-burgershot-interior-sp-and-fivem"> Clicca per mappa </a> </p>
-            <!--a href="google.com" style="float: right; line-height: 45px; margin-right: 10px; text-decoration: none; color: white; font-family: Montserrat, Sans-serif;font-size: 14px; font-weight: 600; text-transform: uppercase;"> Accedi </a-->
+            <!--<p> <a href="https://www.gta5-mods.com/maps/gtaiv-burgershot-interior-sp-and-fivem"> Clicca per mappa </a> </p>
+            a href="google.com" style="float: right; line-height: 45px; margin-right: 10px; text-decoration: none; color: white; font-family: Montserrat, Sans-serif;font-size: 14px; font-weight: 600; text-transform: uppercase;"> Accedi </a-->
             <h2 style="text-align: center;">Prenota un tavolo</h2>
 
+            
             <form id="FormPrenotazione" method="post">
-                <p style="padding-left: 5%;">
+                <p>
                     Nome Prenotazione: <input type="text" id="nomepren" name="nome" placeholder="Mario" required><br><br>
                     Numero di persone: <input type="number" id="numeropren" name="numero" placeholder="4" required><br><br>
                     Data: <input type="date" id="datapren" name="data" required><br><br>
                     Ora: <input type="time" id="timepren" name="time" placeholder="20:00" min="19:00" max="23:00" required><br><br>                    
                 </p>
-                <button type="submit"> Prenota </button>
+                <button class="prenota-button" type="submit"> Prenota </button>
             </form>
-        
-        
+    
+            
         
         </div>
         
-
         
 
     </div>

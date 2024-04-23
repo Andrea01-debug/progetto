@@ -1,1 +1,55 @@
-prova
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Stili per il body */
+body {
+    font-family: Arial, sans-serif;
+}
+
+
+
+
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Stili per i campi di input */
+input[type="text"],
+input[type="number"],
+input[type="date"],
+input[type="time"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: none;
+    box-sizing: border-box;
+}
+
+p {
+    padding: 25px;
+}
+
+/* Stili per il pulsante di prenotazione */
+button[type="submit"] {
+    width: 20vw;
+    padding: 20px;
+    margin: 25px;
+    background-color: #ff8a15;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-family: Arial, sans-serif;
+}
+
+button[type="submit"]:hover {
+    background-color: #e66000;
+}

@@ -139,14 +139,30 @@ end)
 RegisterNetEvent("LTW:PrenotaUnTavolo", function(nome, numero, data, ora)
     local src = source
     local check = true
-    local j = 0 
+    local j = 1
+    local time = strsplit(ora, ":")
+    print(QBCore.Debug(time))
     while(check and j < #tavoli) do
-        if numero <= tavoli[j]["dim"] then
-            MySQL.Async.fetchAll('SELECT * FROM ltwPrenota WHERE data = @data AND ora = @ora AND tavolo = @tavolo', {
+        --[[ print("- j")
+        print(j)
+        print("- check")
+        print(check)
+        print('- data')
+        print(data)
+        print('- ora')
+        print(time[1]) ]]
+        print(j)
+        if tonumber(numero) <= tavoli[j]["dim"] then
+            MySQL.Async.fetchAll('SELECT * FROM ltwPrenota WHERE Data = @data AND Ora = @ora AND Tavolo = @tavolo', {
                 ['@tavolo'] = j,
                 ['@data'] = data,
                 ['@ora'] = ora,
-            }, function(result) 
+            }, function(result)
+                print(j)
+                print(#result)
+                print(#result)
+                print(QBCore.Debug(result))
+                print(j)
                 if #result == 0 then
                     MySQL.Async.insert("INSERT INTO ltwPrenota (Nome, Numero, Data, Ora, Tavolo) VALUES (?, ?, ?, ?, ?)", {
                         nome,
@@ -160,6 +176,8 @@ RegisterNetEvent("LTW:PrenotaUnTavolo", function(nome, numero, data, ora)
                 end
             end)
         end
+        print("Wait")
+        Wait(1500)
         j = j + 1;
     end
     if check == true then
@@ -218,3 +236,16 @@ RegisterNetEvent("LTW:UserLogout",function(id)
     TriggerClientEvent("QBCore:Notify", src, "Logout effettuato", 'error')
 end)
 
+
+-- strsplit
+
+function strsplit (inputstr, sep)
+    if sep == nil then
+       sep = "%s"
+    end
+    local t={}
+    for str in string.gmatch(inputstr, "([^"..sep.."]+)") do
+       table.insert(t, str)
+    end
+    return t
+ end
