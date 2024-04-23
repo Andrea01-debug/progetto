@@ -206,17 +206,22 @@ function toggleRisposta() {
 
 // Bottone per tornare in cima
 
-document.getElementById("container").addEventListener("scroll", scrollFunction);
 
-function scrollFunction() {
-    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-        document.getElementById("scrollBtn").style.display = "block";
-    } else {
-        document.getElementById("scrollBtn").style.display = "none";
-    }
-}
 
-function scrollToTop() {
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
-}
+document.addEventListener("DOMContentLoaded", function() {
+    const container = document.getElementById("container");
+    const scrollBtn = document.getElementById("scrollBtn");
+
+    container.addEventListener("scroll", function() {
+        if (container.scrollTop > 50) { // Il valore soglia può variare
+            scrollBtn.style.display = "block"; // Mostra il pulsante
+        } else {
+            scrollBtn.style.display = "none"; // Nascondi il pulsante
+        }
+    });
+
+    // Funzione per scorrere in cima al container
+    scrollBtn.addEventListener("click", function() {
+        container.scrollTop = 0;
+    });
+});

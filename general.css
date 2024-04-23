@@ -243,8 +243,8 @@ body {
 #scrollBtn {
   display: none;
   position: fixed;
-  bottom: 20px;
-  left: 20px;
+  top: 77vh;
+  left: 78vw;
   z-index: 99;
   font-size: 18px;
   border: none;
