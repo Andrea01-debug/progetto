@@ -112,7 +112,8 @@ body {
     font-size: 18px; 
     font-weight: 600; 
     text-transform: uppercase;
-    text-decoration: none; 
+    text-decoration: none;
+    position: relative;
 }
 
 .navigat:hover {
@@ -271,17 +272,25 @@ body {
 }
 
 
-
 .profiloTendina {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
+  display: block; 
+  position: absolute; 
+  top: 100%;
+  right: 0; 
+  background-color: rgba(133, 127, 105, 0.883);
   min-width: 120px;
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
   z-index: 1;
+
+  transition: max-height 0.3s ease-out;
+  font-family: Montserrat, Sans-serif;
+  font-size: 18px; 
+  font-weight: 600; 
+  text-transform: uppercase;
+  text-decoration: none;
 }
 
-/* Stile del link nel menù a tendina */
+
 .profiloTendina a {
   color: black;
   padding: 12px 16px;
@@ -289,13 +298,13 @@ body {
   display: block;
 }
 
-/* Cambia il colore del link quando ci passi sopra */
+
 .profiloTendina a:hover {
-  background-color: #f1f1f1;
+  background-color: rgba(133, 127, 105, 0.883); 
 }
 
 /* Mostra il menù a tendina quando il link "Profilo" è attivo */
-#Profilo:active + .profiloTendina,
+/* #Profilo:active + .profiloTendina,
 #Profilo:focus + .profiloTendina {
   display: block;
-}
+} */
