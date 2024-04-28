@@ -11,6 +11,7 @@
         <script src="../modal.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="ordina.js"></script>
         
     </head>
     <body>
@@ -163,7 +164,8 @@
                     <div class="corpoLista">
                         <ul id="riepilogoLista"></ul>
                     </div>
-                    TOTALE
+                    
+                    <button id="ChkoutBtn" onclick="totalButton()">Ordina: totale</button>
                 </div>
                 
 
@@ -254,62 +256,3 @@
     </body>
 </html>
 
-
-
-<script>
-   $(document).ready(function() {
-    $(".add").click(function() {
-        var flexitem = $(this).closest('.flexitem');
-        var itemName = flexitem.find('.Oggetto').text(); // Ottieni il nome dell'oggetto dalla classe
-        var priceElement = flexitem.find('.Prezzo');
-        var price = parseFloat(priceElement.text());
-        var prezzo = 0;
-        prezzo = (prezzo + price).toFixed(2);
-        priceElement.text(price);
-        var quantityElement = flexitem.find(".quantity");
-        var quantity = parseInt(quantityElement.text());
-        quantity++;
-        quantityElement.text(quantity);
-        console.log(quantity);
-        updateRiepilogo(itemName, quantity, prezzo);
-    });
-
-    $(".sub").click(function() {
-        var flexitem = $(this).closest('.flexitem');
-        var itemName = flexitem.find('.Oggetto').text(); // Ottieni il nome dell'oggetto dalla classe
-        var priceElement = flexitem.find('.Prezzo');
-        var price = parseFloat(priceElement.text());
-        priceElement.text(price);
-        var quantityElement = flexitem.find(".quantity");
-        var quantity = parseInt(quantityElement.text());
-        if (quantity > 0) {
-            quantity--;
-            quantityElement.text(quantity);
-            var prezzo = 0;
-            prezzo = (prezzo + price).toFixed(2);
-            
-            console.log(quantity);
-            updateRiepilogo(itemName, quantity, prezzo);
-        }
-    });
-});
-
-function updateRiepilogo(itemName, quantity, price) {
-    var riepilogoList = $("#riepilogoLista");
-    var listItem = riepilogoList.find("li[data-item='" + itemName + "']");
-
-    if (quantity === 0) {
-        listItem.remove();
-    } else {
-        var newItem = "<li data-item='" + itemName + "'>" + quantity + " x " + itemName + " $"+ price + "</li>";
-
-        if (listItem.length === 0) {
-            riepilogoList.append(newItem);
-        } else {
-            var newPrice = (quantity * price).toFixed(2);
-            newItem = "<li data-item='" + itemName + "'>" + quantity + " x "  + itemName + " $"+ newPrice + "</li>";
-            listItem.replaceWith(newItem);
-        }
-    }
-}
-</script>

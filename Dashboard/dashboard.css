@@ -1,7 +1,28 @@
-#container {
+
+.white {
     background-color: #eee;
+    color: #000;
 }
 
-#DarkTheme {
-    background-color: #112
+.dark {
+    background-color: #112;
+    color: #fff;
+}
+
+.flexbox {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    padding: 10px;
+}
+
+.flexitem {
+    flex-grow: 1;
+    background-color: #ffffff;
+    padding: 25px;
+    justify-content: space-evenly;
+    margin: 5px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    box-shadow: 5px 5px 3px rgba(0, 0, 0, 0.1);
 }

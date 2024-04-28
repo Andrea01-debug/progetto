@@ -1,24 +1,10 @@
-
-
-/* Stili per il body */
-body {
-    font-family: Arial, sans-serif;
-}
-
-
-
-
-
 h2 {
     text-align: center;
     margin-bottom: 20px;
 }
 
 /* Stili per i campi di input */
-input[type="text"],
-input[type="number"],
-input[type="date"],
-input[type="time"] {
+.inputPren {
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
@@ -28,12 +14,9 @@ input[type="time"] {
     box-sizing: border-box;
 }
 
-p {
-    padding: 25px;
-}
 
 /* Stili per il pulsante di prenotazione */
-button[type="submit"] {
+.prenota-button {
     width: 20vw;
     padding: 20px;
     margin: 25px;
@@ -46,10 +29,13 @@ button[type="submit"] {
     font-family: Arial, sans-serif;
 }
 
-button[type="submit"]:hover {
+.prenota-button:hover {
     background-color: #e66000;
 }
 
 .pren {
-    padding-top: 25px;
+    padding-top: 30px;
+    margin-top: 30px;
+    padding: 25px;
+    font-family: Arial, sans-serif;
 }

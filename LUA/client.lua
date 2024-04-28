@@ -22,6 +22,11 @@ RegisterNUICallback('PrenotaTavolo', function(data, cb)
     cb('ok')
 end)
 
+RegisterNUICallback('DashboardData', function(data, cb)
+    TriggerServerEvent("LTW:DashboardData")
+    cb('ok')
+end)
+
 function SetDisplay(bool)
     display = bool
     SetNuiFocus(bool, bool)
@@ -57,6 +62,14 @@ AddEventHandler("LTW:InvalidLogin", function(message)
     })
 end)
 
+RegisterNetEvent("LTW:validLogin")
+AddEventHandler("LTW:validLogin", function(message)
+    SendNUIMessage({
+        type = "validLogin",
+        message = message
+    })
+end)
+
 RegisterNetEvent("LTW:CloseRegisterWindow")
 AddEventHandler("LTW:CloseRegisterWindow", function()
     SendNUIMessage({
@@ -68,6 +81,19 @@ RegisterNetEvent("LTW:CloseLoginWindow")
 AddEventHandler("LTW:CloseLoginWindow", function()
     SendNUIMessage({
         type = "closeLoginWindow"
+    })
+end)
+
+RegisterNetEvent("LTW:Dashboard")
+AddEventHandler("LTW:Dashboard", function(data)
+    print("-----")
+    print(QBCore.Debug(data))
+    SendNUIMessage({
+        type = "dashboard",
+        NDip = data.dipendenti, 
+        NOrdini= data.ordini, 
+        NPrenot = data.prenotazione, 
+        Saldo = data.soldi
     })
 end)
 

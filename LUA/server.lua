@@ -143,41 +143,27 @@ RegisterNetEvent("LTW:PrenotaUnTavolo", function(nome, numero, data, ora)
     local time = strsplit(ora, ":")
     print(QBCore.Debug(time))
     while(check and j < #tavoli) do
-        --[[ print("- j")
-        print(j)
-        print("- check")
-        print(check)
-        print('- data')
-        print(data)
-        print('- ora')
-        print(time[1]) ]]
-        print(j)
         if tonumber(numero) <= tavoli[j]["dim"] then
             MySQL.Async.fetchAll('SELECT * FROM ltwPrenota WHERE Data = @data AND Ora = @ora AND Tavolo = @tavolo', {
                 ['@tavolo'] = j,
                 ['@data'] = data,
-                ['@ora'] = ora,
+                ['@ora'] = time[1],
             }, function(result)
-                print(j)
-                print(#result)
-                print(#result)
-                print(QBCore.Debug(result))
-                print(j)
                 if #result == 0 then
                     MySQL.Async.insert("INSERT INTO ltwPrenota (Nome, Numero, Data, Ora, Tavolo) VALUES (?, ?, ?, ?, ?)", {
                         nome,
                         numero,
                         data,
-                        ora,
+                        time[1],
                         j
                     })
                     TriggerClientEvent("QBCore:Notify", src, "Tavolo prenotato!", 'success')
+                    TriggerClientEvent("LTW:validLogin", src, 'Tavolo prenotato con successo')
                     check = false
                 end
             end)
         end
-        print("Wait")
-        Wait(1500)
+        Wait(1000)
         j = j + 1;
     end
     if check == true then
@@ -235,6 +221,55 @@ RegisterNetEvent("LTW:UserLogout",function(id)
     end
     TriggerClientEvent("QBCore:Notify", src, "Logout effettuato", 'error')
 end)
+
+
+RegisterNetEvent("LTW:DashboardData", function()
+    local src = source
+    print("ci sono")
+    local NDip
+    local NOrdini
+    local NPrenot
+    local Saldo
+
+    -- Dipendenti assunti
+    MySQL.Async.fetchAll('SELECT grado FROM ltwtable WHERE grado > 0', function(result)
+        NDip = #result
+    end)
+
+    -- Numero di Ordini
+    NOrdini = 5
+
+    -- Numero Tavoli Prenotati
+    MySQL.Async.fetchAll('SELECT * FROM ltwprenota WHERE Data = @Data AND Ora = @Ora', {
+        ['@Data'] = os.date ("%x"),
+        ['@Ora'] = os.date ("%x").hour,
+    }, function(result)
+        NPrenot = #result
+        print(NPrenot)
+        print(os.date ("%x"))
+        print(os.date ("%x").hour)
+    end)
+    
+    -- Saldo
+
+    MySQL.Async.fetchAll('SELECT amount FROM management_funds WHERE job_name = @nome and type = "boss"', {
+        ['@nome'] = "burgerShot"
+    }, function(result)
+        Saldo = result[1].amount
+    end)
+    
+    Wait(500)
+    local data = {
+        dipendenti = NDip,
+        ordini = NOrdini,
+        prenotazione = NPrenot,
+        soldi = Saldo,
+    }
+    TriggerClientEvent("LTW:Dashboard", src, data)
+    
+end)
+
+
 
 
 -- strsplit

@@ -3,9 +3,16 @@ function updateContent(grade) {
         console.log("grado 0");
 		document.getElementById("Accedi").style.display = "none";
     	document.getElementById("Profilo").style.display = "block";
+		document.getElementById("Dashboard").style.display = "none";
     } else if (grade === 1) {
+		document.getElementById("Accedi").style.display = "none";
+    	document.getElementById("Profilo").style.display = "block";
+    	document.getElementById("Dashboard").style.display = "block";
         console.log("grado 1")
-    } else if (grade === 3) {
+    } else if (grade === 2) {
+		document.getElementById("Accedi").style.display = "none";
+    	document.getElementById("Profilo").style.display = "block";
+    	document.getElementById("Dashboard").style.display = "block";
         console.log("grado 2")
     } else {
         console.log("grado boh")
@@ -36,6 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
         updateContent(parseInt(grade)); // Il grado potrebbe essere sconosciuto al riavvio
 		//localStorage.clear();
     }
+	
 });
 
 function openLogout() {
@@ -137,6 +145,13 @@ window.onload=function(){
 				text: event.data.message,
 				confirmButtonText: 'OK'
 			});
+		} else if (event.data.type === "validLogin"){
+			Swal.fire({
+				icon: 'success',
+				title: 'Successo',
+				text: event.data.message,
+				confirmButtonText: 'OK'
+			});
 		}else if (event.data.type === "closeLoginWindow") {
 			closeModalLogin();
 		}else if (event.data.type === "ui") {
@@ -213,15 +228,16 @@ document.addEventListener("DOMContentLoaded", function() {
     const scrollBtn = document.getElementById("scrollBtn");
 
     container.addEventListener("scroll", function() {
-        if (container.scrollTop > 50) { // Il valore soglia può variare
-            scrollBtn.style.display = "block"; // Mostra il pulsante
+        if (container.scrollTop > 50) { 
+            scrollBtn.style.display = "block"; // Mostra il pulsante torna in cima
         } else {
             scrollBtn.style.display = "none"; // Nascondi il pulsante
         }
     });
 
-    // Funzione per scorrere in cima al container
+    // Funzione per tornare in cima al container
     scrollBtn.addEventListener("click", function() {
         container.scrollTop = 0;
     });
 });
+
