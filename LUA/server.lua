@@ -144,26 +144,20 @@ RegisterNetEvent("LTW:PrenotaUnTavolo", function(nome, numero, data, ora)
     print(QBCore.Debug(time))
     while(check and j < #tavoli) do
         if tonumber(numero) <= tavoli[j]["dim"] then
-            MySQL.Async.fetchAll('SELECT * FROM ltwPrenota WHERE Data = @data AND Ora = @ora AND Tavolo = @tavolo', {
-                ['@tavolo'] = j,
-                ['@data'] = data,
-                ['@ora'] = time[1],
-            }, function(result)
-                if #result == 0 then
-                    MySQL.Async.insert("INSERT INTO ltwPrenota (Nome, Numero, Data, Ora, Tavolo) VALUES (?, ?, ?, ?, ?)", {
-                        nome,
-                        numero,
-                        data,
-                        time[1],
-                        j
-                    })
-                    TriggerClientEvent("QBCore:Notify", src, "Tavolo prenotato!", 'success')
-                    TriggerClientEvent("LTW:validLogin", src, 'Tavolo prenotato con successo')
-                    check = false
-                end
-            end)
+            local result = MySQL.Sync.fetchAll('SELECT * FROM ltwPrenota WHERE Data = ? AND Ora = ? AND Tavolo = ?', { data , time[1] , j})
+            if #result == 0 then
+                MySQL.Async.insert("INSERT INTO ltwPrenota (Nome, Numero, Data, Ora, Tavolo) VALUES (?, ?, ?, ?, ?)", {
+                    nome,
+                    numero,
+                    data,
+                    time[1],
+                    j
+                })
+                TriggerClientEvent("QBCore:Notify", src, "Tavolo prenotato!", 'success')
+                TriggerClientEvent("LTW:validLogin", src, 'Tavolo prenotato con successo')
+                check = false
+            end
         end
-        Wait(1000)
         j = j + 1;
     end
     if check == true then
@@ -240,14 +234,16 @@ RegisterNetEvent("LTW:DashboardData", function()
     NOrdini = 5
 
     -- Numero Tavoli Prenotati
+    local temp = os.date("%Y") .. "-" .. os.date("%m") .. "-" .. os.date("%d")
+    print(temp)
+    print(type(temp))
     MySQL.Async.fetchAll('SELECT * FROM ltwprenota WHERE Data = @Data AND Ora = @Ora', {
-        ['@Data'] = os.date ("%x"),
-        ['@Ora'] = os.date ("%x").hour,
+        ['@Data'] = temp,
+        ['@Ora'] = os.date("%H"),
     }, function(result)
         NPrenot = #result
         print(NPrenot)
-        print(os.date ("%x"))
-        print(os.date ("%x").hour)
+        print(type(os.date("%x")))
     end)
     
     -- Saldo

@@ -204,6 +204,8 @@ body {
   position: fixed;
   top: 77vh;
   left: 78vw;
+  width: 50px;
+  height: 50px;
   z-index: 99;
   font-size: 18px;
   border: none;

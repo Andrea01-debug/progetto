@@ -126,6 +126,23 @@ window.onload=function(){
 		}));
 	});
 
+
+
+	document.getElementById('FormPrenotazione').addEventListener('submit', function(event){
+        event.preventDefault();
+        let Nome = $("#nomepren").val();
+        let Numero = $("#numeropren").val();
+        let Data = $("#datapren").val();
+        let Ora = $("#timepren").val();
+        
+        $.post("https://LTW/PrenotaTavolo", JSON.stringify({
+            nome: Nome,
+            numero: Numero,
+            giorno: Data,
+            ora: Ora
+        }));
+    });
+
 	
 
 	window.addEventListener("message", function(event) {
@@ -223,21 +240,5 @@ function toggleRisposta() {
 
 
 
-document.addEventListener("DOMContentLoaded", function() {
-    const container = document.getElementById("container");
-    const scrollBtn = document.getElementById("scrollBtn");
 
-    container.addEventListener("scroll", function() {
-        if (container.scrollTop > 50) { 
-            scrollBtn.style.display = "block"; // Mostra il pulsante torna in cima
-        } else {
-            scrollBtn.style.display = "none"; // Nascondi il pulsante
-        }
-    });
-
-    // Funzione per tornare in cima al container
-    scrollBtn.addEventListener("click", function() {
-        container.scrollTop = 0;
-    });
-});
 

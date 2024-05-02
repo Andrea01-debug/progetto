@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="prenota.css">
    
 
+    <!--script src="prenota.js"></script-->
     <script src="../modal.js"></script>
-    <script src="prenota.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     
@@ -27,6 +27,7 @@
                 <li class="navigat"><a id="Profilo" style="display: none;" onclick="toggleProfiloTendina()">Profilo</a></li>
                 <div class="profiloTendina" id="MenuATendina" style="display: none;">
                     <a id="Logout" href="#" data-target="#myModalLogin" data-toggle="modal" class="access-link" onclick="openLogout()">Logout</a>
+                    <a id="Dashboard" href="../Dashboard/dashboard.html" class="access-link" style="display: none;">Dashboard</a>
                 </div>
                 <li class="navigat"><a href="../guestPage.html#IdContatti" class="navigat">Contatti</a></li>
                 <li class="navigat"><a href="../Prenota/prenota.html" class="navigat">Prenota</a></li>
@@ -46,7 +47,7 @@
                     Nome Prenotazione: <input class="inputPren" type="text" id="nomepren" name="nome" placeholder="Mario" required><br><br>
                     Numero di persone: <input class="inputPren" type="number" id="numeropren" name="numero" placeholder="4" required><br><br>
                     Data: <input class="inputPren" type="date" id="datapren" name="data" required><br><br>
-                    Ora: <input class="inputPren" type="time" id="timepren" name="time" placeholder="20:00" min="19:00" max="23:00" required><br><br>                    
+                    Ora: <input class="inputPren" type="time" id="timepren" name="time" placeholder="20:00" min="16:00" max="23:00" required><br><br>                    
                 </p>
                 <button class="prenota-button" type="submit"> Prenota </button>
             </form>
@@ -145,6 +146,7 @@
             </form>
         </div>
     </div>
+    <!--button id="scrollBtn" title="Torna in cima">⇧</button-->
 </div>
 </body>
 </html>
