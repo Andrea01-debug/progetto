@@ -151,43 +151,6 @@ body {
         
 }
 
-.modal {
-  display: none;
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  background-color: rgba(0,0,0,0.4);
-  z-index: 1001
-}
-
-.modal-content {
-  background-color: #ffffffdc;
-  margin: 15% auto;
-  padding: 20px;
-  border-radius: 30px;
-  border: 1px solid #888;
-  width: 40%; 
-  text-align: center;
-  box-shadow: 8px 8px 6px rgba(0, 0, 0, 0.1);
-}
-
-.close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
-
 .access-link {
     cursor: pointer;
     color: #fff;
@@ -198,21 +161,6 @@ body {
     color: #ec8a00;
 }
 
-.circle-button {
-    display: inline-block;
-    width: 50px; /* Imposta la larghezza del pulsante */
-    height: 50px; /* Imposta l'altezza del pulsante */
-    border-radius: 50%; /* Rende il pulsante a forma di cerchio */
-    background-color: #ec8a00; /* Colore di sfondo del pulsante */
-    color: #fff; /* Colore del testo del pulsante */
-    border: none; /* Rimuove il bordo del pulsante */
-    font-size: 20px; /* Dimensione del testo del pulsante */
-    cursor: pointer; /* Cambia il cursore quando si passa sopra al pulsante */
-  }
-
-.circle-button:hover {
-  background-color: #bd6e00; /* Cambia colore quando il pulsante è in hover */
-}
 
 .MenumapCont{
   grid-area: a;
@@ -303,8 +251,88 @@ body {
   background-color: rgba(133, 127, 105, 0.883); 
 }
 
-/* Mostra il menù a tendina quando il link "Profilo" è attivo */
-/* #Profilo:active + .profiloTendina,
-#Profilo:focus + .profiloTendina {
-  display: block;
-} */
+
+.modal {
+  display: none;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6); /* Background nero trasparente per sfumare lo sfondo quando si apre il modal */
+  z-index: 1001;
+}
+
+.modal-content {
+  background-color: #f5f5f5;
+  margin: 27vh auto;
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  width: 60%;
+  max-width: 500px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.close {
+  color: #747171;
+  font-size: 24px;
+  font-weight: bold;
+  float: right;
+}
+
+.close:hover,
+.close:focus {
+  color: #000; 
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.input-group {
+  margin-bottom: 10px;
+}
+
+.input-group label {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.input-group input {
+  width: 90%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+/* .checkbox-group {
+  display: flex; 
+  align-items: center;
+  margin-bottom: 30px;
+  margin-left: 74%
+}
+
+.checkbox-group label {
+  margin-left: 10px;
+}
+ */
+.login-button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.login-button:hover {
+  background-color: #0056b3; /* Cambia colore al passaggio del mouse */
+}
+
+.link-group {
+  display: flex; /* Disposizione flessibile */
+  justify-content: space-between; /* Spazio tra i link */
+  font-size: 18px
+}
