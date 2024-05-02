@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
-    document.getElementById("themeButton").addEventListener("click", DarkTheme);
-    console.log("aaaaaa")
+    /* document.getElementById("themeButton").addEventListener("click", DarkTheme);
+    console.log("aaaaaa") */
     
 
     const expand_btn = document.querySelector(".expand-btn");
@@ -68,7 +68,7 @@ function DarkTheme() {
     prova.forEach((elem) => {
       elem.classList.toggle("dark")
     });
-    var barra = document.getElementById("Pinguino");
+    var barra = document.getElementById("Barra");
     barra.classList.toggle("dark")
 }
 
