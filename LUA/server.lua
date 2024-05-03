@@ -225,6 +225,7 @@ RegisterNetEvent("LTW:DashboardData", function()
     local NPrenot
     local Saldo
 
+
     -- Dipendenti assunti
     MySQL.Async.fetchAll('SELECT grado FROM ltwtable WHERE grado > 0', function(result)
         NDip = #result
@@ -234,7 +235,7 @@ RegisterNetEvent("LTW:DashboardData", function()
     NOrdini = 5
 
     -- Numero Tavoli Prenotati
-    local temp = os.date("%Y") .. "-" .. os.date("%m") .. "-" .. os.date("%d")
+    local temp = os.date("%Y-%m-%d")
     print(temp)
     print(type(temp))
     MySQL.Async.fetchAll('SELECT * FROM ltwprenota WHERE Data = @Data AND Ora = @Ora', {
@@ -254,18 +255,41 @@ RegisterNetEvent("LTW:DashboardData", function()
         Saldo = result[1].amount
     end)
     
-    Wait(500)
+    Wait(400)
     local data = {
         dipendenti = NDip,
         ordini = NOrdini,
         prenotazione = NPrenot,
-        soldi = Saldo,
+        soldi = Saldo .. " $",
     }
     TriggerClientEvent("LTW:Dashboard", src, data)
     
 end)
 
+RegisterNetEvent("LTW:AndamentoPrenotazioni", function()
+    local src = source
+    local data = {
+        ["Giorni"] = {
 
+        },
+        ["Numero"] = {
+
+        }
+    }
+
+    for i = 0, 6 do
+        temp = os.time() - (86400 * i)
+        data["Giorni"][i+1] = os.date("%Y-%m-%d", temp)
+        
+        result = MySQL.Sync.fetchAll('SELECT COUNT(*) test FROM ltwprenota WHERE Data = ?', { data["Giorni"][i+1] })
+        
+        data["Numero"][i+1] = result[1]["test"]
+    end
+
+    print(QBCore.Debug(data))
+
+    TriggerClientEvent("LTW:AndamentoClienti", src, data)
+end)
 
 
 -- strsplit

@@ -27,6 +27,11 @@ RegisterNUICallback('DashboardData', function(data, cb)
     cb('ok')
 end)
 
+RegisterNUICallback('AndamentoPrenotazioni', function(data, cb)
+    TriggerServerEvent("LTW:AndamentoPrenotazioni")
+    cb('ok')
+end)
+
 function SetDisplay(bool)
     display = bool
     SetNuiFocus(bool, bool)
@@ -86,14 +91,21 @@ end)
 
 RegisterNetEvent("LTW:Dashboard")
 AddEventHandler("LTW:Dashboard", function(data)
-    print("-----")
-    print(QBCore.Debug(data))
     SendNUIMessage({
         type = "dashboard",
         NDip = data.dipendenti, 
         NOrdini= data.ordini, 
         NPrenot = data.prenotazione, 
         Saldo = data.soldi
+    })
+end)
+
+RegisterNetEvent("LTW:AndamentoClienti")
+AddEventHandler("LTW:AndamentoClienti", function(data)
+    SendNUIMessage({
+        type = "grafico",
+        giorni = data.Giorni,
+        clienti = data.Numero
     })
 end)
 

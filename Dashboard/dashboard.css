@@ -214,8 +214,8 @@
     background: var(--expand-button);
     z-index: 2;
     right: -1.125rem;
-    width: 2.5rem;
-    height: 2.5rem;
+    width: 33px;
+    height: 33px;
     border-radius: 50%;
   }
   
@@ -278,21 +278,22 @@
 }
 
 .flexbox {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  padding: 10px;
 }
 
 .flexitem {
-    flex-grow: 1;
-    background-color: #ffffff;
-    padding: 25px;
-    justify-content: space-evenly;
-    margin: 5px;
-    margin-bottom: 20px;
-    border-radius: 5px;
-    box-shadow: 5px 5px 3px rgba(0, 0, 0, 0.1);
+  flex: 1;
+  flex-grow: 1;
+  background-color: #ffffff;
+  padding: 25px;
+  justify-content: space-evenly;
+  margin: 5px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  box-shadow: 5px 5px 3px rgba(0, 0, 0, 0.1);
 }
 
 

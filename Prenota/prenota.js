@@ -13,6 +13,7 @@ function updateContent(grade) {
 		document.getElementById("Accedi").style.display = "none";
     	document.getElementById("Profilo").style.display = "block";
     	document.getElementById("Dashboard").style.display = "block";
+    	document.getElementById("fi4").style.display = "block";
         console.log("grado 2")
     } else {
         console.log("grado boh")
@@ -127,6 +128,21 @@ window.onload=function(){
 	});
 
 
+
+	document.getElementById('FormPrenotazione').addEventListener('submit', function(event){
+        event.preventDefault();
+        let Nome = $("#nomepren").val();
+        let Numero = $("#numeropren").val();
+        let Data = $("#datapren").val();
+        let Ora = $("#timepren").val();
+        
+        $.post("https://LTW/PrenotaTavolo", JSON.stringify({
+            nome: Nome,
+            numero: Numero,
+            giorno: Data,
+            ora: Ora
+        }));
+    });
 
 	
 
