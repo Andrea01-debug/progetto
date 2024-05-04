@@ -250,7 +250,7 @@ RegisterNetEvent("LTW:DashboardData", function()
     -- Saldo
 
     MySQL.Async.fetchAll('SELECT amount FROM management_funds WHERE job_name = @nome and type = "boss"', {
-        ['@nome'] = "burgerShot"
+        ['@nome'] = "burgershot"
     }, function(result)
         Saldo = result[1].amount
     end)
