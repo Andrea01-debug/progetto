@@ -129,8 +129,22 @@
             </nav>
             <div class="MainBlocco">
                 <input type="checkbox" id="darkmode-toggle"/>
-                <label id="SoleLuna" for="darkmode-toggle"></label>
+                <label class="etichetta" id="SoleLuna" for="darkmode-toggle"></label>
+                <div class="data-selector">
+                  <label per="date-input">Seleziona Data:</label>
+                  <input type="date" id="date-input" name="data" onchange="dateChanged()" min="{{ data odierna }}">
+                </div>
+    
+                <div class="data-container" id="data-container">
+                    <!-- Testo o dati verranno mostrati qui in base alla data selezionata -->
+                    aaaaaaa
+                </div>
+  
+                <div class="image-container">
+                    <img id="interactive-image" src="../LogoSmall.png" alt="Clicca qui per prenotare" onclick="openReservationPopup()">
+                </div>
             </div>
+            
         </div>
     </body>
 </html>

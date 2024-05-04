@@ -46,8 +46,8 @@
                 <p>
                     Nome Prenotazione: <input class="inputPren" type="text" id="nomepren" name="nome" placeholder="Mario" required><br><br>
                     Numero di persone: <input class="inputPren" type="number" id="numeropren" name="numero" placeholder="4" required><br><br>
-                    Data: <input class="inputPren" type="date" id="datapren" name="data" required><br><br>
-                    Ora: <input class="inputPren" type="time" id="timepren" name="time" placeholder="20:00" min="16:00" max="23:00" required><br><br>                    
+                    Data: <input class="inputPren" type="date" id="datapren" name="data" required onchange="setMinTime()"><br><br>
+                    Ora: <input class="inputPren" type="time" id="timepren" name="time" required><br><br>                    
                 </p>
                 <button class="prenota-button" type="submit"> Prenota </button>
             </form>

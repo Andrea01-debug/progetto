@@ -297,7 +297,7 @@
 }
 
 
-label {
+.etichetta {
     width: 45px;
     height: 25px;
     position: relative;
@@ -309,7 +309,7 @@ label {
     cursor: pointer;
     transition: 1s;
 }
-label:after {
+.etichetta:after {
     content: "";
     width: 23px;
     height: 23px;
@@ -324,16 +324,18 @@ input {
     visibility: hidden;
 }
 
-input:checked + label {
+input:checked + .etichetta {
     background: #242424;
 }
 
-input:checked + label:after {
+input:checked + .etichetta:after {
     left: 44px;
     transform: translateX(-100%);
     background: linear-gradient(180deg, #777, #3a3a3a);
 }
 
-label:active:after {
+.etichetta:active:after {
     width: 25px;
 }
+
+

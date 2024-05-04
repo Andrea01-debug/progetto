@@ -13,7 +13,6 @@ function updateContent(grade) {
 		document.getElementById("Accedi").style.display = "none";
     	document.getElementById("Profilo").style.display = "block";
     	document.getElementById("Dashboard").style.display = "block";
-    	document.getElementById("fi4").style.display = "block";
         console.log("grado 2")
     } else {
         console.log("grado boh")
@@ -21,42 +20,41 @@ function updateContent(grade) {
 }
 
 
-// Ascolta i messaggi NUI dal client Lua
 window.addEventListener('message', function(event) {
     if (event.data.type === "setUserGrade") {
         const grade = event.data.grade;
         
-        // Memorizza l'ID nel localStorage
+        // Memorizza il grado dell'utente nel localStorage
         localStorage.setItem('grade', grade);
 
-        // Aggiorna il contenuto in base all'ID
+        // Aggiorna le aree visibili all'utente in base al grado impostato su database
         updateContent(grade);
     }
 });
 
-// All'avvio della pagina, usa l'ID memorizzato per aggiornare il contenuto
+// All'avvio della pagina il grado dell'utenet viene letto dal localStorage(se già presente)
 document.addEventListener('DOMContentLoaded', () => {
 	console.log("DOM LOADERD");
+	setMinDate();
     const grade = localStorage.getItem('grade');
     if (grade) {
-        // Se c'è un ID salvato, aggiorna il contenuto
 
-        updateContent(parseInt(grade)); // Il grado potrebbe essere sconosciuto al riavvio
+        updateContent(parseInt(grade));
 		//localStorage.clear();
     }
 	
 });
 
 function openLogout() {
-	console.log("ESCIIIIIIIIIIII")
-    // Invia un messaggio al client Lua per indicare il logout
+	/* console.log("ESCIIIIIIIIIIII") */
+	
     $.post("https://LTW/LogoutUser", JSON.stringify({}));
     
-    // Rimuove l'utente dal localStorage
-    localStorage.removeItem('grade'); // O qualunque sia la chiave usata per memorizzare i dati dell'utente
+    // Rimozione utente dal localStorage al logout
+    localStorage.removeItem('grade');
     console.log("Utente disconnesso e localStorage cancellato.");
     
-    // Aggiorna il contenuto della pagina per riflettere il logout
+    // Aggiorna il contenuto della pagina se ci si disconnette
     document.getElementById("Accedi").style.display = "block";
     document.getElementById("Profilo").style.display = "none";
     document.getElementById("MenuATendina").style.display = "none";
@@ -104,6 +102,7 @@ function toggleProfiloTendina() {
 
 
 window.onload=function(){
+	
 	document.getElementById('registerForm').addEventListener('submit', function(e){
 		console.log("We")
 		e.preventDefault();
@@ -131,10 +130,12 @@ window.onload=function(){
 
 	document.getElementById('FormPrenotazione').addEventListener('submit', function(event){
         event.preventDefault();
+		console.log("prevvv")
         let Nome = $("#nomepren").val();
         let Numero = $("#numeropren").val();
         let Data = $("#datapren").val();
         let Ora = $("#timepren").val();
+		console.log("aaaa")
         
         $.post("https://LTW/PrenotaTavolo", JSON.stringify({
             nome: Nome,
@@ -217,6 +218,7 @@ window.onload=function(){
 	});
 }
 
+// funzione per chiudere l'interfaccia del tablet quando si preme ESC sulla tastiuera
 
 document.onkeyup = function (data) {
 	if (data.which == 27) {
@@ -237,7 +239,42 @@ function toggleRisposta() {
     }
 }
 
-// Bottone per tornare in cima
+
+// Funzioni per gestire data e ora maggiori di quelle attuali quando si fa una prenotazione
+
+function getCurrentDate() {
+	const today = new Date();
+	const year = today.getFullYear();
+	const month = String(today.getMonth() + 1).padStart(2, '0');
+	const day = String(today.getDate()).padStart(2, '0');
+	return `${year}-${month}-${day}`;
+}
+
+function getCurrentTime() {
+	const now = new Date();
+	const hours = String(now.getHours()).padStart(2, '0');
+	const minutes = String(now.getMinutes()).padStart(2, '0');
+	return `${hours}:${minutes}`;
+}
+
+function setMinDate() {
+	const dateInput = document.getElementById("datapren");
+	dateInput.min = getCurrentDate();
+}
+
+function setMinTime() {
+	const timeInput = document.getElementById("timepren");
+	const dateInput = document.getElementById("datapren").value;
+
+	if (dateInput === getCurrentDate()) {
+		timeInput.min = getCurrentTime();
+	} else {
+		timeInput.min = "00:00";
+		//per forza sennò non azzera negli altri giorni
+	}
+}
+ 
+
 
 
 
