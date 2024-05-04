@@ -52,6 +52,7 @@ function updateRiepilogo(itemName, quantity, price) {
             listItem.replaceWith(newItem);
         }
     }
+    
     var total = calculateTotal();
     $("#ChkoutBtn").text("Ordina: totale $" + total);
 }
@@ -72,11 +73,44 @@ function calculateTotal() {
 
 function totalButton() {
     var total = calculateTotal();
+
+    var riepilogoList = $("#riepilogoLista li").map(function() {
+        return $(this).text(); // Ottieni il testo dell'elemento <li>
+    }).get(); // Converte la lista degli elementi in un array di stringhe
+
+    // Unisci tutte le voci della lista in una singola stringa, separata da virgole o newline
+    var lista = riepilogoList.join(";\n");
+
     Swal.fire({
         title: "Totale",
         text: "Il totale dell'ordine è $" + total,
         icon: "info",
-        confirmButtonText: "OK"
+        showCancelButton: true,
+        confirmButtonText: "OK",
+        cancelButtonText: "Annulla",
+        reverseButtons: true 
+    }).then((result) => {
+        if (result.isConfirmed) {
+            let codiceprenotazione = (Math.random() + 1).toString(36).substring(7).toUpperCase();
+            console.log("Confermato" + lista + total);
+            // Azioni da eseguire quando si clicca "OK"
+            $.post("https://LTW/Ordina", JSON.stringify({
+                lista : lista,
+                totale : total,
+                codiceprenotazione : codiceprenotazione,
+            }));
+            Swal.fire({
+                title: "Ordine effettuato",
+                html: `Il codice di ritiro è <b>${codiceprenotazione}</b>`,
+                icon: "info",
+                confirmButtonText: "OK",
+            });
+
+        } else if (result.isDismissed) {
+            console.log("Annullato");
+            // Azioni da eseguire quando si clicca "Annulla"
+        }
     });
     console.log("ok")
 }
+

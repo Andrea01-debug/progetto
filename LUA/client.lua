@@ -32,6 +32,12 @@ RegisterNUICallback('AndamentoPrenotazioni', function(data, cb)
     cb('ok')
 end)
 
+RegisterNUICallback('Ordina', function(data, cb)
+    QBCore.Debug(data)
+    TriggerServerEvent("LTW:OrdinaServer", data.totale, data.lista, data.codiceprenotazione)
+    cb('ok')
+end)
+
 function SetDisplay(bool)
     display = bool
     SetNuiFocus(bool, bool)
@@ -134,11 +140,12 @@ RegisterNetEvent("LTW:loginEffettuato")
 AddEventHandler("LTW:loginEffettuato", function(data)
     id = data.ID
     print("ID CLIENT ACCEDI: ", id)
+    print("ID CLIENT ACCEDI: ", data.idUtente)
     
     SendNUIMessage({
         type = "setUserGrade",
-        userId = id,
-        grade = data.Grado
+        userId = data.idUtente,
+        grade = data.Grado,
     })
     SendNUIMessage({
         type = "loginUser"

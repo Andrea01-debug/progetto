@@ -1,3 +1,7 @@
+function addID(){
+	document.getElementById("idUtente").textContent = ("ID UTENTE: " + localStorage.getItem('id'))
+}
+
 function updateContent(grade) {    
     if (grade === 0) {
         console.log("grado 0");
@@ -23,12 +27,16 @@ function updateContent(grade) {
 window.addEventListener('message', function(event) {
     if (event.data.type === "setUserGrade") {
         const grade = event.data.grade;
+		const ID = event.data.userId;
+		console.log(ID)
         
-        // Memorizza il grado dell'utente nel localStorage
+        // Memorizza l'ID nel localStorage
         localStorage.setItem('grade', grade);
+		localStorage.setItem('id', ID);
 
-        // Aggiorna le aree visibili all'utente in base al grado impostato su database
+        // Aggiorna il contenuto in base all'ID
         updateContent(grade);
+		addID();
     }
 });
 
@@ -36,6 +44,7 @@ window.addEventListener('message', function(event) {
 document.addEventListener('DOMContentLoaded', () => {
 	console.log("DOM LOADERD");
 	setMinDate();
+	addID()
     const grade = localStorage.getItem('grade');
     if (grade) {
 
@@ -193,6 +202,8 @@ window.onload=function(){
 		event.preventDefault();
 		let Username = $("#username").val();
 		let Password = $("#password").val();
+
+		addID()
 
 		$.post("https://LTW/LoginUtente", JSON.stringify({
 			username: Username,

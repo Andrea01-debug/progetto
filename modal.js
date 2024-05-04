@@ -1,3 +1,15 @@
+function addID(){
+	document.getElementById("idUtente").textContent = ("ID UTENTE: " + localStorage.getItem('id'))
+}
+
+/* function copia(){
+	var text = document.getElementById("idUtente")
+	text.select();
+	text.setSelectionRange(0,99999);
+	navigator.clipboard.writeText(text.value);
+	alert("id: " + text.value);
+} */
+
 function updateContent(grade) {    
     if (grade === 0) {
         console.log("grado 0");
@@ -24,18 +36,23 @@ function updateContent(grade) {
 window.addEventListener('message', function(event) {
     if (event.data.type === "setUserGrade") {
         const grade = event.data.grade;
+		const ID = event.data.userId;
+		console.log(ID)
         
         // Memorizza l'ID nel localStorage
         localStorage.setItem('grade', grade);
+		localStorage.setItem('id', ID);
 
         // Aggiorna il contenuto in base all'ID
         updateContent(grade);
+		addID();
     }
 });
 
 // All'avvio della pagina, usa l'ID memorizzato per aggiornare il contenuto
 document.addEventListener('DOMContentLoaded', () => {
 	console.log("DOM LOADERD");
+	addID()
     const grade = localStorage.getItem('grade');
     if (grade) {
         // Se c'è un ID salvato, aggiorna il contenuto
@@ -176,6 +193,8 @@ window.onload=function(){
 		event.preventDefault();
 		let Username = $("#username").val();
 		let Password = $("#password").val();
+
+		addID()
 
 		$.post("https://LTW/LoginUtente", JSON.stringify({
 			username: Username,

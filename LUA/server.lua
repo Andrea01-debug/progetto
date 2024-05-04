@@ -72,6 +72,7 @@ local tavoli = {
 RegisterNetEvent("LTW:RegistraServer", function(username, password, nome, cognome, data, domanda, risposta)
     local player = QBCore.Functions.GetPlayer(source)
     local src = source
+    local ID = math.random(11111111,99999999)
     MySQL.Async.fetchAll('SELECT NomeUtente FROM ltwtable WHERE NomeUtente = @username', {
         ['@username'] = username,
     }, function(result)
@@ -80,7 +81,7 @@ RegisterNetEvent("LTW:RegistraServer", function(username, password, nome, cognom
             TriggerClientEvent("LTW:ErroreRegistrazione", src, 'Nome utente già in uso')
             TriggerClientEvent("QBCore:Notify", src, "Nome utente già in uso", 'error')
         else
-            MySQL.Async.insert("INSERT INTO ltwtable (NomeUtente, Password, CitizenID, Nome, Cognome, Data, Domanda, Risposta) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", {
+            MySQL.Async.insert("INSERT INTO ltwtable (NomeUtente, Password, CitizenID, Nome, Cognome, Data, Domanda, Risposta, ID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", {
                 username,
                 password,
                 player.PlayerData.citizenid,
@@ -88,7 +89,8 @@ RegisterNetEvent("LTW:RegistraServer", function(username, password, nome, cognom
                 cognome,
                 data,
                 domanda,
-                risposta
+                risposta,
+                ID
                 })
             TriggerClientEvent("QBCore:Notify", src, "Ti sei registrato con successo!", 'success')
             TriggerClientEvent("LTW:CloseRegisterWindow", src)
@@ -116,6 +118,7 @@ RegisterNetEvent("LTW:LoginServer", function(username, password)
                     Nome = result[1].Nome,
                     Cognome = result[1].Cognome,
                     Grado = result[1].Grado,
+                    idUtente = result[1].ID,
                 }
                 -- Incrementa l'indice per il prossimo utente
                 i = i + 1
@@ -216,6 +219,18 @@ RegisterNetEvent("LTW:UserLogout",function(id)
     TriggerClientEvent("QBCore:Notify", src, "Logout effettuato", 'error')
 end)
 
+RegisterNetEvent("LTW:OrdinaServer",function(totale, lista, codice)
+    local src = source
+
+    MySQL.Async.insert("INSERT INTO ltwordina (Ordine, Totale, Accettato, CodPren) VALUES (?, ?, ?, ?)", {
+        lista,
+        totale,
+        0,
+        codice,
+    })
+   
+end)
+
 
 RegisterNetEvent("LTW:DashboardData", function()
     local src = source
@@ -232,7 +247,9 @@ RegisterNetEvent("LTW:DashboardData", function()
     end)
 
     -- Numero di Ordini
-    NOrdini = 5
+    MySQL.Async.fetchAll('SELECT ID FROM ltwordina WHERE Accettato = 0', function(result)
+        NOrdini = #result
+    end)
 
     -- Numero Tavoli Prenotati
     local temp = os.date("%Y-%m-%d")

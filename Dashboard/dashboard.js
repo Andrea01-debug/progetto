@@ -140,6 +140,16 @@ function updateContent(grade) {
   }
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+	console.log("DOM LOADERD");
+    const grade = localStorage.getItem('grade');
+    if (grade) {
+
+        updateContent(parseInt(grade));
+    }
+	
+});
+
 
 
 
