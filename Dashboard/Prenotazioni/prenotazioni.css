@@ -1,0 +1,40 @@
+.lista {
+    float: left;
+    width: 30%;
+    height: 100vh;
+    overflow-y: auto;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: #f0f0f0;
+}
+
+.lista ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.lista li {
+    margin-bottom: 10px;
+    cursor: pointer;
+    padding: 10px;
+    background-color: #ddd;
+    border-radius: 5px;
+}
+
+.lista li:hover {
+    background-color: #aaa;
+}
+
+.mappa {
+    float: left;
+    width: 70%;
+    height: 100vh;
+    background-color: #ccc;
+    position: relative;
+}
+
+.mappa img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}

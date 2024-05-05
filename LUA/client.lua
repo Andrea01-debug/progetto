@@ -124,9 +124,11 @@ end)
 RegisterNetEvent("LTW:GetDipendentiClient")
 AddEventHandler("LTW:GetDipendentiClient", function(data)
     print("ricevo dal server")
+    print(data.Nome)
     SendNUIMessage({
         type = "GetDip",
-        employees = data,
+        nome = data.Giorni,
+        clienti = data.Numero
     })
 end)
 

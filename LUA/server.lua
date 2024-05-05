@@ -311,7 +311,7 @@ RegisterNetEvent("LTW:GetDipendentiServer", function()
         if result and #result > 0 then
            QBCore.Debug(result)
            print("mando al client")
-           TriggerClientEvent("LTW:GetDipendentiClient", src, result)
+           TriggerClientEvent("LTW:GetDipendentiClient", src, data)
         else
            print("nessun dipendnente")
         end
