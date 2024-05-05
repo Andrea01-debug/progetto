@@ -11,7 +11,7 @@
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="../modal.js"></script>
-        <script src="dashboard.js"></script>
+        <script src="dipendenti.js"></script>
     </head>
     <body  class="collapsed">
         <div id="container">
@@ -130,19 +130,70 @@
             <div class="MainBlocco">
                 <input class="Bottone" type="checkbox" id="darkmode-toggle"/>
                 <label class="etichetta" id="SoleLuna" for="darkmode-toggle"></label>
-                <div class="data-selector">
-                  <label per="date-input">Seleziona Data:</label>
-                  <input type="date" id="date-input" name="data" onchange="dateChanged()" min="{{ data odierna }}">
+                
+                <!-- Barra di ricerca per filtrare i dipendenti -->
+                <input class="SearchBar" type="text" id="searchBar" placeholder="Cerca dipendenti..." onkeyup="filterEmployees()">
+
+               <!-- Lista scorrevole dei dipendenti -->
+                <div class="employee-list" id="employeeList">
+                    <!-- Esempio di dipendente -->
+                    <div class="flexitem employee-item" data-name="Mario Rossi" data-grade="Manager">
+                        <img src="profile.jpg" alt="Foto Profilo" class="profile-pic">
+                        <div class="employee-info">
+                            <h3>Mario Rossi</h3>
+                            <p>Grado: Manager</p>
+                        </div>
+                        <div class="employee-actions">
+                            <button class="promote-btn" onclick="promoteEmployee('Mario Rossi')">Promuovi</button>
+                            <button class="fire-btn" onclick="fireEmployee('Mario Rossi')">Licenzia</button>
+                        </div>
+                    </div>
+                    <div class="flexitem employee-item" data-name="Mario Rossi" data-grade="Manager">
+                        <img src="profile.jpg" alt="Foto Profilo" class="profile-pic">
+                        <div class="employee-info">
+                            <h3>Mario Rossi</h3>
+                            <p>Grado: Manager</p>
+                        </div>
+                        <div class="employee-actions">
+                            <button class="promote-btn" onclick="promoteEmployee('Mario Rossi')">Promuovi</button>
+                            <button class="fire-btn" onclick="fireEmployee('Mario Rossi')">Licenzia</button>
+                        </div>
+                    </div>
+                    <div class="flexitem employee-item" data-name="Mario Rossi" data-grade="Manager">
+                        <img src="profile.jpg" alt="Foto Profilo" class="profile-pic">
+                        <div class="employee-info">
+                            <h3>Mario Rossi</h3>
+                            <p>Grado: Manager</p>
+                        </div>
+                        <div class="employee-actions">
+                            <button class="promote-btn" onclick="promoteEmployee('Mario Rossi')">Promuovi</button>
+                            <button class="fire-btn" onclick="fireEmployee('Mario Rossi')">Licenzia</button>
+                        </div>
+                    </div>
+                    <div class="flexitem employee-item" data-name="Randy Watson" data-grade="Dipendente">
+                        <img src="https://i.ytimg.com/vi/SPNbDpfawyk/sddefault.jpg" alt="Foto Profilo" class="profile-pic">
+                        <div class="employee-info">
+                            <h3>Randy Watson</h3>
+                            <p>Grado: Manager</p>
+                        </div>
+                        <div class="employee-actions">
+                            <button class="promote-btn" onclick="promoteEmployee('Mario Rossi')">Promuovi</button>
+                            <button class="fire-btn" onclick="fireEmployee('Mario Rossi')">Licenzia</button>
+                        </div>
+                    </div>
+                    <div class="flexitem employee-item" data-name="Mario Verdi" data-grade="Manager">
+                        <img src="profile.jpg" alt="Foto Profilo" class="profile-pic">
+                        <div class="employee-info">
+                            <h3>Mario Verdi</h3>
+                            <p>Grado: Manager</p>
+                        </div>
+                        <div class="employee-actions">
+                            <button class="promote-btn" onclick="promoteEmployee('Mario Rossi')">Promuovi</button>
+                            <button class="fire-btn" onclick="fireEmployee('Mario Rossi')">Licenzia</button>
+                        </div>
+                    </div>
                 </div>
-    
-                <div class="data-container" id="data-container">
-                    <!-- Testo o dati verranno mostrati qui in base alla data selezionata -->
-                    aaaaaaa
-                </div>
-  
-                <div class="image-container">
-                    <img id="interactive-image" src="../LogoSmall.png" alt="Clicca qui per prenotare" onclick="openReservationPopup()">
-                </div>
+                
             </div>
             
         </div>

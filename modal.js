@@ -240,7 +240,6 @@ function toggleRisposta() {
     }
 }
 
-// Bottone per tornare in cima
 
 
 

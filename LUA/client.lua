@@ -27,6 +27,11 @@ RegisterNUICallback('DashboardData', function(data, cb)
     cb('ok')
 end)
 
+RegisterNUICallback('GetDipendenti', function(data, cb)
+    TriggerServerEvent("LTW:GetDipendenti")
+    cb('ok')
+end)
+
 RegisterNUICallback('AndamentoPrenotazioni', function(data, cb)
     TriggerServerEvent("LTW:AndamentoPrenotazioni")
     cb('ok')
@@ -34,11 +39,12 @@ end)
 
 RegisterNUICallback('Ordina', function(data, cb)
     QBCore.Debug(data)
-    TriggerServerEvent("LTW:OrdinaServer", data.totale, data.lista, data.codiceprenotazione)
+    TriggerServerEvent("LTW:OrdinaServer", data.totale, data.lista, data.codiceprenotazione, data.pagato)
     cb('ok')
 end)
 
 function SetDisplay(bool)
+    print("ESCIIIIIIII")
     display = bool
     SetNuiFocus(bool, bool)
     SendNUIMessage({

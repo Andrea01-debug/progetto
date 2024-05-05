@@ -180,13 +180,13 @@
 
                     container.addEventListener("scroll", function() {
                         if (container.scrollTop > 50) { 
-                            scrollBtn.style.display = "block"; // Mostra il pulsante torna in cima
+                            scrollBtn.style.display = "block";
                         } else {
-                            scrollBtn.style.display = "none"; // Nascondi il pulsante
+                            scrollBtn.style.display = "none";
                         }
                     });
 
-                    // Funzione per tornare in cima al container
+                    
                     scrollBtn.addEventListener("click", function() {
                         container.scrollTop = 0;
                     });

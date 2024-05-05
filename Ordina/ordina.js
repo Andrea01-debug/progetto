@@ -91,20 +91,46 @@ function totalButton() {
         reverseButtons: true 
     }).then((result) => {
         if (result.isConfirmed) {
-            let codiceprenotazione = (Math.random() + 1).toString(36).substring(7).toUpperCase();
+            codiceprenotazione = (Math.random() + 1).toString(36).substring(7).toUpperCase();
             console.log("Confermato" + lista + total);
             // Azioni da eseguire quando si clicca "OK"
-            $.post("https://LTW/Ordina", JSON.stringify({
-                lista : lista,
-                totale : total,
-                codiceprenotazione : codiceprenotazione,
-            }));
+            total = parseFloat(total)
             Swal.fire({
-                title: "Ordine effettuato",
-                html: `Il codice di ritiro è <b>${codiceprenotazione}</b>`,
-                icon: "info",
-                confirmButtonText: "OK",
+                title: "Pagamento",
+                text: "Scegli un metodo di pagamento",
+                icon: "question",
+                showCancelButton: true,
+                confirmButtonText: "Paga ora", 
+                cancelButtonText: "Paga al ritiro", 
+                reverseButtons: true 
+            }).then((result) => {
+                if (result.isConfirmed) { // L'utente ha cliccato "Paga ora"
+                    console.log("Pagamento immediato selezionato.");
+
+                    $.post("https://LTW/Ordina", JSON.stringify({
+                        lista : lista,
+                        totale : total,
+                        codiceprenotazione : codiceprenotazione,
+                        pagato : 1,
+                    }));
+
+                } else if (result.isDismissed) { // L'utente ha cliccato "Paga al ritiro"
+                    console.log("Pagamento al ritiro selezionato.");
+                    Swal.fire({
+                        title: "Ordine effettuato",
+                        html: `Il codice di ritiro è <b>${codiceprenotazione}</b>`,
+                        icon: "info",
+                        confirmButtonText: "OK",
+                    });
+                    $.post("https://LTW/Ordina", JSON.stringify({
+                        lista : lista,
+                        totale : total,
+                        codiceprenotazione : codiceprenotazione,
+                        pagato : 0,
+                    }));
+                }
             });
+            
 
         } else if (result.isDismissed) {
             console.log("Annullato");
@@ -112,5 +138,14 @@ function totalButton() {
         }
     });
     console.log("ok")
+}
+
+function success(){
+    Swal.fire({
+        title: "Ordine effettuato",
+        html: `Il codice di ritiro è <b>${codiceprenotazione}</b>`,
+        icon: "info",
+        confirmButtonText: "OK",
+    });
 }
 

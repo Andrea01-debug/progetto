@@ -28,6 +28,14 @@
     padding: 0;
     box-sizing: border-box;
   }
+
+  .p{
+    color: #ebebeb;
+  }
+
+  .p.dark{
+    color: #070E13;
+  }
   
   .sidebar {
     position: absolute;
@@ -320,15 +328,15 @@
     border-radius: 180px;
     box-shadow: 0px 5px 10px rgba(0,0,0,0.2);
 }
-input {
+input.Bottone {
     visibility: hidden;
 }
 
-input:checked + .etichetta {
+input.Bottone:checked + .etichetta {
     background: #242424;
 }
 
-input:checked + .etichetta:after {
+input.Bottone:checked + .etichetta:after {
     left: 44px;
     transform: translateX(-100%);
     background: linear-gradient(180deg, #777, #3a3a3a);
@@ -339,3 +347,88 @@ input:checked + .etichetta:after {
 }
 
 
+
+.employee-list {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto; /* Consente lo scrolling verticale */
+  max-height: 400px; 
+  border: 1px solid #ccc;
+  padding: 10px;
+  background-color: #f9f9f9;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  width: 97%;
+}
+
+.employee-list.dark{
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto; /* Consente lo scrolling verticale */
+  max-height: 400px; 
+  border: 1px solid #282b30;
+  padding: 10px;
+  background-color: #282b30;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  width: 97%;
+}
+
+.employee-list .flexitem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Distribuisce lo spazio tra gli elementi */
+  padding: 10px;
+}
+
+.employee-item .profile-pic {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%; /* Arrotonda le immagini del profilo */
+}
+
+.employee-info {
+  flex-grow: 1; /* Permette di crescere per occupare lo spazio */
+  padding-left: 10px;
+}
+
+.employee-actions {
+  display: flex;
+  gap: 10px; /* Spazio tra i pulsanti */
+}
+
+.promote-btn, .fire-btn {
+  padding: 5px 10px;
+  border: none;
+  background-color: #007bff; /* Blu per promuovere */
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.fire-btn {
+  background-color: #dc3545; /* Rosso per licenziare */
+}
+
+.promote-btn:hover, .fire-btn:hover {
+  opacity: 0.8; /* Effetto hover */
+}
+
+#searchBar {
+  width: 40%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+#searchBar.dark {
+  width: 40%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #5e5a5a;
+  border-radius: 5px;
+}
+
+.SearchBar{
+  margin-top: 2%;
+}

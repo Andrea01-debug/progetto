@@ -219,22 +219,43 @@ RegisterNetEvent("LTW:UserLogout",function(id)
     TriggerClientEvent("QBCore:Notify", src, "Logout effettuato", 'error')
 end)
 
-RegisterNetEvent("LTW:OrdinaServer",function(totale, lista, codice)
+RegisterNetEvent("LTW:OrdinaServer",function(totale, lista, codice, pagato)
     local src = source
+    local saldo = 9999999999
+    local Player = QBCore.Functions.GetPlayer(src)
+    if pagato == 1 then
+        local saldo = Player.Functions.GetMoney("bank")
+        print("SALDO: " .. saldo)
+        if totale < saldo then
 
-    MySQL.Async.insert("INSERT INTO ltwordina (Ordine, Totale, Accettato, CodPren) VALUES (?, ?, ?, ?)", {
-        lista,
-        totale,
-        0,
-        codice,
-    })
+            MySQL.Async.insert("INSERT INTO ltwordina (Ordine, Totale, Accettato, CodPren, Pagato) VALUES (?, ?, ?, ?, ?)", {
+                lista,
+                totale,
+                0,
+                codice,
+                pagato,
+            })
+            Player.Functions.RemoveMoney('bank', totale , 'pagamento BurgerShot')
+        else
+            TriggerClientEvent("QBCore:Notify", src, "Pagamento rifiutato, saldo insufficiente", 'error')
+        end
+    else
+
+        MySQL.Async.insert("INSERT INTO ltwordina (Ordine, Totale, Accettato, CodPren, Pagato) VALUES (?, ?, ?, ?, ?)", {
+            lista,
+            totale,
+            0,
+            codice,
+            pagato,
+        })
+        
+    end
    
 end)
 
 
 RegisterNetEvent("LTW:DashboardData", function()
     local src = source
-    print("ci sono")
     local NDip
     local NOrdini
     local NPrenot
@@ -281,6 +302,18 @@ RegisterNetEvent("LTW:DashboardData", function()
     }
     TriggerClientEvent("LTW:Dashboard", src, data)
     
+end)
+
+RegisterNetEvent("LTW:GetDipendenti", function()
+    local src = source
+    MySQL.Async.fetchAll('SELECT Nome, Cognome, Grado, ID FROM ltwtable WHERE Grado > 0', {
+    }, function(result)
+        if result and #result > 0 then
+           QBCore.Debug(result)
+        else
+           print("nessun dipendnente")
+        end
+    end)
 end)
 
 RegisterNetEvent("LTW:AndamentoPrenotazioni", function()

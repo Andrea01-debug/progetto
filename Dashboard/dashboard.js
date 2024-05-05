@@ -54,46 +54,42 @@ $.post("https://LTW/AndamentoPrenotazioni");
 
 
 window.addEventListener("message", function(event) {
-  if (event.data.type === "dashboard") {
-    var flexitem1 = document.getElementById("fi1"); // Correzione del nome
-    var flexitem2 = document.getElementById("fi2");
-    var flexitem3 = document.getElementById("fi3");
-    var flexitem4 = document.getElementById("fi4");
-    
-    flexitem1.querySelector(".quantity1").textContent = event.data.NDip;
-    flexitem2.querySelector(".quantity2").textContent = event.data.NOrdini;
-    flexitem3.querySelector(".quantity3").textContent = event.data.NPrenot;
-    flexitem4.querySelector(".quantity4").textContent = event.data.Saldo;
-  } else if (event.data.type === "grafico") {
-    const xValues = event.data.giorni;
-    const yValues = event.data.clienti;
+    if (event.data.type === "dashboard") {
+      var flexitem1 = document.getElementById("fi1"); // Correzione del nome
+      var flexitem2 = document.getElementById("fi2");
+      var flexitem3 = document.getElementById("fi3");
+      var flexitem4 = document.getElementById("fi4");
+      
+      flexitem1.querySelector(".quantity1").textContent = event.data.NDip;
+      flexitem2.querySelector(".quantity2").textContent = event.data.NOrdini;
+      flexitem3.querySelector(".quantity3").textContent = event.data.NPrenot;
+      flexitem4.querySelector(".quantity4").textContent = event.data.Saldo;
+    } else if (event.data.type === "grafico") {
+      const xValues = event.data.giorni;
+      const yValues = event.data.clienti;
 
-    new Chart("GraficoLinee", {
-      type: "line",
-      data: {
-        labels: xValues,
-        datasets: [{
-          fill: false,
-          lineTension: 0.4,
-          backgroundColor: "rgba(255,128,0,1.0)",
-          borderColor: "rgba(255,128,0,0.1)",
-          data: yValues
-        }]
-      },
-      options: {
-        legend: {display: false},
-        title: {
-          display: true,
-          text: "Andamento prenotazioni ultimi 7 giorni"
+      new Chart("GraficoLinee", {
+        type: "line",
+        data: {
+          labels: xValues,
+          datasets: [{
+            fill: false,
+            lineTension: 0.4,
+            backgroundColor: "rgba(255,128,0,1.0)",
+            borderColor: "rgba(255,128,0,0.1)",
+            data: yValues
+          }]
+        },
+        options: {
+          legend: {display: false},
+          title: {
+            display: true,
+            text: "Andamento prenotazioni ultimi 7 giorni"
+          }
         }
-      }
-    });
-  }
-});
-
-
-
-
+      });
+    }
+  });
 
 };
 
@@ -112,7 +108,8 @@ element.checked = true;
 }
 
 function DarkTheme() {
-  var element = document.getElementById("container");
+  
+  let element = document.getElementById("container");
   element.classList.toggle("dark"); 
   const prova = document.querySelectorAll(".flexitem");
   prova.forEach((elem) => {
@@ -148,6 +145,16 @@ document.addEventListener('DOMContentLoaded', () => {
         updateContent(parseInt(grade));
     }
 	
+});
+
+window.addEventListener("message", function(event) {
+  if (event.data.type === "ui") {
+    if (event.data.status == true) {
+      $("#container").show()
+    } else {
+      $("#container").hide();
+    }
+  }
 });
 
 
