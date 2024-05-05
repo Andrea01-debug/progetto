@@ -435,3 +435,43 @@ input.Bottone:checked + .etichetta:after {
 .SearchBar{
   margin-top: 2%;
 }
+.search-container {
+  display: flex;
+  align-items: center; /* Centra in altezza */
+  justify-content: space-between;
+}
+
+
+.add-employee-btn {
+  position: relative;
+  background-color: transparent;
+  border: none; 
+  cursor: pointer;
+  padding: 5px;
+  margin-right: 4%;
+}
+
+.add-employee-btn svg {
+  fill: none;
+  stroke: #28a745; /* colore scritta */
+  stroke-width: 2;
+}
+.add-employee-btn::after {
+  content: "Assumi dipendenti";
+  position: absolute;
+  bottom: 20%;
+  right: 90%; 
+  
+  background-color: black; 
+  color: white; 
+  padding: 5px; 
+  border-radius: 4px; 
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  pointer-events: none;
+}
+
+.add-employee-btn:hover::after {
+  opacity: 1;
+}
