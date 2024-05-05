@@ -397,7 +397,7 @@ input.Bottone:checked + .etichetta:after {
   gap: 10px; /* Spazio tra i pulsanti */
 }
 
-.promote-btn, .fire-btn {
+.promote-btn, .fire-btn, .unpromote-btn {
   padding: 5px 10px;
   border: none;
   background-color: #007bff; /* Blu per promuovere */
@@ -407,10 +407,13 @@ input.Bottone:checked + .etichetta:after {
 }
 
 .fire-btn {
-  background-color: #dc3545; /* Rosso per licenziare */
+  background-color: #dc3545;
+}
+.unpromote-btn {
+  background-color: #b30c5f;
 }
 
-.promote-btn:hover, .fire-btn:hover {
+.promote-btn:hover, .fire-btn:hover, .unpromote-btn:hover {
   opacity: 0.8; /* Effetto hover */
 }
 

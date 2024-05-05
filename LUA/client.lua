@@ -28,7 +28,7 @@ RegisterNUICallback('DashboardData', function(data, cb)
 end)
 
 RegisterNUICallback('GetDipendenti', function(data, cb)
-    TriggerServerEvent("LTW:GetDipendenti")
+    TriggerServerEvent("LTW:GetDipendentiServer")
     cb('ok')
 end)
 
@@ -117,6 +117,17 @@ AddEventHandler("LTW:AndamentoClienti", function(data)
     SendNUIMessage({
         type = "grafico",
         giorni = data.Giorni,
+        clienti = data.Numero
+    })
+end)
+
+RegisterNetEvent("LTW:GetDipendentiClient")
+AddEventHandler("LTW:GetDipendentiClient", function(data)
+    print("ricevo dal server")
+    print(data.Nome)
+    SendNUIMessage({
+        type = "GetDip",
+        nome = data.Giorni,
         clienti = data.Numero
     })
 end)

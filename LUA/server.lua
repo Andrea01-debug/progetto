@@ -304,12 +304,14 @@ RegisterNetEvent("LTW:DashboardData", function()
     
 end)
 
-RegisterNetEvent("LTW:GetDipendenti", function()
+RegisterNetEvent("LTW:GetDipendentiServer", function()
     local src = source
     MySQL.Async.fetchAll('SELECT Nome, Cognome, Grado, ID FROM ltwtable WHERE Grado > 0', {
     }, function(result)
         if result and #result > 0 then
            QBCore.Debug(result)
+           print("mando al client")
+           TriggerClientEvent("LTW:GetDipendentiClient", src, data)
         else
            print("nessun dipendnente")
         end

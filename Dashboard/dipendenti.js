@@ -50,17 +50,17 @@ window.onload=function(){
 }
   
   function SetDark() {
-  if(localStorage.getItem('dark-mode') == 0) {
-    localStorage.setItem('dark-mode', 1);
-  } else {
-    localStorage.setItem('dark-mode', 0);
-  }
-  DarkTheme();
+    if(localStorage.getItem('dark-mode') == 0) {
+      localStorage.setItem('dark-mode', 1);
+    } else {
+      localStorage.setItem('dark-mode', 0);
+    }
+    DarkTheme();
   }
   
   function SetSoleLuna() {
-  var element = document.getElementById("darkmode-toggle");
-  element.checked = true;
+    var element = document.getElementById("darkmode-toggle");
+    element.checked = true;
   }
   
   function DarkTheme() {
@@ -114,16 +114,64 @@ window.onload=function(){
     }
   }
   
-  function promoteEmployee(name) {
-    console.log("Promuovi:", name);
-    // Azioni per promuovere il dipendente
+  function promoteEmployee(nome) {
+    console.log("Promuovi:", nome);
+    Swal.fire({
+      title: "Gestione Dipendente",
+      html: `Vuoi davvero Promuovere <b>${nome}</b> ? `,
+      icon: "info",
+      confirmButtonText: "OK",
+  });
   }
   
-  function fireEmployee(name) {
-    console.log("Licenzia:", name);
-    // Azioni per licenziare il dipendente
+  function unpromoteEmployee(nome) {
+    console.log("Promuovi:", nome);
+    Swal.fire({
+      title: "Gestione Dipendente",
+      html: `Vuoi davvero Retrocedere <b>${nome}</b> ? `,
+      icon: "info",
+      confirmButtonText: "OK",
+  });
   }
   
+  function fireEmployee(nome) {
+    console.log("Licenzia:", nome);
+    Swal.fire({
+      title: "Gestione Dipendente",
+      html: `Vuoi davvero Licenziare <b>${nome}</b> ? `,
+      icon: "info",
+      confirmButtonText: "OK",
+  });
+  }
+  
+  window.addEventListener("message", function(event) {
+    if (event.data.type === "GetDip") {
+        const employeeList = event.data.employees;
+        const listElement = document.getElementById("employeeList");
+        listElement.innerHTML = ''; // Svuota la lista attuale
+
+        // Crea gli elementi per ogni dipendente
+        employeeList.forEach((employee) => {
+            const employeeItem = document.createElement("div");
+            employeeItem.className = "flexitem employee-item";
+            employeeItem.setAttribute("data-name", `${employee.Nome} ${employee.Cognome}`);
+            employeeItem.innerHTML = `
+                <img src="profilo.jpg" alt="Foto Profilo" class="profile-pic">
+                <div class="employee-info">
+                    <h3>${employee.Nome} ${employee.Cognome}</h3>
+                    <p>Grado: ${employee.Grado}</p>
+                    <p>ID: ${employee.ID}</p>
+                </div>
+                <div class="employee-actions">
+                    <button class="promote-btn" onclick="promoteEmployee('${employee.Nome} ${employee.Cognome}')">Promuovi</button>
+                    <button class="unpromote-btn" onclick="unpromoteEmployee('${employee.Nome} ${employee.Cognome}')">Retrocedi</button>
+                    <button class="fire-btn" onclick="fireEmployee('${employee.Nome} ${employee.Cognome}')">Licenzia</button>
+                </div>
+            `;
+            listElement.appendChild(employeeItem);
+        });
+    }
+});
   
   
   
