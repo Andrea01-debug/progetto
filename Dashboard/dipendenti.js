@@ -65,7 +65,7 @@ window.onload=function(){
   
   function DarkTheme() {
     
-    let element = document.getElementById("container");
+    var element = document.getElementById("container");
     element.classList.toggle("dark"); 
     const prova = document.querySelectorAll(".flexitem");
     prova.forEach((elem) => {
@@ -73,7 +73,7 @@ window.onload=function(){
     });
     var barra = document.getElementById("Barra");
     barra.classList.toggle("dark")
-    let element2 = document.getElementById("employeeList");
+    var element2 = document.getElementById("employeeList");
     element2.classList.toggle("dark");
   }
   
@@ -149,7 +149,7 @@ window.onload=function(){
         const employeeList = event.data.employees;
         const listElement = document.getElementById("employeeList");
         listElement.innerHTML = ''; // Svuota la lista attuale
-
+        
         // Crea gli elementi per ogni dipendente
         employeeList.forEach((employee) => {
             const employeeItem = document.createElement("div");
@@ -169,6 +169,18 @@ window.onload=function(){
                 </div>
             `;
             listElement.appendChild(employeeItem);
+            const DarkMode = localStorage.getItem('dark-mode')
+            if(DarkMode == 1) { 
+              const prova = document.querySelectorAll(".flexitem");
+              prova.forEach((elem) => {
+                elem.classList.add("dark")
+              });
+            }else{
+              const prova = document.querySelectorAll(".flexitem");
+              prova.forEach((elem) => {
+                elem.classList.remove("dark")
+              });
+            }
         });
     }
 });
