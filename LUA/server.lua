@@ -309,13 +309,111 @@ RegisterNetEvent("LTW:GetDipendentiServer", function()
     MySQL.Async.fetchAll('SELECT Nome, Cognome, Grado, ID FROM ltwtable WHERE Grado > 0', {
     }, function(result)
         if result and #result > 0 then
-           QBCore.Debug(result)
-           print("mando al client")
-           TriggerClientEvent("LTW:GetDipendentiClient", src, data)
+           --QBCore.Debug(result)
+           --print("mando al client")
+           TriggerClientEvent("LTW:GetDipendentiClient", src, result)
         else
            print("nessun dipendnente")
         end
     end)
+end)
+
+RegisterNetEvent("LTW:LicenziaDipendenteServer", function(userId)
+    local src = source
+    MySQL.Async.execute('UPDATE ltwtable SET Grado = @grado WHERE ID = @id', {
+        ['@grado'] = 0,
+        ['@id'] = userId,
+    })
+    TriggerClientEvent("QBCore:Notify", src, "Dipendente Licenziato", 'success')
+end)
+
+RegisterNetEvent("LTW:PromuoviDipendenteServer", function(userId)
+    local src = source
+    --print(userId)
+    local result = MySQL.Sync.fetchAll('SELECT grado FROM ltwtable WHERE ID = ?', {userId})
+    --QBCore.Debug(result)
+    --print(result[1])
+    grado = result[1].grado
+
+    if grado < 2 then
+        MySQL.Async.execute('UPDATE ltwtable SET Grado = @grado WHERE ID = @id', {
+            ['@grado'] = grado + 1 ,
+            ['@id'] = userId,
+        })
+        TriggerClientEvent("QBCore:Notify", src, "Dipendente Promosso", 'success')
+    else
+        TriggerClientEvent("QBCore:Notify", src, "Impossibile promuovere", 'error')
+    end
+    --[[ local data = {
+        grado = grado + 1,
+    }
+    
+    TriggerClientEvent("LTW:UpdateGradoClient",src, data ) ]]
+end)
+
+RegisterNetEvent("LTW:RetrocediDipendenteServer", function(userId)
+    local src = source
+    local result = MySQL.Sync.fetchAll('SELECT grado FROM ltwtable WHERE ID = ?', {userId})
+    --QBCore.Debug(result)
+    --print(result[1])
+    grado = result[1].grado
+
+    if grado > 1 then
+        MySQL.Async.execute('UPDATE ltwtable SET Grado = @grado WHERE ID = @id', {
+            ['@grado'] = grado - 1 ,
+            ['@id'] = userId,
+        })
+        TriggerClientEvent("QBCore:Notify", src, "Dipendente Retrocesso", 'success')
+    else
+        TriggerClientEvent("QBCore:Notify", src, "Impossibile Retrocedere", 'error')
+    end
+    --[[ local data = {
+        grado = grado - 1,
+    }
+    TriggerClientEvent("LTW:UpdateGradoClient",src, data) ]]
+end)
+
+RegisterNetEvent("LTW:AssumiDipServer", function(id, userId, grado)
+    local src = source
+    local Player = QBCore.Functions.GetPlayer(id)
+    print(Player)
+    MySQL.Async.fetchAll('SELECT ID FROM ltwtable WHERE ID = @id AND Grado = @grado', {
+        ['@id'] = userId,
+        ['@grado'] = 0,
+    }, function(result)
+        --QBCore.Debug(result)
+        if result and #result > 0 then
+            --TriggerClientEvent("QBCore:Notify", src, "ok", 'success')
+            if  Player then
+                --TriggerClientEvent("QBCore:Notify", src, "Il giocatore è online", 'success')
+                if grado <= 2 and grado >= 0 then
+                    MySQL.Async.execute('UPDATE ltwtable SET Grado = @grado WHERE ID = @id', {
+                        ['@grado'] = grado,
+                        ['@id'] = userId,
+                    })
+                    Player.Functions.SetJob("burgershot", 0)
+                    TriggerClientEvent("QBCore:Notify", src, "Nuovo dipendente assunto", 'success')
+                else
+                    TriggerClientEvent("QBCore:Notify", src, "Grado errato", 'error')
+                end
+            else
+                TriggerClientEvent("QBCore:Notify", src, "Il giocatore non è online", 'error')
+            end
+        else
+            MySQL.Async.fetchAll('SELECT ID FROM ltwtable WHERE ID = @id AND Grado > @grado', {
+                ['@id'] = userId,
+                ['@grado'] = 0,
+            }, function(result)
+                --QBCore.Debug(result)
+                if result and #result > 0 then
+                    TriggerClientEvent("QBCore:Notify", src, "Dipendente già assunto", 'error')
+                else
+                    TriggerClientEvent("QBCore:Notify", src, "ID dipendente errato", 'error')
+                end
+            end)
+        end
+    end)
+    
 end)
 
 RegisterNetEvent("LTW:AndamentoPrenotazioni", function()

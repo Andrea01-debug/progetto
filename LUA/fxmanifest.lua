@@ -26,5 +26,7 @@ files {
 	'html/Prenota/*',
 	'html/Main/*',
 	'html/Dashboard/*',
+	'html/Dashboard/Dipendenti/*',
+	'html/Dashboard/Prenotazioni/*',
 	
 }

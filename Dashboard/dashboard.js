@@ -126,10 +126,13 @@ function updateContent(grade) {
     console.log("grado 1")
     document.getElementById("dashboardDefault").style.display = "none";
     document.getElementById("dashboardDipendenti").style.display = "block";
+    
+    document.getElementById("gestioneDipendenti").style.display = "none";
   } else if (grade === 2) {
     document.getElementById("fi4").style.display = "block";
     document.getElementById("dashboardDefault").style.display = "none";
     document.getElementById("dashboadAmministratore").style.display = "block";
+    document.getElementById("gestioneDipendenti").style.display = "block";
     
     console.log("grado 2")
   } else {
@@ -138,8 +141,10 @@ function updateContent(grade) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-	console.log("DOM LOADERD");
+	console.log("DOM CARICATO");
+	console.log("DOM CARICATO");
     const grade = localStorage.getItem('grade');
+    console.log(grade);
     if (grade) {
 
         updateContent(parseInt(grade));

@@ -32,30 +32,28 @@ function updateContent(grade) {
 }
 
 
-// Ascolta i messaggi NUI dal client Lua
+
 window.addEventListener('message', function(event) {
     if (event.data.type === "setUserGrade") {
         const grade = event.data.grade;
 		const ID = event.data.userId;
 		console.log(ID)
         
-        // Memorizza l'ID nel localStorage
+        // Memorizza il grado nel localStorage
         localStorage.setItem('grade', grade);
 		localStorage.setItem('id', ID);
 
-        // Aggiorna il contenuto in base all'ID
+        
         updateContent(grade);
 		addID();
     }
 });
 
-// All'avvio della pagina, usa l'ID memorizzato per aggiornare il contenuto
 document.addEventListener('DOMContentLoaded', () => {
 	console.log("DOM LOADERD");
 	addID()
     const grade = localStorage.getItem('grade');
     if (grade) {
-        // Se c'è un ID salvato, aggiorna il contenuto
 
         updateContent(parseInt(grade)); // Il grado potrebbe essere sconosciuto al riavvio
 		//localStorage.clear();
@@ -69,8 +67,8 @@ function openLogout() {
     $.post("https://LTW/LogoutUser", JSON.stringify({}));
     
     // Rimuove l'utente dal localStorage
-    localStorage.removeItem('grade'); // O qualunque sia la chiave usata per memorizzare i dati dell'utente
-    console.log("Utente disconnesso e localStorage cancellato.");
+    localStorage.removeItem('grade'); 
+    //console.log("Utente disconnesso e localStorage cancellato.");
     
     // Aggiorna il contenuto della pagina per riflettere il logout
     document.getElementById("Accedi").style.display = "block";

@@ -38,8 +38,28 @@ RegisterNUICallback('AndamentoPrenotazioni', function(data, cb)
 end)
 
 RegisterNUICallback('Ordina', function(data, cb)
-    QBCore.Debug(data)
+    --QBCore.Debug(data)
     TriggerServerEvent("LTW:OrdinaServer", data.totale, data.lista, data.codiceprenotazione, data.pagato)
+    cb('ok')
+end)
+
+RegisterNUICallback('AssumiDip', function(data, cb)
+    TriggerServerEvent("LTW:AssumiDipServer", data.id, data.userId, data.grado)
+    cb('ok')
+end)
+
+RegisterNUICallback('LicenziaDipendente', function(data, cb)
+    TriggerServerEvent("LTW:LicenziaDipendenteServer", data.userId)
+    cb('ok')
+end)
+
+RegisterNUICallback('PromuoviDipendente', function(data, cb)
+    TriggerServerEvent("LTW:PromuoviDipendenteServer", data.userId)
+    cb('ok')
+end)
+
+RegisterNUICallback('RetrocediDipendente', function(data, cb)
+    TriggerServerEvent("LTW:RetrocediDipendenteServer", data.userId)
     cb('ok')
 end)
 
@@ -123,12 +143,9 @@ end)
 
 RegisterNetEvent("LTW:GetDipendentiClient")
 AddEventHandler("LTW:GetDipendentiClient", function(data)
-    print("ricevo dal server")
-    print(data.Nome)
     SendNUIMessage({
         type = "GetDip",
-        nome = data.Giorni,
-        clienti = data.Numero
+        employees = data,
     })
 end)
 
@@ -166,6 +183,15 @@ AddEventHandler("LTW:loginEffettuato", function(data)
     })
     SendNUIMessage({
         type = "loginUser"
+    })
+end)
+
+RegisterNetEvent("LTW:UpdateGradoClient")
+AddEventHandler("LTW:UpdateGradoClient", function(data)
+    QBCore.Debug(data)
+    SendNUIMessage({
+        type = "updateUserGrade",
+        grade = data.grado,
     })
 end)
 

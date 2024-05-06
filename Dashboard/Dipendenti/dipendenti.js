@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function () {
   
   
 document.addEventListener('DOMContentLoaded', () => {
-const DarkMode = localStorage.getItem('dark-mode')
+  const DarkMode = localStorage.getItem('dark-mode')
   if(DarkMode == 1) {
     DarkTheme()
     SetSoleLuna()
@@ -86,6 +86,14 @@ document.addEventListener('DOMContentLoaded', () => {
     
 });
 
+window.addEventListener('message', function(event) {
+  if (event.data.type === "updateUserGrade") {
+    const grade = event.data.grade;
+        
+    localStorage.setItem('grade', grade);
+  }
+});
+
 window.addEventListener("message", function(event) {
   if (event.data.type === "ui") {
     if (event.data.status == true) {
@@ -113,38 +121,71 @@ function filterEmployees() {
   }
 }
   
-function promoteEmployee(nome) {
-    console.log("Promuovi:", nome);
-    Swal.fire({
-      title: "Gestione Dipendente",
-      html: `Vuoi davvero Promuovere <b>${nome}</b> ? `,
-      icon: "info",
-      confirmButtonText: "OK",
-  });
-  //TODO INCREMENTARE DI 1 IL GRADO DEL GIOCATORE CON QUELL'ID (GRADO + 1)
-}
-  
-function unpromoteEmployee(nome) {
-    console.log("Promuovi:", nome);
+function unpromoteEmployee(nome, userId) {
     Swal.fire({
       title: "Gestione Dipendente",
       html: `Vuoi davvero Retrocedere <b>${nome}</b> ? `,
       icon: "info",
       confirmButtonText: "OK",
-  });
-   //TODO DECREMENTARE DI 1 IL GRADO DEL GIOCATORE CON QUELL'ID (GRADO - 1)
+  }).then((result) => {
+    if (result.isConfirmed) {
+      $.post("https://LTW/RetrocediDipendente", JSON.stringify({
+        userId: userId,
+      }))
+      .done(() => {
+        setTimeout(() => {
+          window.location.reload();
+        }, 100);
+      });
+    }
+});
+  //TODO DECREMENTARE DI 1 IL GRADO DEL GIOCATORE CON QUELL'ID (GRADO - 1) fatto
 }
   
-function fireEmployee(nome) {
+function promoteEmployee(nome, userId) {
+    Swal.fire({
+      title: "Gestione Dipendente",
+      html: `Vuoi davvero Promuovere <b>${nome}</b> ? `,
+      icon: "info",
+      confirmButtonText: "OK",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      $.post("https://LTW/PromuoviDipendente", JSON.stringify({
+        userId: userId,
+      }))
+      .done(() => {
+        setTimeout(() => {
+          window.location.reload();
+        }, 100);
+      });
+    }
+});
+    //TODO INCREMENTARE DI 1 IL GRADO DEL GIOCATORE CON QUELL'ID (GRADO + 1) fatto
+   
+}
+  
+function fireEmployee(nome, userId) {
     console.log("Licenzia:", nome);
     Swal.fire({
       title: "Gestione Dipendente",
       html: `Vuoi davvero Licenziare <b>${nome}</b> ? `,
       icon: "info",
       confirmButtonText: "OK",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        console.log("Dipendente licenziato: ", userId);
+        $.post("https://LTW/LicenziaDipendente", JSON.stringify({
+          userId: userId,
+        }))
+        .done(() => {
+          setTimeout(() => {           //Ricarica la pagina ed aggiorna in tempo reale la lista dipendenti senza che dobbiamo aggiornarla noi quando licenzi un dipendente (dopo che premi ok)
+            window.location.reload();
+          }, 100);
+        });
+      }
   });
 
-  //TODO RIMUOVERE GRADO DEL GIOCATORE CON QUELL'ID (IMPOSTARE GRADO = 0)
+  //TODO RIMUOVERE GRADO DEL GIOCATORE CON QUELL'ID (IMPOSTARE GRADO = 0) fatto 
 }
 
 function addEmployee() {
@@ -154,15 +195,15 @@ function addEmployee() {
         <div style="display: flex; flex-direction: column; gap: 10px;">
           <div style="display: flex; align-items: center; justify-content: space-between;">
             <label for="employee-id" style="width: 30%;">ID:</label>
-            <input type="text" id="employee-id" class="swal2-input" placeholder="Inserisci ID" style="flex-grow: 1;">
+            <input type="number" id="employee-id" class="swal2-input" placeholder="Inserisci ID" style="flex-grow: 1;">
           </div>
           <div style="display: flex; align-items: center; justify-content: space-between;">
             <label for="employee-user-id" style="width: 30%;">ID Utente:</label>
-            <input type="text" id="employee-user-id" class="swal2-input" placeholder="Inserisci ID Utente" style="flex-grow: 1;">
+            <input type="number" id="employee-user-id" class="swal2-input" placeholder="Inserisci ID Utente" style="flex-grow: 1;">
           </div>
           <div style="display: flex; align-items: center; justify-content: space-between;">
             <label for="employee-grade" style="width: 30%;">Grado:</label>
-            <input type="text" id="employee-grade" class="swal2-input" placeholder="Inserisci Grado" style="flex-grow: 1;">
+            <input type="number" id="employee-grade" class="swal2-input" placeholder="Inserisci Grado" style="flex-grow: 1;">
           </div>
         </div>
       `,
@@ -187,13 +228,23 @@ function addEmployee() {
       }
   }).then((result) => {
       if (result.isConfirmed) {
-          const data = result.value;
-          console.log("Dipendente assunto:", data);
+        const data = result.value;
+        console.log("Dipendente assunto:", data);
 
           //TODO DOMANI: invia dati al client e al server e salva su DB
+        $.post("https://LTW/AssumiDip", JSON.stringify({
+          id: parseInt(data.id),
+          userId: parseInt(data.userId),
+          grado : parseInt(data.grade),
+        }))
+        .done(() => {
+          setTimeout(() => {          //Ricarica la pagina ed aggiorna in tempo reale la lista dipendenti senza che dobbiamo aggiornarla noi quando assumi un nuovo dopendente
+            window.location.reload();
+          }, 100);
+        });
 
       } else if (result.isDismissed) {
-          console.log("Assunzione annullata.");
+          console.log("Assunzione annullata");
       }
   });
 }
@@ -209,6 +260,7 @@ function addEmployee() {
             const employeeItem = document.createElement("div");
             employeeItem.className = "flexitem employee-item";
             employeeItem.setAttribute("data-name", `${employee.Nome} ${employee.Cognome}`);
+            employeeItem.setAttribute("data-user-id", employee.ID);
             employeeItem.innerHTML = `
                 <img src="profilo.jpg" alt="Foto Profilo" class="profile-pic">
                 <div class="employee-info">
@@ -217,12 +269,24 @@ function addEmployee() {
                     <p>ID: ${employee.ID}</p>
                 </div>
                 <div class="employee-actions">
-                    <button class="promote-btn" onclick="promoteEmployee('${employee.Nome} ${employee.Cognome}')">Promuovi</button>
-                    <button class="unpromote-btn" onclick="unpromoteEmployee('${employee.Nome} ${employee.Cognome}')">Retrocedi</button>
-                    <button class="fire-btn" onclick="fireEmployee('${employee.Nome} ${employee.Cognome}')">Licenzia</button>
+                    <button class="promote-btn" onclick="promoteEmployee('${employee.Nome} ${employee.Cognome}', ${employee.ID})">Promuovi</button>
+                    <button class="unpromote-btn" onclick="unpromoteEmployee('${employee.Nome} ${employee.Cognome}', ${employee.ID})">Retrocedi</button>
+                    <button class="fire-btn" onclick="fireEmployee('${employee.Nome} ${employee.Cognome}', ${employee.ID})">Licenzia</button>
                 </div>
             `;
             listElement.appendChild(employeeItem);
+            const DarkMode = localStorage.getItem('dark-mode')
+            if(DarkMode == 1) { 
+              const prova = document.querySelectorAll(".flexitem");
+              prova.forEach((elem) => {
+                elem.classList.add("dark")                                      //quando viene aggiunto un dipendente nuovo il flexbox non viene settato come gli altri in automatico
+              });                                                               //in base al colore dello sfondo ed è quindi importante farlo manulamente ogni qualvolta la lista
+            }else{                                                              //viene aggiornata con l'aggiunta di un nuovo impiegato
+              const prova = document.querySelectorAll(".flexitem");
+              prova.forEach((elem) => {
+                elem.classList.remove("dark")
+              });
+            }
         });
     }
 });
