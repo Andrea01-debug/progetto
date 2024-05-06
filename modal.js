@@ -118,6 +118,16 @@ function toggleProfiloTendina() {
 
 
 window.onload=function(){
+	const id = localStorage.getItem('id')
+	if (id && id.trim() !== "") {
+		$.post("https://LTW/UpdateGrado", JSON.stringify({
+        id: id,
+    }))
+	}
+    
+    
+
+
 	document.getElementById('registerForm').addEventListener('submit', function(e){
 		console.log("We")
 		e.preventDefault();
@@ -146,7 +156,13 @@ window.onload=function(){
 	
 
 	window.addEventListener("message", function(event) {
-		if (event.data.type === "registrationError") {
+		if (event.data.type === "AggiornaGrado"){
+			console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+			console.log(event.data.grade);
+			localStorage.setItem('grade', event.data.grade);
+		
+		}		
+		else if (event.data.type === "registrationError") {
 			Swal.fire({
 				icon: 'error',
 				title: 'Errore',

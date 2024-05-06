@@ -46,8 +46,21 @@ document.addEventListener('DOMContentLoaded', () => {
   
 window.onload=function(){
     $.post("https://LTW/GetDipendenti");
+    const id = localStorage.getItem('id')
+    $.post("https://LTW/UpdateGrado", JSON.stringify({
+        id: id,
+    }))
   
 }
+
+window.addEventListener('message', function(event) {
+  if (event.data.type === "AggiornaGrado"){
+    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+    console.log(event.data.grade);
+    localStorage.setItem('grade', event.data.grade);
+
+  }
+});
   
   function SetDark() {
   if(localStorage.getItem('dark-mode') == 0) {
@@ -129,8 +142,10 @@ function unpromoteEmployee(nome, userId) {
       confirmButtonText: "OK",
   }).then((result) => {
     if (result.isConfirmed) {
+      const id = localStorage.getItem('id')
       $.post("https://LTW/RetrocediDipendente", JSON.stringify({
         userId: userId,
+        id: id,
       }))
       .done(() => {
         setTimeout(() => {
@@ -150,8 +165,10 @@ function promoteEmployee(nome, userId) {
       confirmButtonText: "OK",
   }).then((result) => {
     if (result.isConfirmed) {
+      const id = localStorage.getItem('id')
       $.post("https://LTW/PromuoviDipendente", JSON.stringify({
         userId: userId,
+        id: id,
       }))
       .done(() => {
         setTimeout(() => {
@@ -173,9 +190,10 @@ function fireEmployee(nome, userId) {
       confirmButtonText: "OK",
     }).then((result) => {
       if (result.isConfirmed) {
-        console.log("Dipendente licenziato: ", userId);
+        const id = localStorage.getItem('id')
         $.post("https://LTW/LicenziaDipendente", JSON.stringify({
           userId: userId,
+          id: id,
         }))
         .done(() => {
           setTimeout(() => {           //Ricarica la pagina ed aggiorna in tempo reale la lista dipendenti senza che dobbiamo aggiornarla noi quando licenzi un dipendente (dopo che premi ok)

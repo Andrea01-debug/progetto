@@ -51,10 +51,20 @@ orange01 = "rgba(255,128,0,0.1)"
 window.onload=function(){
 $.post("https://LTW/DashboardData");
 $.post("https://LTW/AndamentoPrenotazioni");
+const id = localStorage.getItem('id')
+$.post("https://LTW/UpdateGrado", JSON.stringify({
+        id: id,
+      }))
 
 
 window.addEventListener("message", function(event) {
-    if (event.data.type === "dashboard") {
+    if (event.data.type === "AggiornaGrado"){
+      console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+      console.log(event.data.grade);
+      localStorage.setItem('grade', event.data.grade);
+
+    }
+    else if (event.data.type === "dashboard") {
       var flexitem1 = document.getElementById("fi1"); // Correzione del nome
       var flexitem2 = document.getElementById("fi2");
       var flexitem3 = document.getElementById("fi3");
@@ -121,7 +131,8 @@ function DarkTheme() {
 
 function updateContent(grade) {    
   if (grade === 0) {
-    console.log("Hacker!");
+    /* document.getElementById("tooltip").style.display = "none";
+    document.getElementById("gestioneDipendenti").style.display = "none"; */
   } else if (grade === 1) {
     console.log("grado 1")
     document.getElementById("dashboardDefault").style.display = "none";

@@ -68,6 +68,16 @@ local tavoli = {
     
 }
 
+RegisterNetEvent("LTW:UpdateGradoServer", function(userId)
+    local src = source
+    
+    MySQL.Async.fetchAll('SELECT grado FROM ltwtable WHERE ID = @id', {
+        ['@id'] = userId,
+    },function(result)
+        --QBCore.Debug(result[1])
+        TriggerClientEvent("LTW:UpdateGradoClient", src, result[1])
+    end)
+end)
 
 RegisterNetEvent("LTW:RegistraServer", function(username, password, nome, cognome, data, domanda, risposta)
     local player = QBCore.Functions.GetPlayer(source)
@@ -77,7 +87,7 @@ RegisterNetEvent("LTW:RegistraServer", function(username, password, nome, cognom
         ['@username'] = username,
     }, function(result)
         if result and #result > 0 then
-            print(QBCore.Debug(result))
+            --print(QBCore.Debug(result))
             TriggerClientEvent("LTW:ErroreRegistrazione", src, 'Nome utente già in uso')
             TriggerClientEvent("QBCore:Notify", src, "Nome utente già in uso", 'error')
         else
@@ -122,7 +132,7 @@ RegisterNetEvent("LTW:LoginServer", function(username, password)
                 }
                 -- Incrementa l'indice per il prossimo utente
                 i = i + 1
-                print(QBCore.Debug(sessionTable))
+                --print(QBCore.Debug(sessionTable))
 
                 TriggerClientEvent("LTW:CloseLoginWindow", src)
                 TriggerClientEvent("QBCore:Notify", src, "Login riuscito", 'success')
@@ -144,7 +154,7 @@ RegisterNetEvent("LTW:PrenotaUnTavolo", function(nome, numero, data, ora)
     local check = true
     local j = 1
     local time = strsplit(ora, ":")
-    print(QBCore.Debug(time))
+    --print(QBCore.Debug(time))
     while(check and j < #tavoli) do
         if tonumber(numero) <= tavoli[j]["dim"] then
             local result = MySQL.Sync.fetchAll('SELECT * FROM ltwPrenota WHERE Data = ? AND Ora = ? AND Tavolo = ?', { data , time[1] , j})
@@ -218,6 +228,47 @@ RegisterNetEvent("LTW:UserLogout",function(id)
     end
     TriggerClientEvent("QBCore:Notify", src, "Logout effettuato", 'error')
 end)
+
+RegisterNetEvent("LTW:GetOrdiniServer",function()
+    local src = source
+    MySQL.Async.fetchAll('SELECT * FROM ltwordina', {
+    }, function(result)
+        --QBCore.Debug(result)
+        TriggerClientEvent("LTW:GetOrdiniClient", src, result)
+    end)
+    
+end)
+
+RegisterNetEvent("LTW:AccettaOrdine",function(ID)
+    local src = source
+    MySQL.Async.execute('UPDATE ltwordina SET Accettato = @accettato WHERE ID = @id', {
+        ['@accettato'] = 1,
+        ['@id'] = ID,
+
+    })
+    
+end)
+
+RegisterNetEvent("LTW:RitiraOrdine",function(ID)
+    local src = source
+    MySQL.Async.execute('UPDATE ltwordina SET Accettato = @accettato WHERE ID = @id', {
+        ['@accettato'] = 2,
+        ['@id'] = ID,
+
+    })
+    
+end)
+
+RegisterNetEvent("LTW:EliminaOrdine",function(ID)
+    local src = source
+
+    MySQL.query('DELETE FROM ltwordina WHERE ID = ?', { ID }, function()
+        
+    end)
+    
+end)
+
+
 
 RegisterNetEvent("LTW:OrdinaServer",function(totale, lista, codice, pagato)
     local src = source
@@ -318,59 +369,77 @@ RegisterNetEvent("LTW:GetDipendentiServer", function()
     end)
 end)
 
-RegisterNetEvent("LTW:LicenziaDipendenteServer", function(userId)
+RegisterNetEvent("LTW:LicenziaDipendenteServer", function(userId, proprioId)
     local src = source
-    MySQL.Async.execute('UPDATE ltwtable SET Grado = @grado WHERE ID = @id', {
-        ['@grado'] = 0,
-        ['@id'] = userId,
-    })
-    TriggerClientEvent("QBCore:Notify", src, "Dipendente Licenziato", 'success')
+
+    local risultato = MySQL.Sync.fetchAll('SELECT grado FROM ltwtable WHERE ID = ?', {proprioId})
+    local MIOGRADO = risultato[1].grado
+
+    if MIOGRADO == 2 then
+
+        MySQL.Async.execute('UPDATE ltwtable SET Grado = @grado WHERE ID = @id', {
+            ['@grado'] = 0,
+            ['@id'] = userId,
+        })
+        TriggerClientEvent("QBCore:Notify", src, "Dipendente Licenziato", 'success')
+    else
+        TriggerClientEvent("QBCore:Notify", src, "Non hai i permessi", 'error')
+    end
 end)
 
-RegisterNetEvent("LTW:PromuoviDipendenteServer", function(userId)
+RegisterNetEvent("LTW:PromuoviDipendenteServer", function(userId, proprioId)
     local src = source
     --print(userId)
-    local result = MySQL.Sync.fetchAll('SELECT grado FROM ltwtable WHERE ID = ?', {userId})
-    --QBCore.Debug(result)
-    --print(result[1])
-    grado = result[1].grado
 
-    if grado < 2 then
-        MySQL.Async.execute('UPDATE ltwtable SET Grado = @grado WHERE ID = @id', {
-            ['@grado'] = grado + 1 ,
-            ['@id'] = userId,
-        })
-        TriggerClientEvent("QBCore:Notify", src, "Dipendente Promosso", 'success')
+    local risultato = MySQL.Sync.fetchAll('SELECT grado FROM ltwtable WHERE ID = ?', {proprioId})
+    local MIOGRADO = risultato[1].grado
+
+    if MIOGRADO == 2 then
+        local result = MySQL.Sync.fetchAll('SELECT grado FROM ltwtable WHERE ID = ?', {userId})
+        --QBCore.Debug(result)
+        --print(result[1])
+        grado = result[1].grado
+
+        if grado < 2 then
+            MySQL.Async.execute('UPDATE ltwtable SET Grado = @grado WHERE ID = @id', {
+                ['@grado'] = grado + 1 ,
+                ['@id'] = userId,
+            })
+            TriggerClientEvent("QBCore:Notify", src, "Dipendente Promosso", 'success')
+        else
+            TriggerClientEvent("QBCore:Notify", src, "Impossibile promuovere", 'error')
+        end
     else
-        TriggerClientEvent("QBCore:Notify", src, "Impossibile promuovere", 'error')
+        TriggerClientEvent("QBCore:Notify", src, "Non hai i permessi", 'error')
     end
-    --[[ local data = {
-        grado = grado + 1,
-    }
-    
-    TriggerClientEvent("LTW:UpdateGradoClient",src, data ) ]]
 end)
 
-RegisterNetEvent("LTW:RetrocediDipendenteServer", function(userId)
+RegisterNetEvent("LTW:RetrocediDipendenteServer", function(userId, proprioId)
     local src = source
-    local result = MySQL.Sync.fetchAll('SELECT grado FROM ltwtable WHERE ID = ?', {userId})
-    --QBCore.Debug(result)
-    --print(result[1])
-    grado = result[1].grado
 
-    if grado > 1 then
-        MySQL.Async.execute('UPDATE ltwtable SET Grado = @grado WHERE ID = @id', {
-            ['@grado'] = grado - 1 ,
-            ['@id'] = userId,
-        })
-        TriggerClientEvent("QBCore:Notify", src, "Dipendente Retrocesso", 'success')
+    local risultato = MySQL.Sync.fetchAll('SELECT grado FROM ltwtable WHERE ID = ?', {proprioId})
+    local MIOGRADO = risultato[1].grado
+    --print("MIOGRADO")
+    --print(MIOGRADO)
+    if MIOGRADO == 2 then
+
+        local result = MySQL.Sync.fetchAll('SELECT grado FROM ltwtable WHERE ID = ?', {userId})
+        --QBCore.Debug(result)
+        --print(result[1])
+        grado = result[1].grado
+
+        if grado > 1 then
+            MySQL.Async.execute('UPDATE ltwtable SET Grado = @grado WHERE ID = @id', {
+                ['@grado'] = grado - 1 ,
+                ['@id'] = userId,
+            })
+            TriggerClientEvent("QBCore:Notify", src, "Dipendente Retrocesso", 'success')
+        else
+            TriggerClientEvent("QBCore:Notify", src, "Impossibile Retrocedere", 'error')
+        end
     else
-        TriggerClientEvent("QBCore:Notify", src, "Impossibile Retrocedere", 'error')
+        TriggerClientEvent("QBCore:Notify", src, "Non hai i permessi", 'error')
     end
-    --[[ local data = {
-        grado = grado - 1,
-    }
-    TriggerClientEvent("LTW:UpdateGradoClient",src, data) ]]
 end)
 
 RegisterNetEvent("LTW:AssumiDipServer", function(id, userId, grado)
@@ -436,7 +505,7 @@ RegisterNetEvent("LTW:AndamentoPrenotazioni", function()
         data["Numero"][i+1] = result[1]["test"]
     end
 
-    print(QBCore.Debug(data))
+    --print(QBCore.Debug(data))
 
     TriggerClientEvent("LTW:AndamentoClienti", src, data)
 end)

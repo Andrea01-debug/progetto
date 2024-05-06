@@ -6,11 +6,16 @@
         <title>Document</title>
         <link rel="stylesheet" href="../../general.css">
         <link rel="stylesheet" href="../dashboard.css">
-        <link rel="stylesheet" href="prenotazioni.css">
+        
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+        
 
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+        <script src="../../modal.js"></script>
         <script src="../dashboard.js"></script>
+        <script src="ordini.js"></script>
     </head>
     <body  class="collapsed">
         <div id="container">
@@ -51,7 +56,7 @@
                       </a>
                     </li>
                     <li>
-                      <a href="../Ordini/ordini.html" class="tooltip" draggable="false">
+                      <a href="ordini.html" class="tooltip" draggable="false">
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-transform-filled" width="24"
                           height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
                           stroke-linejoin="round">
@@ -72,7 +77,7 @@
                       </a>
                     </li>
                     <li>
-                      <a href="Prenotazioni.html" class="tooltip" draggable="false">
+                      <a href="../Prenotazioni/prenotazioni.html" class="tooltip" draggable="false">
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chart-pie" width="24"
                           height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
                           stroke-linejoin="round">
@@ -126,70 +131,33 @@
                     </li>
                 </div>
             </nav>
+
             <div class="MainBlocco">
+                <!-- <button id="themeButton">Tema Scuro</button> -->
                 <input class="Bottone" type="checkbox" id="darkmode-toggle"/>
                 <label class="etichetta" id="SoleLuna" for="darkmode-toggle"></label>
-                <div class="data-selector">
-                  <label per="date-input">Seleziona Data:</label>
-                  <input type="date" id="date-input" name="data" onchange="dateChanged()" min="{{ data odierna }}">
-                </div>
+                
+                <div class="cont">
+                  <h1>Gestione Ordini</h1>
+                  <!-- Contenitore per la tabella con altezza limitata e scorrimento verticale -->
+                  <div class="table-container">
+                      <table id="ordineTable">
+                          <thead>
+                              <tr>
+                                  <th onclick="sortTable(0)">ID</th>
+                                  <th onclick="sortTable(1)">Ordine</th>
+                                  <th onclick="sortTable(2)">Totale</th>
+                                  <th onclick="sortTable(3)">Stato</th>
+                                  <th>Azioni</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <!-- JS -->
+                          </tbody>
+                      </table>
+                  </div>
 
-
-
-
-                <div class="lista">
-                  <h2>Lista dei luoghi</h2>
-                  <ul>
-                      <!-- Elenca i luoghi qui -->
-                      <li>Luogo 1</li>
-                      <li>Luogo 2</li>
-                      <li>Luogo 3</li>
-                  </ul>
-                </div>
-                <div class="mappa">
-                    <h2>Mappa</h2>
-                    <img src="MappaBurger.png" usemap="#tavoli" width="790" height="543">
-
-                    <map name="tavoli">
-                      <area target="" alt="Tavolo1" title="Tavolo1" href="" coords="254,55,322,120" shape="rect">
-                      <area target="" alt="Tavolo2" title="Tavolo2" href="" coords="455,54,525,126" shape="rect">
-                      <area target="" alt="Tavolo3" title="Tavolo3" href="" coords="240,288,313,353" shape="rect">
-                      <area target="" alt="Tavolo4" title="Tavolo4" href="" coords="478,286,550,356" shape="rect">
-                      <area target="" alt="Tavolo5" title="Tavolo5" href="" coords="58,409,134,484" shape="rect">
-                      <area target="" alt="Tavolo6" title="Tavolo6" href="" coords="660,419,733,491" shape="rect">
-                      <area target="" alt="Tavolo7" title="Tavolo7" href="" coords="0,170,148,235" shape="rect">
-                      <area target="" alt="Tavolo8" title="Tavolo8" href="" coords="0,290,146,352" shape="rect">
-                      <area target="" alt="Tavolo9" title="Tavolo9" href="" coords="196,404,268,541" shape="rect">
-                      <area target="" alt="Tavolo10" title="Tavolo10" href="" coords="526,414,594,541" shape="rect">
-                      <area target="" alt="Tavolo11" title="Tavolo11" href="" coords="658,299,788,361" shape="rect">
-                      <area target="" alt="Tavolo12" title="Tavolo12" href="" coords="658,183,788,246" shape="rect">
-                      <area target="" alt="Tavolo13" title="Tavolo13" href="" coords="228,157,302,229" shape="rect">
-                      <area target="" alt="Tavolo14" title="Tavolo14" href="" coords="484,158,558,231" shape="rect">
-                    </map>
-                </div>
-          
-          
-
-
-
-
-
-
-
-
-
-
-    
-                <div class="data-container" id="data-container">
-                    <!-- Testo o dati verranno mostrati qui in base alla data selezionata -->
-                    aaaaaaa
-                </div>
-  
-                <div class="image-container">
-                    <img id="interactive-image" src="../LogoSmall.png" alt="Clicca qui per prenotare" onclick="openReservationPopup()">
-                </div>
             </div>
-            
         </div>
     </body>
 </html>

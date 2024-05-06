@@ -475,3 +475,102 @@ input.Bottone:checked + .etichetta:after {
 .add-employee-btn:hover::after {
   opacity: 1;
 }
+
+
+.cont {
+  width: 90%;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+}
+
+.table-container {
+  margin-top: 2%;
+  height: 50vh; 
+  overflow-y: auto; 
+  border: 1px solid #ddd;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+th {
+  cursor: pointer;
+}
+
+th:hover {
+  background-color: #f1f1f1;
+}
+
+
+.prontoRitiro{
+  margin-top: 4px;
+  background-color: green;
+  border: none;
+  border-radius: 20px;
+  padding: 4px 8px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.prontoRitiro:hover {
+  background-color: #006e25; 
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
+}
+
+.avviaLavorazione {
+  background-color: #d8860b;
+  border: none;
+  border-radius: 20px;
+  padding: 4px 8px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.avviaLavorazione:hover {
+  background-color: #c77407; 
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
+}
+
+.red {
+  color: red;
+}
+
+.yellow {
+  color: #d8860b;
+}
+
+.green {
+  color: green;
+}
+
+
+.delete-button {
+  background: none;
+  border: none;
+  color: red;
+  cursor: pointer;
+  font-size: 1.5em;
+  transition: transform 0.2s;
+}
+
+.delete-button:hover { /* Effetto  apertura cestino del mouse in ordini */
+  transform: rotate(-15deg);
+}

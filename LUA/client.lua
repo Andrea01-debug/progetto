@@ -49,17 +49,43 @@ RegisterNUICallback('AssumiDip', function(data, cb)
 end)
 
 RegisterNUICallback('LicenziaDipendente', function(data, cb)
-    TriggerServerEvent("LTW:LicenziaDipendenteServer", data.userId)
+    TriggerServerEvent("LTW:LicenziaDipendenteServer", data.userId, data.id)
     cb('ok')
 end)
 
 RegisterNUICallback('PromuoviDipendente', function(data, cb)
-    TriggerServerEvent("LTW:PromuoviDipendenteServer", data.userId)
+    TriggerServerEvent("LTW:PromuoviDipendenteServer", data.userId, data.id)
     cb('ok')
 end)
 
 RegisterNUICallback('RetrocediDipendente', function(data, cb)
-    TriggerServerEvent("LTW:RetrocediDipendenteServer", data.userId)
+    TriggerServerEvent("LTW:RetrocediDipendenteServer", data.userId, data.id)
+    cb('ok')
+end)
+
+RegisterNUICallback('GetOrdiniServer', function(data, cb)
+    TriggerServerEvent("LTW:GetOrdiniServer")
+    cb('ok')
+end)
+
+RegisterNUICallback('AccettaOrdine', function(data, cb)
+    TriggerServerEvent("LTW:AccettaOrdine", data.id)
+    cb('ok')
+end)
+
+RegisterNUICallback('RitiraOrdine', function(data, cb)
+    TriggerServerEvent("LTW:RitiraOrdine", data.id)
+    cb('ok')
+end)
+
+RegisterNUICallback('EliminaOrdine', function(data, cb)
+    TriggerServerEvent("LTW:EliminaOrdine", data.id)
+    cb('ok')
+end)
+
+RegisterNUICallback('UpdateGrado', function(data, cb)
+    --QBCore.Debug(data)
+    TriggerServerEvent("LTW:UpdateGradoServer", data.id)
     cb('ok')
 end)
 
@@ -132,6 +158,15 @@ AddEventHandler("LTW:Dashboard", function(data)
     })
 end)
 
+RegisterNetEvent("LTW:GetOrdiniClient")
+AddEventHandler("LTW:GetOrdiniClient", function(data)
+    QBCore.Debug(data)
+    SendNUIMessage({
+        type = "SendOrdiniClient",
+        data = data,
+    })
+end)
+
 RegisterNetEvent("LTW:AndamentoClienti")
 AddEventHandler("LTW:AndamentoClienti", function(data)
     SendNUIMessage({
@@ -189,8 +224,9 @@ end)
 RegisterNetEvent("LTW:UpdateGradoClient")
 AddEventHandler("LTW:UpdateGradoClient", function(data)
     QBCore.Debug(data)
+    print(data.grado)
     SendNUIMessage({
-        type = "updateUserGrade",
+        type = "AggiornaGrado",
         grade = data.grado,
     })
 end)

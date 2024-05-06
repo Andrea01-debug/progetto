@@ -28,5 +28,6 @@ files {
 	'html/Dashboard/*',
 	'html/Dashboard/Dipendenti/*',
 	'html/Dashboard/Prenotazioni/*',
+	'html/Dashboard/Ordini/*',
 	
 }
