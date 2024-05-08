@@ -1,0 +1,25 @@
+{
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    // causes special characters to be escaped in md/mdx files unnecessarily
+    // so commenting out waiting for https://github.com/microsoft/vscode-eslint/issues/1814
+    //"source.fixAll.eslint": "explicit"
+  },
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "html",
+    "markdown",
+    "mdx",
+    "yaml",
+    "json",
+    "jsonc",
+    "typescript",
+    "astro"
+  ],
+  "prettier.documentSelectors": ["**/*.astro"],
+  "mdx.validate.validateFileLinks": "ignore"
+}

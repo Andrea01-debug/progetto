@@ -1,0 +1,12 @@
+tests/redist/
+examples/redist/
+build/
+dist/
+node_modules/
+!.github
+!.vscode
+package-lock.json
+!.*.json
+!.*.jsonc
+*.hbs
+/docs/
