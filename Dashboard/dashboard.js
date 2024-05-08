@@ -131,16 +131,16 @@ function DarkTheme() {
 }
 
 function updateContent(grade) {    
-  if (grade === 0) {
+  if (grade == 0) {
     /* document.getElementById("tooltip").style.display = "none";
     document.getElementById("gestioneDipendenti").style.display = "none"; */
-  } else if (grade === 1) {
+  } else if (grade == 1) {
     console.log("grado 1")
     document.getElementById("dashboardDefault").style.display = "none";
     document.getElementById("dashboardDipendenti").style.display = "block";
     
     document.getElementById("gestioneDipendenti").style.display = "none";
-  } else if (grade === 2) {
+  } else if (grade == 2) {
     document.getElementById("fi4").style.display = "block";
     document.getElementById("dashboardDefault").style.display = "none";
     document.getElementById("dashboadAmministratore").style.display = "block";

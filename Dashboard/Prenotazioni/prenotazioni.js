@@ -49,32 +49,14 @@ window.onload = function(){
 // Aggiorna le coordinate quando la finestra viene ridimensionata
 window.onresize = AggiornaCoordinate;
 
-document.addEventListener('DOMContentLoaded', () => {
-	console.log("DOM CARICATO Prenotazioni");
-    const grade = localStorage.getItem('grade');
-    console.log(grade);
-    if (grade) {
-
-        updateContent(parseInt(grade));
-    }
-	
-});
-
-function updateContent(grade) {    
-    if (grade === 0) {
-    } else if (grade === 1) {
-      console.log("grado 1")
-      document.getElementById("dashboardDefault").style.display = "none";
-      document.getElementById("dashboardDipendenti").style.display = "block";
-      
-      document.getElementById("gestioneDipendenti").style.display = "none";
-    } else if (grade === 2) {
-      document.getElementById("dashboardDefault").style.display = "none";
-      document.getElementById("dashboadAmministratore").style.display = "block";
+document.addEventListener('DOMContentLoaded', function () {
+  console.log("DOM CARICATO Ordini");
+  const grade = localStorage.getItem('grade');
+  if (grade == 2) {
       document.getElementById("gestioneDipendenti").style.display = "block";
-      
-      console.log("grado 2")
-    } else {
+  
+      console.log("grado 2!!!!!!!!!!!!!!")
+  } else {
       console.log("grado Pinguino")
-    }
   }
+});
