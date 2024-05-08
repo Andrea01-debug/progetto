@@ -1,8 +1,6 @@
 function AggiornaCoordinate() {
     // Otteniamo l'elemento immagine
-    var img = document.getElementById('mappaImg');
-    console.log("Test")
-    
+    var img = document.getElementById('mappaImg');    
 
     var scaleX = img.width / Gazella;
     var scaleY = img.height / Zebra;
@@ -54,9 +52,75 @@ document.addEventListener('DOMContentLoaded', function () {
   const grade = localStorage.getItem('grade');
   if (grade == 2) {
       document.getElementById("gestioneDipendenti").style.display = "block";
-  
-      console.log("grado 2!!!!!!!!!!!!!!")
   } else {
-      console.log("grado Pinguino")
+      console.log("grado Impossibile")
   }
+
+  var area = document.getElementById('Tavolo1');
+console.log("pollo")
+    var status = area.dataset.status;
+    if (status == 'occupato') {
+        area.style.fill = 'red';
+        console.log("1000000000000")
+    } else {
+        area.style.fill = 'green'
+        console.log("1000")
+    }
+    
+    $('classeMappa').maphilight({
+
+        // fill the shape
+        fill: true,
+      
+        // fill color
+        fillColor: '000000',
+      
+        // fill opacity
+        fillOpacity: 0.2,
+      
+        // outline the shape
+        stroke: true,
+      
+        // stroke color
+        strokeColor: 'ff0000',
+      
+        // stroke opacity
+        strokeOpacity: 1,
+      
+        // stroke width
+        strokeWidth: 1,
+      
+        // fade in the shapes on mouseover
+        fade: true,
+      
+        // always show the hilighted areas
+        alwaysOn: false,
+      
+        // never show the hilighted areas
+        neverOn: false,
+      
+        // The name of an attribute to group areas by, or a selector for elements in the map to group. 
+        // Or an array of the same
+        // If this is present then all areas in the map which have the same attribute value as the hovered area will hilight as well
+        groupBy: false,
+      
+        // If true, applies the class on the <img> to the wrapper div maphilight created.
+        // If a string, that string is used as a class on the wrapper div.
+        wrapClass: true,
+      
+        // apply a shadow to the shape
+        shadow: false,
+        shadowX: 0,
+        shadowY: 0,
+        shadowRadius: 6,
+        shadowColor: '000000',
+        shadowOpacity: 0.8,
+        // Can be 'outside', 'inside', or 'both'.
+        shadowPosition: 'outside',
+        // Can be 'stroke' or 'fill'
+        shadowFrom: false,
+      
+      });
+
+
 });
