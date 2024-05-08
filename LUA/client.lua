@@ -160,7 +160,7 @@ end)
 
 RegisterNetEvent("LTW:GetOrdiniClient")
 AddEventHandler("LTW:GetOrdiniClient", function(data)
-    QBCore.Debug(data)
+    --QBCore.Debug(data)
     SendNUIMessage({
         type = "SendOrdiniClient",
         data = data,
@@ -223,7 +223,7 @@ end)
 
 RegisterNetEvent("LTW:UpdateGradoClient")
 AddEventHandler("LTW:UpdateGradoClient", function(data)
-    QBCore.Debug(data)
+    --QBCore.Debug(data)
     print(data.grado)
     SendNUIMessage({
         type = "AggiornaGrado",

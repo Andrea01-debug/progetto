@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
   let activeIndex;
   expand_btn.addEventListener("click", () => {
     document.body.classList.toggle("collapsed");
+    AggiornaCoordinate();
   });
   
   const current = window.location.href;
@@ -152,8 +153,7 @@ function updateContent(grade) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-	console.log("DOM CARICATO");
-	console.log("DOM CARICATO");
+	console.log("DOM CARICATO Dashboard");
     const grade = localStorage.getItem('grade');
     console.log(grade);
     if (grade) {

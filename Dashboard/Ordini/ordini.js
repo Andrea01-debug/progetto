@@ -9,7 +9,6 @@ $(document).ready(function() {
     window.addEventListener("message", function(event) {
         if (event.data.type === 'SendOrdiniClient') {
             const orders = event.data.data;
-            console.log(orders);
             const tbody = $("#ordineTable tbody");
             tbody.empty(); // Pulisci la tabella
             
@@ -44,9 +43,10 @@ $(document).ready(function() {
                 const statusInfo = getStatusTextAndClass(order.Accettato);
 
                 const row = `<tr>
-                    <td>${order.ID}</td>
+                    <td>${order.CodPren}</td>
                     <td>${order.Ordine}</td>
                     <td>${order.Totale}</td>
+                    <td>${order.Pagato}</td>
                     <td class="${statusInfo.class}">${statusInfo.text}</td>
                     <td class="td">
                         <button class="avviaLavorazione" onclick="avviaLavorazione(${order.ID})">Lavora</button>
@@ -135,3 +135,35 @@ $(document).ready(function() {
         }
     };
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+	console.log("DOM CARICATO Ordini");
+    const grade = localStorage.getItem('grade');
+    console.log(grade);
+    if (grade) {
+
+        updateContent(parseInt(grade));
+    }
+	
+});
+
+function updateContent(grade) {    
+    if (grade === 0) {
+      /* document.getElementById("tooltip").style.display = "none";
+      document.getElementById("gestioneDipendenti").style.display = "none"; */
+    } else if (grade === 1) {
+      console.log("grado 1")
+      document.getElementById("dashboardDefault").style.display = "none";
+      document.getElementById("dashboardDipendenti").style.display = "block";
+      
+      document.getElementById("gestioneDipendenti").style.display = "none";
+    } else if (grade === 2) {
+      document.getElementById("dashboardDefault").style.display = "none";
+      document.getElementById("dashboadAmministratore").style.display = "block";
+      document.getElementById("gestioneDipendenti").style.display = "block";
+      
+      console.log("grado 2")
+    } else {
+      console.log("grado Pinguino")
+    }
+  }
