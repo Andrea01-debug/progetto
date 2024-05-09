@@ -171,6 +171,7 @@ RegisterNetEvent("LTW:PrenotaUnTavolo", function(nome, numero, data, ora)
                 check = false
             end
         end
+        Wait(5)
         j = j + 1;
     end
     if check == true then
@@ -237,6 +238,17 @@ RegisterNetEvent("LTW:GetOrdiniServer",function()
         TriggerClientEvent("LTW:GetOrdiniClient", src, result)
     end)
     
+end)
+
+RegisterNetEvent("LTW:GetPrenotazioniServer", function(giorno)
+    local src = source
+    print(giorno)
+    MySQL.Async.fetchAll('SELECT * FROM ltwprenota WHERE Data = @Data', {
+        ['@Data'] = giorno,
+    }, function(result)
+        QBCore.Debug(result)
+        TriggerClientEvent("LTW:GetPrenotazioniClient", src, result)
+    end)
 end)
 
 RegisterNetEvent("LTW:AccettaOrdine",function(ID)
@@ -510,10 +522,10 @@ RegisterNetEvent("LTW:AndamentoPrenotazioni", function()
     TriggerClientEvent("LTW:AndamentoClienti", src, data)
 end)
 
-QBCore.Functions.CreateUseableItem("tabletburger", function(source, item)
+QBCore.Functions.CreateUseableItem("tabletburger", function(source)
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
-    TriggerClientEvent("LTW:client:usaTablet", src, item.name)
+    TriggerClientEvent("LTW:client:usaTablet", src)
 end)
 
 

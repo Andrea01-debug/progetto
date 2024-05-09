@@ -136,20 +136,14 @@
                 <label class="etichetta" id="SoleLuna" for="darkmode-toggle"></label>
                 <div class="data-selector">
                   <label per="date-input">Seleziona Data:</label>
-                  <input type="date" id="date-input" name="data" onchange="dateChanged()" min="{{ data odierna }}">
+                  <input type="date" id="date-input" name="data" onchange="caricaPrenotazioni()" min="{{ data odierna }}" value="2024-05-30">
                 </div>
 
 
 
 
                 <div class="lista">
-                  <h2>Lista dei luoghi</h2>
-                  <ul>
-                      <!-- Elenca i luoghi qui -->
-                      <li>Luogo 1</li>
-                      <li>Luogo 2</li>
-                      <li>Luogo 3</li>
-                  </ul>
+                  <h2>Lista prenotazioni</h2>
                   <div class="lista-prenotazioni">
                     <table id="tabellaPrenotazioni">
                       <thead>

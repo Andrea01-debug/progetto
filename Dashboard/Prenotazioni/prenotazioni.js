@@ -41,8 +41,6 @@ window.onresize = function() {
     
 };
 
-
-
 document.addEventListener('DOMContentLoaded', function () {
     console.log("DOM CARICATO Ordini");
     const grade = localStorage.getItem('grade');
@@ -53,3 +51,35 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
 });
+
+$(document).ready(function() {
+    caricaPrenotazioni();
+})
+
+function caricaPrenotazioni() {
+    var giorno = document.getElementById("date-input").value
+    console.log(giorno)
+    function loadReservations() {
+        $.post('https://LTW/GetPrenotazioniServer', JSON.stringify({ valore: giorno })); 
+    }
+
+    loadReservations();
+
+    window.addEventListener("message", function(event) {
+        if (event.data.type === 'SendPrenotazioniClient') {
+            const prenot = event.data.data;
+            const tbody = $("#tabellaPrenotazioni tbody");
+            tbody.empty();
+
+            prenot.forEach(prenotato => {
+                const row = `<tr>
+                    <td>${prenotato.Nome}</td>
+                    <td>${prenotato.Tavolo}</td>
+                    <td>${prenotato.Numero}</td>
+                    <td>${prenotato.Ora}</td>
+                </tr>`;
+                tbody.append(row)
+            });
+        }
+    });
+}

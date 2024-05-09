@@ -23,8 +23,7 @@ $(document).ready(function() {
         if (event.data.type === 'SendOrdiniClient') {
             const orders = event.data.data;
             const tbody = $("#ordineTable tbody");
-            tbody.empty(); // Pulisci la tabella
-            
+            tbody.empty();
 
             function getStatusTextAndClass(accettato) {
                 switch (accettato) {

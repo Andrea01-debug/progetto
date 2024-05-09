@@ -68,6 +68,11 @@ RegisterNUICallback('GetOrdiniServer', function(data, cb)
     cb('ok')
 end)
 
+RegisterNUICallback('GetPrenotazioniServer', function(data, cb)
+    TriggerServerEvent('LTW:GetPrenotazioniServer', data.valore)
+    cb('ok')
+end)
+
 RegisterNUICallback('AccettaOrdine', function(data, cb)
     TriggerServerEvent("LTW:AccettaOrdine", data.id)
     cb('ok')
@@ -176,6 +181,14 @@ AddEventHandler("LTW:GetOrdiniClient", function(data)
     --QBCore.Debug(data)
     SendNUIMessage({
         type = "SendOrdiniClient",
+        data = data,
+    })
+end)
+
+RegisterNetEvent("LTW:GetPrenotazioniClient")
+AddEventHandler("LTW:GetPrenotazioniClient", function(data)
+    SendNUIMessage({
+        type = "SendPrenotazioniClient",
         data = data,
     })
 end)
