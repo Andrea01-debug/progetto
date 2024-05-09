@@ -104,6 +104,19 @@ RegisterCommand("tablet", function(source, args)
     SetDisplay(not display)   
 end, "admin")
 
+RegisterNetEvent("LTW:client:usaTablet", function()
+    TriggerEvent('animations:client:EmoteCommandStart', {"tablet2"})
+    QBCore.Functions.Progressbar("tablet", "Aprendo il tablet", 1000, false, false, {
+        disableMovement = true,
+        disableCarMovement = true,
+		disableMouse = false,
+		disableCombat = true,
+    }, {}, {}, {}, function()
+        SetDisplay(not display)
+    end)
+    
+end)
+
 
 RegisterNUICallback("exit", function(data)
     SetDisplay(false)
@@ -240,6 +253,7 @@ RegisterNUICallback("LogoutUser", function(data, cb)
     id = 0
     cb('ok')
 end)
+
 
 
 Wait(2000)

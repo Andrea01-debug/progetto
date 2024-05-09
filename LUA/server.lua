@@ -510,6 +510,12 @@ RegisterNetEvent("LTW:AndamentoPrenotazioni", function()
     TriggerClientEvent("LTW:AndamentoClienti", src, data)
 end)
 
+QBCore.Functions.CreateUseableItem("tabletburger", function(source, item)
+    local src = source
+    local Player = QBCore.Functions.GetPlayer(src)
+    TriggerClientEvent("LTW:client:usaTablet", src, item.name)
+end)
+
 
 -- strsplit
 
