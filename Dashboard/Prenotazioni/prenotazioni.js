@@ -1,10 +1,10 @@
-function AggiornaCoordinate() {
+/* function AggiornaCoordinate() {
     var img = document.getElementById('mappaImg');    
 
     var scaleX = img.width / Gazella;
     var scaleY = img.height / Zebra;
     Gazella = img.width
-    Zebra = img.height /* non riesco a ridimensionare bene, non so perchè non è più come prima */
+    Zebra = img.height 
 
     var aree = document.querySelectorAll("map[name='tavoli'] area");
 
@@ -39,6 +39,53 @@ window.onload = function() {
 window.onresize = function() {
     AggiornaCoordinate();
     
+}; */
+
+function AggiornaCoordinate() {
+    var img = document.getElementById('mappaImg');
+
+    var scaleX = img.width / Gazella;
+    var scaleY = img.height / Zebra;
+
+    const aree = document.querySelectorAll('.area');
+
+    aree.forEach(area => {
+        const originalLeft = parseInt(area.getAttribute('data-original-left'));
+        const originalTop = parseInt(area.getAttribute('data-original-top'));
+        const originalWidth = parseInt(area.getAttribute('data-original-width'));
+        const originalHeight = parseInt(area.getAttribute('data-original-height'));
+
+        area.style.left = `${Math.round(originalLeft * scaleX)}px`;
+        area.style.top = `${Math.round(originalTop * scaleY)}px`;
+        area.style.width = `${Math.round(originalWidth * scaleX)}px`;
+        area.style.height = `${Math.round(originalHeight * scaleY)}px`;
+    });
+}
+
+
+
+window.onload = function() {
+    const aree = document.querySelectorAll('.area');
+    aree.forEach(area => {
+        area.setAttribute('data-original-left', area.style.left);
+        area.setAttribute('data-original-top', area.style.top);
+        area.setAttribute('data-original-width', area.style.width);
+        area.setAttribute('data-original-height', area.style.height);
+
+        area.addEventListener('click', function() {
+            // Azione da eseguire quando si fa clic su un'area
+            console.log(`Hai cliccato sull'area: ${this.id}`);
+        });
+    });
+
+    Gazella = document.getElementById('mappaImg').naturalWidth;
+    Zebra = document.getElementById('mappaImg').naturalHeight;
+
+    AggiornaCoordinate();
+};
+
+window.onresize = function() {
+    AggiornaCoordinate();
 };
 
 document.addEventListener('DOMContentLoaded', function () {
