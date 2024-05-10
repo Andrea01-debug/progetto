@@ -78,7 +78,7 @@ $(document).ready(function() {
     window.avviaLavorazione = function(orderId) {
         $.post('https://LTW/AccettaOrdine', JSON.stringify({ id: orderId }), function() { // l'ordine passa allo stato 1 su DB "In Lavorazione"
        
-            loadOrders();
+            
             loadOrders();
             setTimeout(() => {
                 window.location.reload();

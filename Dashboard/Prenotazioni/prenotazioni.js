@@ -82,6 +82,21 @@ window.onload = function() {
     Zebra = document.getElementById('mappaImg').naturalHeight;
 
     AggiornaCoordinate();
+
+    // set campi data e ora av vio pagina
+    const now = new Date();
+
+    
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+
+    
+    const timeString = `${hours}:${minutes}`;
+
+    
+    document.getElementById('time').value = timeString;
+
+    document.getElementById('date-input').valueAsDate = now; 
 };
 
 window.onresize = function() {
@@ -101,11 +116,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
 $(document).ready(function() {
     caricaPrenotazioni();
+    aggiornaMappa();
 })
 
 function caricaPrenotazioni() {
     var giorno = document.getElementById("date-input").value
-    console.log(giorno)
+    //console.log(giorno)
     function loadReservations() {
         $.post('https://LTW/GetPrenotazioniServer', JSON.stringify({ valore: giorno })); 
     }
@@ -124,9 +140,68 @@ function caricaPrenotazioni() {
                     <td>${prenotato.Tavolo}</td>
                     <td>${prenotato.Numero}</td>
                     <td>${prenotato.Ora}</td>
+                    <td class="td">
+                        <button class="rimuoviTavolo" onclick="rimuoviTavolo('${prenotato.Nome}', ${prenotato.Tavolo}, ${prenotato.Numero}, '${prenotato.Ora}', '${prenotato.Data}')">Rimuovi</button>
+                    </td>
                 </tr>`;
                 tbody.append(row)
             });
         }
     });
 }
+
+window.rimuoviTavolo = function(Nome, Tavolo, Numero, Ora, Data) {
+    console.log("dfgdtythftyhjyf")
+    $.post('https://LTW/RimuoviTavoloPrenotato', JSON.stringify({ 
+        Nome: Nome,
+        Tavolo: Tavolo,
+        Numero: Numero,
+        Ora: Ora,
+        Data: Data, 
+
+    }), function() { 
+        
+        aggiornaMappa();
+        caricaPrenotazioni();
+        setTimeout(() => {
+            window.location.reload();
+        }, 5);
+    });
+};
+
+
+
+function aggiornaMappa() {
+    var giorno = document.getElementById("date-input").value;
+    var ora = document.getElementById("time").value;
+
+    console.log(giorno);
+    console.log(ora);
+
+    
+    $.post('https://LTW/AggiornaMappa', JSON.stringify({ giorno: giorno, ora: ora }));
+
+    
+    window.addEventListener("message", function(event) {
+        if (event.data.type === 'AggiornaMappaDalClient') {
+            const colora = event.data.data;
+
+            // ogni volta tutti i tavoli vengono prima impostati su verde
+            const aree = document.querySelectorAll('.area');
+            aree.forEach(area => {
+                area.classList.remove('rosso');
+            });
+
+            // Colora di rosso i tavoli prenotati in base agli ID ricevuti che corrispondono al numero di tavoli sul server
+            colora.forEach(tavolo => {
+                const tavoloElement = document.getElementById(tavolo.Tavolo);
+                if (tavoloElement) {
+                    tavoloElement.classList.add('rosso');
+                }
+            });
+        }
+    });
+}
+
+
+

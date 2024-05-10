@@ -17,7 +17,7 @@ RegisterNUICallback('ResetPswUtente', function(data, cb)
 end)
 
 RegisterNUICallback('PrenotaTavolo', function(data, cb)
-    print("1")
+    --print("1")
     TriggerServerEvent("LTW:PrenotaUnTavolo", data.nome, data.numero, data.giorno, data.ora)
     cb('ok')
 end)
@@ -73,6 +73,11 @@ RegisterNUICallback('GetPrenotazioniServer', function(data, cb)
     cb('ok')
 end)
 
+RegisterNUICallback('AggiornaMappa', function(data, cb)
+    TriggerServerEvent('LTW:AggiornaMappaServer', data.giorno, data.ora)
+    cb('ok')
+end)
+
 RegisterNUICallback('AccettaOrdine', function(data, cb)
     TriggerServerEvent("LTW:AccettaOrdine", data.id)
     cb('ok')
@@ -91,6 +96,16 @@ end)
 RegisterNUICallback('UpdateGrado', function(data, cb)
     --QBCore.Debug(data)
     TriggerServerEvent("LTW:UpdateGradoServer", data.id)
+    cb('ok')
+end)
+
+RegisterNUICallback('SetNavigatore', function(cb)
+
+end)
+
+RegisterNUICallback("RimuoviTavoloPrenotato", function(data, cb)
+    --QBCore.Debug(data)
+    TriggerServerEvent("LTW:RimuoviTavoloPrenotatoServer", data.Nome, data.Tavolo, data.Numero, data.Ora, data.Data)
     cb('ok')
 end)
 
@@ -193,6 +208,14 @@ AddEventHandler("LTW:GetPrenotazioniClient", function(data)
     })
 end)
 
+RegisterNetEvent("LTW:AggiornaMappaClient")
+AddEventHandler("LTW:AggiornaMappaClient", function(data)
+    SendNUIMessage({
+        type = "AggiornaMappaDalClient",
+        data = data,
+    })
+end)
+
 RegisterNetEvent("LTW:AndamentoClienti")
 AddEventHandler("LTW:AndamentoClienti", function(data)
     SendNUIMessage({
@@ -234,8 +257,8 @@ end) ]]
 RegisterNetEvent("LTW:loginEffettuato")
 AddEventHandler("LTW:loginEffettuato", function(data)
     id = data.ID
-    print("ID CLIENT ACCEDI: ", id)
-    print("ID CLIENT ACCEDI: ", data.idUtente)
+    --print("ID CLIENT ACCEDI: ", id)
+    --print("ID CLIENT ACCEDI: ", data.idUtente)
     
     SendNUIMessage({
         type = "setUserGrade",
@@ -250,7 +273,7 @@ end)
 RegisterNetEvent("LTW:UpdateGradoClient")
 AddEventHandler("LTW:UpdateGradoClient", function(data)
     --QBCore.Debug(data)
-    print(data.grado)
+    --print(data.grado)
     SendNUIMessage({
         type = "AggiornaGrado",
         grade = data.grado,
@@ -259,9 +282,9 @@ end)
 
 
 RegisterNUICallback("LogoutUser", function(data, cb)
-    print("Utente disconnesso dal client")
+    --print("Utente disconnesso dal client")
     
-    print("ID CLIENT LOGOUT: ", id)
+    --print("ID CLIENT LOGOUT: ", id)
     TriggerServerEvent("LTW:UserLogout", id, cb)
     id = 0
     cb('ok')

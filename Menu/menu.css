@@ -42,7 +42,7 @@ h3 {
 }
 
 .flexbox {
-    height: 300px;
+    height: auto;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
@@ -112,4 +112,5 @@ h3 {
 
 .containercarta{
     perspective: 1000px;
+    margin: 10px ;
 }

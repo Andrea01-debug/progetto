@@ -254,6 +254,9 @@ function toggleRisposta() {
     }
 }
 
+function SetNavigatore() {
+	$.post('https://LTW/SetNavigatore');
+}
 
 
 

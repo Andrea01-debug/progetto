@@ -200,8 +200,8 @@ RegisterNetEvent("LTW:ResetPswServer", function(username, data, domanda, rispost
         ['@risposta'] = risposta,
     }, function(result)
         if result and #result > 0 then
-            print("Cambio psw riuscito")
-            print("source:", src)
+            --print("Cambio psw riuscito")
+            --print("source:", src)
             TriggerClientEvent("QBCore:Notify", src, "Cambio psw riuscito", 'success')
             MySQL.Async.execute('UPDATE ltwtable SET password = @password WHERE NomeUtente = @username AND Data = @data AND Domanda = @domanda AND Risposta = @risposta', {
                 ['@password'] = password,
@@ -211,8 +211,8 @@ RegisterNetEvent("LTW:ResetPswServer", function(username, data, domanda, rispost
                 ['@risposta'] = risposta,
             })
         else
-            print("Cambio psw non riuscito")
-            print("source:", src)
+            --print("Cambio psw non riuscito")
+            --print("source:", src)
             TriggerClientEvent("QBCore:Notify", src, "Cambio psw non riuscito", 'error')
         end
     end)
@@ -223,7 +223,7 @@ RegisterNetEvent("LTW:UserLogout",function(id)
     for k, user in pairs(sessionTable) do
         if user.ID == id then
             sessionTable[k] = nil 
-            print("utente rimosso")
+            --print("utente rimosso")
             break
         end
     end
@@ -242,12 +242,29 @@ end)
 
 RegisterNetEvent("LTW:GetPrenotazioniServer", function(giorno)
     local src = source
-    print(giorno)
+    
     MySQL.Async.fetchAll('SELECT * FROM ltwprenota WHERE Data = @Data', {
         ['@Data'] = giorno,
     }, function(result)
-        QBCore.Debug(result)
+       -- QBCore.Debug(result)
         TriggerClientEvent("LTW:GetPrenotazioniClient", src, result)
+    end)
+end)
+
+RegisterNetEvent("LTW:AggiornaMappaServer", function(giorno, ora)
+    local src = source
+    --print("aaaaaaaoooo")
+    --print(giorno)
+    print(ora)
+    ora = strsplit(ora,":")[1]
+    print(ora)
+
+    MySQL.Async.fetchAll('SELECT * FROM ltwprenota WHERE Data = @Data AND Ora = @Ora', {
+        ['@Data'] = giorno,
+        ['@Ora'] = ora,
+    }, function(result)
+        --QBCore.Debug(result)
+        TriggerClientEvent("LTW:AggiornaMappaClient", src, result)
     end)
 end)
 
@@ -281,6 +298,13 @@ RegisterNetEvent("LTW:EliminaOrdine",function(ID)
 end)
 
 
+RegisterNetEvent("LTW:RimuoviTavoloPrenotatoServer", function(Nome, Tavolo, Numero, Ora, Data)
+    MySQL.query('DELETE FROM ltwprenota WHERE Nome = ? AND Tavolo = ? AND Numero = ? AND Ora = ? AND Data = ?', { Nome, Tavolo, Numero, Ora, Data }, function()
+        
+    end)
+end)
+
+
 
 RegisterNetEvent("LTW:OrdinaServer",function(totale, lista, codice, pagato)
     local src = source
@@ -288,7 +312,7 @@ RegisterNetEvent("LTW:OrdinaServer",function(totale, lista, codice, pagato)
     local Player = QBCore.Functions.GetPlayer(src)
     if pagato == 1 then
         local saldo = Player.Functions.GetMoney("bank")
-        print("SALDO: " .. saldo)
+        --print("SALDO: " .. saldo)
         if totale < saldo then
 
             MySQL.Async.insert("INSERT INTO ltwordina (Ordine, Totale, Accettato, CodPren, Pagato) VALUES (?, ?, ?, ?, ?)", {
@@ -337,15 +361,15 @@ RegisterNetEvent("LTW:DashboardData", function()
 
     -- Numero Tavoli Prenotati
     local temp = os.date("%Y-%m-%d")
-    print(temp)
-    print(type(temp))
+    --print(temp)
+    --print(type(temp))
     MySQL.Async.fetchAll('SELECT * FROM ltwprenota WHERE Data = @Data AND Ora = @Ora', {
         ['@Data'] = temp,
         ['@Ora'] = os.date("%H"),
     }, function(result)
         NPrenot = #result
-        print(NPrenot)
-        print(type(os.date("%x")))
+        --print(NPrenot)
+        --print(type(os.date("%x")))
     end)
     
     -- Saldo
@@ -376,7 +400,7 @@ RegisterNetEvent("LTW:GetDipendentiServer", function()
            --print("mando al client")
            TriggerClientEvent("LTW:GetDipendentiClient", src, result)
         else
-           print("nessun dipendnente")
+           --print("nessun dipendnente")
         end
     end)
 end)
@@ -457,7 +481,7 @@ end)
 RegisterNetEvent("LTW:AssumiDipServer", function(id, userId, grado)
     local src = source
     local Player = QBCore.Functions.GetPlayer(id)
-    print(Player)
+    --print(Player)
     MySQL.Async.fetchAll('SELECT ID FROM ltwtable WHERE ID = @id AND Grado = @grado', {
         ['@id'] = userId,
         ['@grado'] = 0,

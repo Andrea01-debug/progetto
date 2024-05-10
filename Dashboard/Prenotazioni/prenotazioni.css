@@ -3,7 +3,7 @@
     width: 30%;
     height: 100vh;
     overflow-y: auto;
-    padding: 20px;
+    padding: 5px;
     box-sizing: border-box;
     background-color: #f0f0f0;
 }
@@ -41,11 +41,18 @@
 
 .area {
     position: absolute;
-    background: rgba(0, 197, 43, 0.76); /* Colore rosso con trasparenza */
+    background: rgba(0, 197, 43, 0.76);
     border: none;
     cursor: pointer;
 }
 
 .area:hover {
-    background: rgba(13, 189, 189, 0.7); /* Cambia colore al passaggio del mouse */
+    background: rgba(13, 189, 136, 0.7);
+}
+
+.area.rosso {
+    background-color: red;
+  }
+.area.rosso:hover {
+    background-color: rgb(160, 7, 7);
 }
