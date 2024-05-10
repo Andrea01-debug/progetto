@@ -48,6 +48,7 @@ h3 {
     justify-content: space-evenly;
     padding: 10px;
     align-items: center;
+    margin-bottom: 10%;
 }
 
 /* .flexitem {
@@ -73,6 +74,7 @@ h3 {
     position: relative;
     transition: all 0.5s linear;
     transform-style: preserve-3d;
+    /* margin-bottom: 50%; */
 }
 
 .front,
