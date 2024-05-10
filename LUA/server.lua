@@ -304,6 +304,17 @@ RegisterNetEvent("LTW:RimuoviTavoloPrenotatoServer", function(Nome, Tavolo, Nume
     end)
 end)
 
+RegisterNetEvent("LTW:GetinfoTavoloServer", function(Tavolo, Data, Ora)
+    local src = source
+    MySQL.Async.fetchAll('SELECT * FROM ltwprenota WHERE Tavolo = @tavolo AND Data = @data AND Ora = @ora', {
+        ['@tavolo'] = Tavolo,
+        ['@data'] = Data,
+        ['@ora'] = strsplit(Ora,":")[1],
+    }, function(result)
+        TriggerClientEvent("LTW:GetinfoTavoloClient", src, result[1])
+    end)
+end)
+
 
 
 RegisterNetEvent("LTW:OrdinaServer",function(totale, lista, codice, pagato)

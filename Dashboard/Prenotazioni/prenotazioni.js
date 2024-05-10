@@ -73,12 +73,23 @@ window.onload = function() {
         area.setAttribute('data-original-height', area.style.height);
 
         area.addEventListener('click', function() {
+            var giorno = document.getElementById("date-input").value;
+            var ora = document.getElementById("time").value;
             // Azione da eseguire quando si fa clic su un'area
             console.log(`Hai cliccato sull'area: ${this.id}`);
             if (area.classList.contains("rosso")) {
-                openModalTable1();
+                $.post('https://LTW/GetinfoTavolo', JSON.stringify({ Tavolo: this.id, Ora : ora, Data : giorno }));
+
+                window.addEventListener("message", function(event) {
+                    if (event.data.type === 'InfoTavolo') {
+                        const InfoTavolo = event.data;
+
+                        openModalTable1(InfoTavolo.Nome, InfoTavolo.Numero, InfoTavolo.Data, InfoTavolo.Tavolo, InfoTavolo.Ora);
+                    }
+                });
+                
             } else {
-                openModalTable2();
+                openModalTable2(this.id);
                 console.log("aaa");
             }
         });
@@ -181,8 +192,8 @@ function aggiornaMappa() {
     var giorno = document.getElementById("date-input").value;
     var ora = document.getElementById("time").value;
 
-    console.log(giorno);
-    console.log(ora);
+    /* console.log(giorno);
+    console.log(ora); */
 
     
     $.post('https://LTW/AggiornaMappa', JSON.stringify({ giorno: giorno, ora: ora }));
@@ -214,8 +225,20 @@ function aggiornaMappa() {
 // Finestre Modali Tavoli
 
 
-function openModalTable1() {
+function openModalTable1(Nome, Numero, Data, Tavolo, Ora) {
     document.getElementById("ModaleTavoli1").style.display = "block";
+    // Seleziona gli elementi HTML all'interno della finestra modale
+    var modalContent = document.querySelector("#ModaleTavoli1 .contenuto-modale");
+    // Inserisci i dati ricevuti all'interno degli elementi HTML della finestra modale
+    modalContent.innerHTML = `
+        <span class="close" onclick="closeModalTable1()">&times;</span>
+        <h2>Tavolo Occupato</h2>
+        <p>Nome Prenotazione: ${Nome}</p>
+        <p>Numero di Persone: ${Numero}</p>
+        <p>Data: ${Data}</p>
+        <p>Tavolo Numero: ${Tavolo}</p>
+        <p>Ora Prenotazione: ${Ora}</p>
+    `;
 }
 
 function closeModalTable1() {

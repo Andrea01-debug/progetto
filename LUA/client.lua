@@ -32,6 +32,11 @@ RegisterNUICallback('GetDipendenti', function(data, cb)
     cb('ok')
 end)
 
+RegisterNUICallback('GetinfoTavolo', function(data, cb)
+    TriggerServerEvent("LTW:GetinfoTavoloServer", data.Tavolo, data.Data, data.Ora)
+    cb('ok')
+end)
+
 RegisterNUICallback('AndamentoPrenotazioni', function(data, cb)
     TriggerServerEvent("LTW:AndamentoPrenotazioni")
     cb('ok')
@@ -155,6 +160,18 @@ AddEventHandler("LTW:InvalidLogin", function(message)
     SendNUIMessage({
         type = "invalidLogin",
         message = message
+    })
+end)
+
+RegisterNetEvent("LTW:GetinfoTavoloClient")
+AddEventHandler("LTW:GetinfoTavoloClient", function(data)
+    SendNUIMessage({
+        type = "InfoTavolo",
+        Tavolo = data.Tavolo, 
+        Nome= data.Nome, 
+        Data = data.Data, 
+        Ora = data.Ora,
+        Numero = data.Numero,
     })
 end)
 
