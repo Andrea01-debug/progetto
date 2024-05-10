@@ -75,6 +75,12 @@ window.onload = function() {
         area.addEventListener('click', function() {
             // Azione da eseguire quando si fa clic su un'area
             console.log(`Hai cliccato sull'area: ${this.id}`);
+            if (area.classList.contains("rosso")) {
+                openModalTable1();
+            } else {
+                openModalTable2();
+                console.log("aaa");
+            }
         });
     });
 
@@ -205,3 +211,21 @@ function aggiornaMappa() {
 
 
 
+// Finestre Modali Tavoli
+
+
+function openModalTable1() {
+    document.getElementById("ModaleTavoli1").style.display = "block";
+}
+
+function closeModalTable1() {
+    document.getElementById("ModaleTavoli1").style.display = "none";
+}
+
+function openModalTable2() {
+    document.getElementById("ModaleTavoli2").style.display = "block";
+}
+
+function closeModalTable2() {
+    document.getElementById("ModaleTavoli2").style.display = "none";
+}
