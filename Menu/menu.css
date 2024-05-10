@@ -30,17 +30,19 @@ h2 {
     font-size: 50px;
     text-align: center;
     margin-top: 35px;
+    margin-bottom: -10px;
     color: #4462cf;
 }
 
 h3 {
-    font-size: 30px;
+    font-size: 35px;
     text-align: center;
-    margin-top: 35px;
-    color: #ff00d0;
+    margin-top: 55px;
+    color: #db0000;
 }
 
 .flexbox {
+    height: 300px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
@@ -69,7 +71,7 @@ h3 {
     height: 340px;
     width: 250px;
     position: relative;
-    transition: all 1s linear;
+    transition: all 0.5s linear;
     transform-style: preserve-3d;
 }
 
