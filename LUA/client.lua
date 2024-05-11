@@ -37,6 +37,11 @@ RegisterNUICallback('GetinfoTavolo', function(data, cb)
     cb('ok')
 end)
 
+RegisterNUICallback('GetTavoloVuoto', function(data, cb)
+    TriggerServerEvent("LTW:GetTavoloVuotoServer", data.Tavolo)
+    cb('ok')
+end)
+
 RegisterNUICallback('AndamentoPrenotazioni', function(data, cb)
     TriggerServerEvent("LTW:AndamentoPrenotazioni")
     cb('ok')
@@ -172,6 +177,15 @@ AddEventHandler("LTW:GetinfoTavoloClient", function(data)
         Data = data.Data, 
         Ora = data.Ora,
         Numero = data.Numero,
+    })
+end)
+
+RegisterNetEvent("LTW:GetTavoloVuotoClient")
+AddEventHandler("LTW:GetTavoloVuotoClient", function(data, tabb)
+    SendNUIMessage({
+        type = "TavoloVuoto",
+        Numero = data,
+        Tavolo = tabb
     })
 end)
 

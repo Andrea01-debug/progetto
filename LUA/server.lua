@@ -315,7 +315,12 @@ RegisterNetEvent("LTW:GetinfoTavoloServer", function(Tavolo, Data, Ora)
     end)
 end)
 
-
+RegisterNetEvent("LTW:GetTavoloVuotoServer", function(Tavolo)
+    local src = source
+    QBCore.Debug(tavoli[tonumber(Tavolo)])
+    print(tavoli[tonumber(Tavolo)].dim)
+    TriggerClientEvent("LTW:GetTavoloVuotoClient", src, tavoli[tonumber(Tavolo)].dim, Tavolo)
+end)
 
 RegisterNetEvent("LTW:OrdinaServer",function(totale, lista, codice, pagato)
     local src = source
@@ -350,7 +355,6 @@ RegisterNetEvent("LTW:OrdinaServer",function(totale, lista, codice, pagato)
     end
    
 end)
-
 
 RegisterNetEvent("LTW:DashboardData", function()
     local src = source

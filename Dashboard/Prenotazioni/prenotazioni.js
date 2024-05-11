@@ -87,9 +87,20 @@ window.onload = function() {
                         openModalTable1(InfoTavolo.Nome, InfoTavolo.Numero, InfoTavolo.Data, InfoTavolo.Tavolo, InfoTavolo.Ora);
                     }
                 });
-                
             } else {
-                openModalTable2(this.id);
+                $.post('https://LTW/GetTavoloVuoto', JSON.stringify({
+                    Tavolo: this.id,
+                    Ora: ora,
+                    Data: giorno
+                }));
+
+                window.addEventListener("message", function(event) {
+                    if (event.data.type === 'TavoloVuoto') {
+                        const TavoloVuoto = event.data;
+                        openModalTable2(TavoloVuoto.Numero, TavoloVuoto.Tavolo);
+                    }
+                })
+                
                 console.log("aaa");
             }
         });
@@ -238,6 +249,7 @@ function openModalTable1(Nome, Numero, Data, Tavolo, Ora) {
         <p>Data: ${Data}</p>
         <p>Tavolo Numero: ${Tavolo}</p>
         <p>Ora Prenotazione: ${Ora}</p>
+        <button onclick="rimuoviTavolo('${Nome}', ${Tavolo}, ${Numero}, '${Ora}', '${Data}')"> Libera Tavolo </button>
     `;
 }
 
@@ -245,8 +257,20 @@ function closeModalTable1() {
     document.getElementById("ModaleTavoli1").style.display = "none";
 }
 
-function openModalTable2() {
+function openModalTable2(Numero, Tavolo) {
     document.getElementById("ModaleTavoli2").style.display = "block";
+
+    var modalContent = document.querySelector("#ModaleTavoli2 .contenuto-modale")
+    console.log(Numero)
+    console.log(Tavolo)
+
+    modalContent.innerHTML = `
+        <span class="close" onclick="closeModalTable2()">&times;</span>
+        <h2>Tavolo Libero</h2>
+        <p>Tavolo ${Tavolo}</p>
+        <p>Numero di posti: ${Numero}</p>
+        <button>Prenota Tavolo</button>
+    `
 }
 
 function closeModalTable2() {
