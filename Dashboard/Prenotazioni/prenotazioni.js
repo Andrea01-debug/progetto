@@ -50,7 +50,7 @@ window.onload = function() {
             var giorno = document.getElementById("date-input").value;
             var ora = document.getElementById("time").value;
             // Azione da eseguire quando si fa clic su un'area
-            console.log(`Hai cliccato sull'area: ${this.id}`);
+            //console.log(`Hai cliccato sull'area: ${this.id}`);
             if (area.classList.contains("rosso")) {
                 $.post('https://LTW/GetinfoTavolo', JSON.stringify({ Tavolo: this.id, Ora : ora, Data : giorno }));
 
@@ -75,7 +75,7 @@ window.onload = function() {
                     }
                 })
                 
-                console.log("aaa");
+                //console.log("aaa");
             }
         });
     });
@@ -86,13 +86,24 @@ window.onload = function() {
     AggiornaCoordinate();
 
     var storedDate = localStorage.getItem('data');
+    if (storedDate == "") {
+        var giorno = document.getElementById("date-input").value;
+        localStorage.setItem('data', giorno);
+        storedDate = giorno
+    }
     var dateObject = new Date(storedDate);
 
     var storedTime = localStorage.getItem('ora');
-    var timeParts = storedTime.split(':');
-    var hours = parseInt(timeParts[0], 10);
-    var minutes = parseInt(timeParts[1], 10);
-    const timeString = `${hours}:${minutes}`;   
+    if (storedTime == "") {
+        var ora = document.getElementById("time").value;
+        localStorage.setItem('ora', ora);
+        storedTime = ora;
+    } else {
+        var timeParts = storedTime.split(':');
+        var hours = parseInt(timeParts[0], 10);
+        var minutes = parseInt(timeParts[1], 10);
+        var timeString = `${hours}:${minutes}`;
+    }
 
     document.getElementById('time').value = timeString;
     document.getElementById('date-input').valueAsDate = dateObject;
@@ -150,7 +161,7 @@ function caricaPrenotazioni() {
 }
 
 window.rimuoviTavolo = function(Nome, Tavolo, Numero, Ora, Data) {
-    console.log("dfgdtythftyhjyf")
+    //console.log("dfgdtythftyhjyf")
     $.post('https://LTW/RimuoviTavoloPrenotato', JSON.stringify({ 
         Nome: Nome,
         Tavolo: Tavolo,
@@ -301,7 +312,7 @@ function confermaPrenotazione(Tavolo, Ora, Data) {
     var nomePrenotazione = document.getElementById("nomePrenotazione").value;
     var numeroPersone = document.getElementById("numeroPersone").value;
 
-    if (nomePrenotazione.trim() === '' || numeroPersone.trim() === '') { // Non proseguire se entrambi i campi non sono stati compilati
+    if (nomePrenotazione.trim() === '' || numeroPersone.trim() === '') { // Blocca se i campi non sono stati compilati
         console.log("Si prega di compilare tutti i campi.");
         return;
     }
