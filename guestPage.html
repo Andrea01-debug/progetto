@@ -78,13 +78,13 @@
                 <div class="ContainerContatti">
                     <div class="BloccoMenuCont" id="IdContatti">
                         <div class="MenumapCont">
-                            <iframe src="https://gta-5-map.com?locationIds=12864" height="500px" width = "700px" ></iframe>
+                            <iframe src="https://gta-5-map.com?locationIds=12864" height="500px" width = "700px" onload="tornaSuDopoIlCaricamento()"></iframe>
                         </div>
                         <div class="MenuContactCont">
                             <p>Telefono: <a href="tel:33333333333"> 33333333333 </a></p>
                             <p>Email: <a href="mailto:info@burgershot.com">info@burgershot.com</a></p>
                             <p>Indirizzo: <a href="#" onclick="SetNavigatore()">San Andreas Avenue, 333</a></p>  <!--TODO STessa cosa per telefono ed email-->
-                            Social
+                            <img src="esternoBurger.jpg" alt="immagine burger" draggable="false" height="200px" width = "300px">
                         </div>
                     </div>
                 </div>
@@ -202,3 +202,17 @@
         </div>
     </body>
 </html>
+
+
+
+<script>
+    // L'iframe presente nella pagina imposta sempre il focus in maniera automatica su di esso ed essendo l'ultima cosa che viene caricata nella pagina
+    // la pagina scorre sempre in fondo per mostrarlo una volta che viene caricato. Grazie al campo onload presente sull'iframe è possibile specificare
+    // una funzione che viene chiamata quando l'iframe viene caricato (tornaSuDopoIlCaricamento()) scrolla la pagina di nuovo in cima
+
+    function tornaSuDopoIlCaricamento() {
+        const container = document.getElementById("container");
+        container.scrollTop = 0;
+    }
+</script>
+

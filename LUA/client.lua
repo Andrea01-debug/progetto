@@ -109,8 +109,9 @@ RegisterNUICallback('UpdateGrado', function(data, cb)
     cb('ok')
 end)
 
-RegisterNUICallback('SetNavigatore', function(cb)
-
+RegisterNUICallback('ConfermaPrenotazione', function(data, cb)
+    TriggerServerEvent("LTW:ConfermaPrenotazioneServer", data.Nome, data.Tavolo, data.Numero, data.Ora, data.Data)
+    cb('ok')
 end)
 
 RegisterNUICallback("RimuoviTavoloPrenotato", function(data, cb)
@@ -120,7 +121,6 @@ RegisterNUICallback("RimuoviTavoloPrenotato", function(data, cb)
 end)
 
 function SetDisplay(bool)
-    print("ESCIIIIIIII")
     display = bool
     SetNuiFocus(bool, bool)
     SendNUIMessage({

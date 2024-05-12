@@ -1,45 +1,19 @@
-/* function AggiornaCoordinate() {
-    var img = document.getElementById('mappaImg');    
-
-    var scaleX = img.width / Gazella;
-    var scaleY = img.height / Zebra;
-    Gazella = img.width
-    Zebra = img.height 
-
-    var aree = document.querySelectorAll("map[name='tavoli'] area");
-
-    aree.forEach(area => {
-        var coords = area.getAttribute("coords").split(",").map(Number);
-
-        var scaledCoords = coords.map((val, index) => {
-            return (index % 2 === 0) ? Math.round(val * scaleX) : Math.round(val * scaleY);
-        });
-
-        area.setAttribute("coords", scaledCoords.join(","));
+function DarkTheme() {
+  
+    let element = document.getElementById("container");
+    element.classList.toggle("dark"); 
+    const prova = document.querySelectorAll(".flexitem");
+    prova.forEach((elem) => {
+      elem.classList.toggle("dark")
     });
+    var barra = document.getElementById("Barra");
+    barra.classList.toggle("dark")
+    var lista = document.getElementById("lista");
+    lista.classList.toggle("dark")
+    var mappa = document.getElementById("mappa");
+    mappa.classList.toggle("dark");
+  }
 
-    // Maphilight bello
-    $('#mappaImg').maphilight({
-        fill: true,
-        fillColor: 'ff0000',
-        fillOpacity: 0.5,
-        stroke: false,
-        alwaysOn: true,
-    });
-}
-
-// Aggiornamento coordinate quando l'immagine viene caricata e quando la finestra viene ridimensionata
-window.onload = function() {
-    Gazella = document.getElementById('mappaImg').naturalWidth
-    Zebra = document.getElementById('mappaImg').naturalHeight
-    AggiornaCoordinate();
-    
-};
-
-window.onresize = function() {
-    AggiornaCoordinate();
-    
-}; */
 
 function AggiornaCoordinate() {
     var img = document.getElementById('mappaImg');
@@ -111,20 +85,17 @@ window.onload = function() {
 
     AggiornaCoordinate();
 
-    // set campi data e ora av vio pagina
-    const now = new Date();
+    var storedDate = localStorage.getItem('data');
+    var dateObject = new Date(storedDate);
 
-    
-    const hours = String(now.getHours()).padStart(2, '0');
-    const minutes = String(now.getMinutes()).padStart(2, '0');
+    var storedTime = localStorage.getItem('ora');
+    var timeParts = storedTime.split(':');
+    var hours = parseInt(timeParts[0], 10);
+    var minutes = parseInt(timeParts[1], 10);
+    const timeString = `${hours}:${minutes}`;   
 
-    
-    const timeString = `${hours}:${minutes}`;
-
-    
     document.getElementById('time').value = timeString;
-
-    document.getElementById('date-input').valueAsDate = now; 
+    document.getElementById('date-input').valueAsDate = dateObject;
 };
 
 window.onresize = function() {
@@ -205,7 +176,8 @@ function aggiornaMappa() {
 
     /* console.log(giorno);
     console.log(ora); */
-
+    localStorage.setItem('data', giorno);
+    localStorage.setItem('ora', ora);
     
     $.post('https://LTW/AggiornaMappa', JSON.stringify({ giorno: giorno, ora: ora }));
 
@@ -238,20 +210,32 @@ function aggiornaMappa() {
 
 function openModalTable1(Nome, Numero, Data, Tavolo, Ora) {
     document.getElementById("ModaleTavoli1").style.display = "block";
-    // Seleziona gli elementi HTML all'interno della finestra modale
+
     var modalContent = document.querySelector("#ModaleTavoli1 .contenuto-modale");
-    // Inserisci i dati ricevuti all'interno degli elementi HTML della finestra modale
+
     modalContent.innerHTML = `
         <span class="close" onclick="closeModalTable1()">&times;</span>
-        <h2>Tavolo Occupato</h2>
-        <p>Nome Prenotazione: ${Nome}</p>
-        <p>Numero di Persone: ${Numero}</p>
-        <p>Data: ${Data}</p>
-        <p>Tavolo Numero: ${Tavolo}</p>
-        <p>Ora Prenotazione: ${Ora}</p>
-        <button onclick="rimuoviTavolo('${Nome}', ${Tavolo}, ${Numero}, '${Ora}', '${Data}')"> Libera Tavolo </button>
+        <p style="color: red; margin-bottom: 8px;"><strong>Tavolo n° ${Tavolo}</strong></p>
+        <p style="margin-bottom: 8px; margin-top: 20px"><strong>Nome Prenotazione:</strong> ${Nome}</p>
+        <p style="margin-bottom: 8px;"><strong>Numero di Persone:</strong> ${Numero}</p>
+        <p style="margin-bottom: 8px;"><strong>Data:</strong> ${Data}</p>
+        <p style="margin-bottom: 8px;"><strong>Ora Prenotazione:</strong> ${Ora}</p>
+        <div style="text-align: center; margin-top: 20px;">
+            <button class="bottoneRimuovi" style="background-color: #4CAF50;
+                border: none;
+                color: white;
+                padding: 10px 24px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                border-radius: 4px;
+                cursor: pointer;
+                transition-duration: 0.4s;" onclick="rimuoviTavolo('${Nome}', ${Tavolo}, ${Numero}, '${Ora}', '${Data}')">Libera Tavolo</button>
+        </div>
     `;
 }
+
 
 function closeModalTable1() {
     document.getElementById("ModaleTavoli1").style.display = "none";
@@ -260,19 +244,80 @@ function closeModalTable1() {
 function openModalTable2(Numero, Tavolo) {
     document.getElementById("ModaleTavoli2").style.display = "block";
 
+    var giorno = document.getElementById("date-input").value;
+    var ora = document.getElementById("time").value;
+
     var modalContent = document.querySelector("#ModaleTavoli2 .contenuto-modale")
-    console.log(Numero)
-    console.log(Tavolo)
+    /* console.log(Numero)
+    console.log(Tavolo) */
 
     modalContent.innerHTML = `
-        <span class="close" onclick="closeModalTable2()">&times;</span>
-        <h2>Tavolo Libero</h2>
-        <p>Tavolo ${Tavolo}</p>
-        <p>Numero di posti: ${Numero}</p>
-        <button>Prenota Tavolo</button>
-    `
+    <span class="close" onclick="closeModalTable2()">&times;</span>
+    <p><span style="color: green; font-weight: bold; margin-bottom: 8px;"><strong>Tavolo n° ${Tavolo}</strong></span></p>
+        <p><strong>Numero di posti:</strong> ${Numero}</p>
+        <p>
+        <label class="modal-field-label" for="nomePrenotazione"><strong>Nome Prenotazione:</strong></label>
+        <input type="text" id="nomePrenotazione" required>
+        </p>
+        <p>
+            <label class="modal-field-label" for="numeroPersone"><strong>Numero di Persone:</strong></label>
+            <input type="number" id="numeroPersone" placeholder="Numero massimo: ${Numero}" required>
+        </p>
+        <div style="text-align: center;">
+            <button style="background-color: #4CAF50; /* Green */
+                            border: none;
+                            color: white;
+                            padding: 10px 24px;
+                            text-align: center;
+                            text-decoration: none;
+                            display: inline-block;
+                            font-size: 16px;
+                            margin-top: 16px;
+                            border-radius: 4px;
+                            cursor: pointer;
+                            transition-duration: 0.4s;" onclick="confermaPrenotazione(${Tavolo}, '${ora}', '${giorno}')">Conferma</button>
+            <button style="background-color: #f44336; /* Red */
+                            border: none;
+                            color: white;
+                            padding: 10px 24px;
+                            text-align: center;
+                            text-decoration: none;
+                            display: inline-block;
+                            font-size: 16px;
+                            margin-top: 16px;
+                            border-radius: 4px;
+                            cursor: pointer;
+                            transition-duration: 0.4s;" onclick="closeModalTable2()" >Annulla</button>
+        </div>
+    `;
 }
+
 
 function closeModalTable2() {
     document.getElementById("ModaleTavoli2").style.display = "none";
+}
+
+function confermaPrenotazione(Tavolo, Ora, Data) {
+    var nomePrenotazione = document.getElementById("nomePrenotazione").value;
+    var numeroPersone = document.getElementById("numeroPersone").value;
+
+    if (nomePrenotazione.trim() === '' || numeroPersone.trim() === '') { // Non proseguire se entrambi i campi non sono stati compilati
+        console.log("Si prega di compilare tutti i campi.");
+        return;
+    }
+
+    $.post('https://LTW/ConfermaPrenotazione', JSON.stringify({ 
+        Nome: nomePrenotazione,
+        Tavolo: Tavolo,
+        Numero: parseInt(numeroPersone),
+        Ora: Ora,
+        Data: Data,
+    }));
+    
+    closeModalTable2();
+    aggiornaMappa();
+    caricaPrenotazioni();
+    setTimeout(() => {
+        window.location.reload();
+    }, 105);
 }

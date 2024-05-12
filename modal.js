@@ -117,6 +117,17 @@ function toggleProfiloTendina() {
 
 
 
+window.addEventListener("message", function(event) {
+	if (event.data.type === "ui") {
+		if (event.data.status == true) {
+			$("#container").show()
+		} else {
+			$("#container").hide();
+		}
+	}
+});
+
+
 window.onload=function(){
 	const id = localStorage.getItem('id')
 	if (id && id.trim() !== "") {
@@ -124,6 +135,8 @@ window.onload=function(){
         id: id,
     }))
 	}
+
+	
     
     
 
@@ -187,12 +200,6 @@ window.onload=function(){
 			});
 		}else if (event.data.type === "closeLoginWindow") {
 			closeModalLogin();
-		}else if (event.data.type === "ui") {
-			if (event.data.status == true) {
-				$("#container").show()
-			} else {
-				$("#container").hide();
-			}
 		}else if (event.data.type === "loginUser"){
 			loginUser();
 		}else if (event.data.type === "loginWorker"){

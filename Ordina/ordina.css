@@ -9,13 +9,14 @@
 }
 
 .listaOrdina {
-    grid-area: 'a';
+    grid-area: a;
 }
 
 .riepilogo {
-    grid-area: 'b';
-    background-color: #fff;
-    border-radius: 10px;
+    grid-area: b;
+    background-color: #502314; 
+    border: 1px solid #000000; 
+    border-radius: 5px;
     height: 50vh;
     width: 15vw;
     margin-top: 60px;
@@ -27,12 +28,12 @@
     height: 30vh; 
     overflow-y: auto;  
     padding: 10px; 
-    background-color: #490909; 
-    border: 1px solid #00d80b; 
+    background-color: #502314; 
+    color: #FF8732;
 }
 
 .bottoni{
-    grid-area: 'c';
+    grid-area: c;
 }
 
 .add, .sub {
@@ -46,39 +47,55 @@
 }
 
 h2 {
-    font-size: 30px;
+    font-size: 50px;
     text-align: center;
-    margin-top: 35px;
-    color: #000000;
+    margin-top: 55px;
+    color: #db0000;
 }
 
 h3 {
-    font-size: 20px;
+    font-size: 40px;
     margin-top: 35px;
-    color: #000000;
+    color: #4462cf;
+    margin-left: 32%;
+    font-weight: bolder;
+
+}
+
+h4 {
+    font-size: 30px;
+    margin-top: 35px;
+    color: rgb(180, 102, 0);
+    text-align: center;
+
 }
 
 .flexbox {
     display: block;
     justify-content: space-evenly;
     padding: 10px;
+    
 }
 
 .flexitem {
     flex-grow: 1;
     width: 40vw;
-    background-color: #ffffff;
+    background-color: #502314;
+    color: #FF8732 ;
     padding: 25px;
-    justify-content: space-evenly;
-    margin: 5px;
-    margin-bottom: 20px;
+    justify-content: space-between;
+    margin-bottom: 30px;
     border-radius: 5px;
     box-shadow: 5px 5px 3px rgba(0, 0, 0, 0.1);
     display: grid;
     grid-template-columns: auto auto;
     grid-template-areas: 
-        "a a ."
+        "a d ."
         "b b c"; 
+}
+
+.Prezzo{
+    grid-area: d;
 }
 
 .Oggetto {
@@ -94,7 +111,7 @@ h3 {
 .Descrizione {
     font-size: 15px;
     font-style: normal;
-    color: #7b1c1c;
+    color: #cecece;
     padding-top: 10px;
     text-align: left;
     margin-top: 25px;
@@ -102,4 +119,6 @@ h3 {
     grid-area: b;
     padding-left: 10px;
 }
+
+
 

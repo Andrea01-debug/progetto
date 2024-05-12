@@ -5,7 +5,17 @@
     overflow-y: auto;
     padding: 5px;
     box-sizing: border-box;
-    background-color: #f0f0f0;
+    background-color: aliceblue;
+}
+
+.lista.dark {
+    float: left;
+    width: 30%;
+    height: 100vh;
+    overflow-y: auto;
+    padding: 5px;
+    box-sizing: border-box;
+    background-color: rgb(40,43,48);
 }
 
 .lista ul {
@@ -29,7 +39,15 @@
     float: left;
     width: 70%;
     height: 100vh;
-    background-color: #ccc;
+    background-color: aliceblue;
+    position: relative;
+}
+
+.mappa.dark {
+    float: left;
+    width: 70%;
+    height: 100vh;
+    background-color: rgb(40,43,48);
     position: relative;
 }
 
@@ -80,3 +98,4 @@
     text-align: center;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
+

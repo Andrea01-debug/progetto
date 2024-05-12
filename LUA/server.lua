@@ -255,9 +255,8 @@ RegisterNetEvent("LTW:AggiornaMappaServer", function(giorno, ora)
     local src = source
     --print("aaaaaaaoooo")
     --print(giorno)
-    print(ora)
     ora = strsplit(ora,":")[1]
-    print(ora)
+    --print(ora)
 
     MySQL.Async.fetchAll('SELECT * FROM ltwprenota WHERE Data = @Data AND Ora = @Ora', {
         ['@Data'] = giorno,
@@ -297,6 +296,24 @@ RegisterNetEvent("LTW:EliminaOrdine",function(ID)
     
 end)
 
+RegisterNetEvent("LTW:ConfermaPrenotazioneServer",function(Nome, Tavolo, Numero, Ora, Data)
+    local src = source
+    local tavolo = tavoli[Tavolo]
+    local ora = strsplit( Ora,":")[1]
+    if Numero <= tavolo["dim"] then
+        MySQL.Sync.insert("INSERT INTO ltwPrenota (Nome, Numero, Data, Ora, Tavolo) VALUES (?, ?, ?, ?, ?)", {
+            Nome,
+            Numero,
+            Data,
+            ora,
+            Tavolo
+        })
+        TriggerClientEvent("QBCore:Notify", src, "Numero valido", 'success')
+    else
+        TriggerClientEvent("QBCore:Notify", src, "Numero non valido", 'error')
+    end
+end)
+
 
 RegisterNetEvent("LTW:RimuoviTavoloPrenotatoServer", function(Nome, Tavolo, Numero, Ora, Data)
     MySQL.query('DELETE FROM ltwprenota WHERE Nome = ? AND Tavolo = ? AND Numero = ? AND Ora = ? AND Data = ?', { Nome, Tavolo, Numero, Ora, Data }, function()
@@ -317,8 +334,8 @@ end)
 
 RegisterNetEvent("LTW:GetTavoloVuotoServer", function(Tavolo)
     local src = source
-    QBCore.Debug(tavoli[tonumber(Tavolo)])
-    print(tavoli[tonumber(Tavolo)].dim)
+    --QBCore.Debug(tavoli[tonumber(Tavolo)])
+    --print(tavoli[tonumber(Tavolo)].dim)
     TriggerClientEvent("LTW:GetTavoloVuotoClient", src, tavoli[tonumber(Tavolo)].dim, Tavolo)
 end)
 

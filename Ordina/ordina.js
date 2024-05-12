@@ -29,26 +29,29 @@ $(document).ready(function() {
             var prezzo = 0;
             prezzo = (prezzo + price).toFixed(2);
             
-            console.log(quantity);
+            //console.log(quantity);
             updateRiepilogo(itemName, quantity, prezzo);
         }
     });
 });
 
 function updateRiepilogo(itemName, quantity, price) {
+    // Rimuovere il prezzo dall'itemName da mettere nella lista del riepilogo
+    var itemNameWithoutPrice = itemName.split("$")[0].trim();
+
     var riepilogoList = $("#riepilogoLista");
-    var listItem = riepilogoList.find("li[data-item='" + itemName + "']");
+    var listItem = riepilogoList.find("li[data-item='" + itemNameWithoutPrice + "']");
 
     if (quantity === 0) {
         listItem.remove();
     } else {
-        var newItem = "<li data-item='" + itemName + "'>" + quantity + " x " + itemName + " $"+ price + "</li>";
+        var newItem = "<li data-item='" + itemNameWithoutPrice + "'>" + quantity + " x " + itemNameWithoutPrice + " $" + price + "</li>";
 
         if (listItem.length === 0) {
             riepilogoList.append(newItem);
         } else {
             var newPrice = (quantity * price).toFixed(2);
-            newItem = "<li data-item='" + itemName + "'>" + quantity + " x "  + itemName + " $"+ newPrice + "</li>";
+            newItem = "<li data-item='" + itemNameWithoutPrice + "'>" + quantity + " x " + itemNameWithoutPrice + " $" + newPrice + "</li>";
             listItem.replaceWith(newItem);
         }
     }
@@ -56,6 +59,7 @@ function updateRiepilogo(itemName, quantity, price) {
     var total = calculateTotal();
     $("#ChkoutBtn").text("Ordina: totale $" + total);
 }
+
 
 function calculateTotal() {
     var total = 0;
