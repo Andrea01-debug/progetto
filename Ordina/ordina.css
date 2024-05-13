@@ -1,3 +1,7 @@
+.body{
+    font-family: 'Work Sans', sans-serif;
+}
+
 .corpoOrdina {
     margin-top: 40px;
     padding: 20px;
@@ -5,19 +9,16 @@
     justify-content: space-between; 
 }
 
-.listaOrdina {
-    
+.listaOrdina { 
     margin-right: 20px;
     height: 50%;
-    
-
 }
 
 .riepilogo {
-    background-color: #502314;
+    background-color: #572c1e;
     color: #FF8732;
     padding: 3%;
-    border: 1px solid #000000;
+    border: 1px solid #572c1e;
     border-radius: 40px;
     height: 50vh;
     width: 15vw;
@@ -35,7 +36,7 @@
     max-height: 30vh;
     overflow-y: auto;
     overflow-x: hidden;
-    background-color: #502314; 
+    background-color: #572c1e; 
     color: #FF8732;
 }
 
@@ -73,7 +74,7 @@
 }
 
 .add, .sub {
-    background-color: #00d40b;
+    background-color: #48b84b;
     color: white;
     border: none;
     padding: 5px 10px;
@@ -87,6 +88,7 @@ h2 {
     text-align: center;
     margin-top: 55px;
     color: #db0000;
+    font-weight: bolder; 
 }
 
 h3 {
@@ -95,15 +97,13 @@ h3 {
     color: #4462cf;
     margin-left: 45%;
     font-weight: bolder;
-
 }
 
 h4 {
     font-size: 30px;
     margin-top: 15px;
-    color: rgb(180, 102, 0);
+    color: #FF8732;
     text-align: center;
-
 }
 
 .flexbox {
@@ -116,7 +116,7 @@ h4 {
 .flexitem {
     flex-grow: 1;
     width: 40vw;
-    background-color: #502314;
+    background-color: #572c1e;
     color: #FF8732 ;
     padding: 25px;
     justify-content: space-between;
