@@ -57,7 +57,7 @@ function updateRiepilogo(itemName, quantity, price) {
     }
     
     var total = calculateTotal();
-    $("#ChkoutBtn").text("Ordina: totale $" + total);
+    $("#ChkoutBtn").text("Totale: $" + total);
 }
 
 
@@ -80,7 +80,7 @@ function totalButton() {
 
     var riepilogoList = $("#riepilogoLista li").map(function() {
         return $(this).text(); // Ottieni il testo dell'elemento <li>
-    }).get(); // Converte la lista degli elementi in un array di stringhe
+    }).get(); // Converto la lista degli elementi in un array di stringhe
 
     // Unisci tutte le voci della lista in una singola stringa, separata da virgole o newline
     var lista = riepilogoList.join(";\n");
@@ -94,56 +94,61 @@ function totalButton() {
         cancelButtonText: "Annulla",
         reverseButtons: true 
     }).then((result) => {
-        if (result.isConfirmed) {
-            codiceprenotazione = (Math.random() + 1).toString(36).substring(7).toUpperCase();
-            console.log("Confermato" + lista + total);
-            // Azioni da eseguire quando si clicca "OK"
-            total = parseFloat(total)
-            Swal.fire({
-                title: "Pagamento",
-                text: "Scegli un metodo di pagamento",
-                icon: "question",
-                showCancelButton: true,
-                confirmButtonText: "Paga ora", 
-                cancelButtonText: "Paga al ritiro", 
-                reverseButtons: true 
-            }).then((result) => {
-                if (result.isConfirmed) { // L'utente ha cliccato "Paga ora"
-                    console.log("Pagamento immediato selezionato.");
+        //console.log("Totale" + total);
+        if (total > 0) {
+            if (result.isConfirmed) {
+                codiceprenotazione = (Math.random() + 1).toString(36).substring(7).toUpperCase();
+                console.log("Confermato" + lista + total);
+                // Azioni da eseguire quando si clicca "OK"
+                total = parseFloat(total)
+                Swal.fire({
+                    title: "Pagamento",
+                    text: "Scegli un metodo di pagamento",
+                    icon: "question",
+                    showCancelButton: true,
+                    confirmButtonText: "Paga ora", 
+                    cancelButtonText: "Paga al ritiro", 
+                    reverseButtons: true 
+                }).then((result) => {
+                    if (result.isConfirmed) { // L'utente ha cliccato "Paga ora"
+                        console.log("Pagamento immediato selezionato.");
 
-                    $.post("https://LTW/Ordina", JSON.stringify({
-                        lista : lista,
-                        totale : total,
-                        codiceprenotazione : codiceprenotazione,
-                        pagato : 1,
-                    }));
+                        $.post("https://LTW/Ordina", JSON.stringify({
+                            lista : lista,
+                            totale : total,
+                            codiceprenotazione : codiceprenotazione,
+                            pagato : 1,
+                        }));
 
-                } else if (result.isDismissed) { // L'utente ha cliccato "Paga al ritiro"
-                    console.log("Pagamento al ritiro selezionato.");
-                    Swal.fire({
-                        title: "Ordine effettuato",
-                        html: `Il codice di ritiro è <b>${codiceprenotazione}</b>`,
-                        icon: "info",
-                        confirmButtonText: "OK",
-                    });
-                    $.post("https://LTW/Ordina", JSON.stringify({
-                        lista : lista,
-                        totale : total,
-                        codiceprenotazione : codiceprenotazione,
-                        pagato : 0,
-                    }));
-                }
-            });
+                    } else if (result.isDismissed) { // L'utente ha cliccato "Paga al ritiro"
+                        console.log("Pagamento al ritiro selezionato.");
+                        Swal.fire({
+                            title: "Ordine effettuato",
+                            html: `Il codice di ritiro è <b>${codiceprenotazione}</b>`,
+                            icon: "info",
+                            confirmButtonText: "OK",
+                        });
+                        $.post("https://LTW/Ordina", JSON.stringify({
+                            lista : lista,
+                            totale : total,
+                            codiceprenotazione : codiceprenotazione,
+                            pagato : 0,
+                        }));
+                    }
+                });
+        } else{
+            console.log("totale: 0");
+        }
             
 
         } else if (result.isDismissed) {
             console.log("Annullato");
-            // Azioni da eseguire quando si clicca "Annulla"
+           
         }
     });
     console.log("ok")
 }
-
+/* 
 function success(){
     Swal.fire({
         title: "Ordine effettuato",
@@ -153,3 +158,4 @@ function success(){
     });
 }
 
+ */

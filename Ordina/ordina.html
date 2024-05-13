@@ -3,7 +3,8 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
+        <link rel="icon" href="../img/logo-piccolo.png">
+        <title>BurgerShot - Ordina</title>
         <link rel="stylesheet" href="../general.css">
         <link rel="stylesheet" href="ordina.css">
     
@@ -18,8 +19,9 @@
         <div id="container" style="background-color: #e2d6c3;">
             <div class="header">
                 <a href="../guestPage.html" draggable="false">
-                    <img src="../BurgerShot-HDLogo.svg" width="180px" style="margin-top: -2px;" draggable="false">
+                    <img src="../img/BurgerShot-HDLogo.svg" width="180px" style="margin-top: -5px;" draggable="false">
                 </a>
+                 <a  href="#" class="Barrette" onclick="toggleMenuRidimensionato()">☰</a>
                 <nav class="navigat" style="text-align: right;">
                     
                     <li class="navigat"><a id="Accedi" href="#" data-target="#myModalLogin" data-toggle="modal" class="access-link" onclick="openModalLogin()">Accedi</a></li>
@@ -41,6 +43,15 @@
                     <li class="navigat"><a href="../Menu/menu.html" class="navigat">Menu</a></li>
 
                 </nav>
+                <div class="navigatRidimensionato" id="navigatRidimensionato" style="display: none;" >
+                    <a id="Accedi" href="#" data-target="#myModalLogin" data-toggle="modal" class="access-link" onclick="openModalLogin()">Accedi</a>
+                    <a id="Profilo" style="display: none;" onclick="toggleProfiloTendina()">Profilo</a>
+                    
+                    <a href="../guestPage.html#IdContatti" class="navigat">Contatti</a>
+                    <a href="../Prenota/prenota.html" class="navigat">Prenota</a>
+                    <a href="../Ordina/ordina.html" class="navigat">Ordina</a>
+                    <a href="../Menu/menu.html" class="navigat">Menu</a>
+                </div>
             </div>
             
             <div class="corpoOrdina">
@@ -226,8 +237,9 @@
                     <div class="corpoLista">
                         <ul id="riepilogoLista"></ul>
                     </div>
-                    
-                    <button id="ChkoutBtn" onclick="totalButton()">Ordina: totale</button>
+                    <div class="bottone">
+                        <button id="ChkoutBtn" onclick="totalButton()">Totale: </button>
+                    </div>
                 </div>
                 
 

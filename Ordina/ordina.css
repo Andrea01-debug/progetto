@@ -1,11 +1,56 @@
 .corpoOrdina {
     margin-top: 40px;
     padding: 20px;
+    display: flex;
+    justify-content: space-between; 
+}
+
+.listaOrdina {
+    
+    margin-right: 20px;
+    height: 50%;
+    
+
+}
+
+.riepilogo {
+    background-color: #502314;
+    color: #FF8732;
+    padding: 3%;
+    border: 1px solid #000000;
+    border-radius: 40px;
+    height: 50vh;
+    width: 15vw;
+    position: sticky;
+    top: 90px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column; 
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.corpoLista {
+    max-height: 30vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background-color: #502314; 
+    color: #FF8732;
+}
+
+.bottone {
+    margin-top: auto;
+}
+
+/* .corpoOrdina {
+    margin-top: 40px;
+    padding: 20px;
 
     display: grid;
     grid-template: 'a a a a b b' 10px
                    'a a a a b b' 10px
-                   'a a a a b b' 10px;
+                   'a a a a . .' 10px;
 }
 
 .listaOrdina {
@@ -16,21 +61,12 @@
     grid-area: b;
     background-color: #502314; 
     border: 1px solid #000000; 
-    border-radius: 5px;
-    height: 50vh;
-    width: 15vw;
-    margin-top: 60px;
+    height: 30%;
+    width: 15%;
+    margin-top: 5%;
     position: fixed; 
-    left: 65vw;
-}
-
-.corpoLista {
-    height: 30vh; 
-    overflow-y: auto;  
-    padding: 10px; 
-    background-color: #502314; 
-    color: #FF8732;
-}
+    left: 65%;
+} */
 
 .bottoni{
     grid-area: c;
@@ -57,14 +93,14 @@ h3 {
     font-size: 40px;
     margin-top: 35px;
     color: #4462cf;
-    margin-left: 32%;
+    margin-left: 45%;
     font-weight: bolder;
 
 }
 
 h4 {
     font-size: 30px;
-    margin-top: 35px;
+    margin-top: 15px;
     color: rgb(180, 102, 0);
     text-align: center;
 
@@ -122,3 +158,21 @@ h4 {
 
 
 
+#ChkoutBtn {
+    background-color: #48b84b;
+    border: none;
+    color: white;
+    padding: 10px 24px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+    margin: 20px auto 0;
+    border-radius: 4px;
+    cursor: pointer;
+    transition-duration: 0.4s;
+}
+
+#ChkoutBtn:hover {
+    background-color: #135e17;
+}

@@ -2,7 +2,9 @@
 <html>
 <head>
     <meta charset="UTF-8" />
-    <title>Menu</title>
+    <link rel="icon" href="../img/logo-piccolo.png">
+    <title>BurgerShot - Menu</title>
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../general.css">
     <link rel="stylesheet" href="menu.css">
@@ -14,8 +16,9 @@
     <div id="container" style="background-color: #e2d6c3;">
         <div class="header">
             <a href="../guestPage.html" draggable="false">
-                <img src="../BurgerShot-HDLogo.svg" width="180px" style="margin-top: -2px;" draggable="false">
+                <img src="../img/BurgerShot-HDLogo.svg" width="180px" style="margin-top: -5px;" draggable="false">
             </a>
+            <a  href="#" class="Barrette" onclick="toggleMenuRidimensionato()">☰</a>
             <nav class="navigat" style="text-align: right;">
                 
                 <li class="navigat"><a id="Accedi" href="#" data-target="#myModalLogin" data-toggle="modal" class="access-link" onclick="openModalLogin()">Accedi</a></li>
@@ -38,7 +41,15 @@
                 <li class="navigat"><a href="menu.html" class="navigat">Menu</a></li>
 
             </nav>
-            <!--a href="google.com" style="float: right; line-height: 45px; margin-right: 10px; text-decoration: none; color: white; font-family: Montserrat, Sans-serif;font-size: 14px; font-weight: 600; text-transform: uppercase;"> Accedi </a-->
+            <div class="navigatRidimensionato" id="navigatRidimensionato" style="display: none;" >
+                <a id="Accedi" href="#" data-target="#myModalLogin" data-toggle="modal" class="access-link" onclick="openModalLogin()">Accedi</a>
+                <a id="Profilo" style="display: none;" onclick="toggleProfiloTendina()">Profilo</a>
+                
+                <a href="../guestPage.html#IdContatti" class="navigat">Contatti</a>
+                <a href="../Prenota/prenota.html" class="navigat">Prenota</a>
+                <a href="../Ordina/ordina.html" class="navigat">Ordina</a>
+                <a href="menu.html" class="navigat">Menu</a>
+            </div>
         </div>
         
 

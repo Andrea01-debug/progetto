@@ -3,7 +3,8 @@
   <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Document</title>
+      <link rel="icon" href="../../img/logo-piccolo.png">
+      <title>BurgerShot Dashboard - Prenotazioni</title>
       <link rel="stylesheet" href="../../general.css">
       <link rel="stylesheet" href="../dashboard.css">
       <link rel="stylesheet" href="prenotazioni.css">
@@ -23,7 +24,7 @@
           <div class="sidebar-top-wrapper">
             <div class="sidebar-top">
               <a href="../../guestPage.html" class="logo__wrapper" draggable="false">
-                <img src="../../LogoSmall.png" alt="Logo" class="logo-small" draggable="false">
+                <img src="../../img/LogoSmall.png" alt="Logo" class="logo-small" draggable="false">
                 <span class="hide">
                   &nbsp BurgerShot &nbsp &nbsp
                 </span>
@@ -103,9 +104,9 @@
         <input class="Bottone" type="checkbox" id="darkmode-toggle"/>
         <label class="etichetta" id="SoleLuna" for="darkmode-toggle"></label>
         <div class="data-selector">
-          <label per="date-input">Seleziona Data:</label>
-          <input type="date" id="date-input" name="data" onchange="caricaPrenotazioni(); aggiornaMappa()">
-          <input class="inputPren" type="time" id="time" name="time" onchange="aggiornaMappa()">
+          <label for="date-input">Seleziona Data:</label>
+          <input type="date" id="date-input" name="data" class="input-date" onchange="caricaPrenotazioni(); aggiornaMappa()">
+          <input class="inputPren input-time" type="time" id="time" name="time" onchange="aggiornaMappa()">
         </div>
         
         <div id="lista" class="lista" style="height: 57vh; ">
@@ -164,28 +165,18 @@
               <area target="" alt="Tavolo14" title="Tavolo14" href="" coords="484,158,558,231" shape="rect" id="Tavolo14" data-status="libero">
             </map> -->
         </div>
-  
-
-        <div class="data-container" id="data-container">
-            <!-- Testo o dati verranno mostrati qui in base alla data selezionata -->
-            aaaaaaa
-        </div>
-
-        <div class="image-container">
-            <img id="interactive-image" src="../LogoSmall.png" alt="Clicca qui per prenotare" onclick="openReservationPopup()">
-        </div>
       </div>
       
 
 
       <div id="ModaleTavoli1" class="modal-table">
-        <div class="contenuto-modale">
+        <div class="contenuto-modale" id="contenuto-modale1">
             <span class="close" onclick="closeModalTable1()">&times;</span>
         </div>
       </div>
 
       <div id="ModaleTavoli2" class="modal-table">
-        <div class="contenuto-modale">
+        <div class="contenuto-modale" id="contenuto-modale2">
           <span class="close" onclick="closeModalTable2()">&times;</span>
         </div> 
       </div>

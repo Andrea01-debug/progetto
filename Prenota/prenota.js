@@ -51,6 +51,16 @@ document.addEventListener('DOMContentLoaded', () => {
         updateContent(parseInt(grade));
 		//localStorage.clear();
     }
+	    // set campi data e ora av vio pagina
+		const now = new Date();
+    
+		const hours = String(now.getHours()).padStart(2, '0');
+		const minutes = String(now.getMinutes()).padStart(2, '0');
+		
+		const timeString = `${hours}:${minutes}`;
+		
+		document.getElementById('timepren').value = timeString;
+		document.getElementById('datapren').valueAsDate = now; 
 	
 });
 
@@ -139,12 +149,12 @@ window.onload=function(){
 
 	document.getElementById('FormPrenotazione').addEventListener('submit', function(event){
         event.preventDefault();
-		console.log("prevvv")
+		/* console.log("prevvv") */
         let Nome = $("#nomepren").val();
         let Numero = $("#numeropren").val();
         let Data = $("#datapren").val();
         let Ora = $("#timepren").val();
-		console.log("aaaa")
+		/* console.log("aaaa") */
         
         $.post("https://LTW/PrenotaTavolo", JSON.stringify({
             nome: Nome,
@@ -283,6 +293,16 @@ function setMinTime() {
 		timeInput.min = "00:00";
 		//per forza sennò non azzera negli altri giorni
 	}
+}
+
+
+function toggleMenuRidimensionato() {
+    var menuTendina = document.getElementById("navigatRidimensionato");
+    if (menuTendina.style.display === "flex") {
+        menuTendina.style.display = "none";
+    } else {
+		menuTendina.style.display = "flex";
+    }
 }
  
 

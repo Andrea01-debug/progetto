@@ -3,7 +3,8 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
+        <link rel="icon" href="img/logo-piccolo.png">
+        <title>BurgerShot - Home</title>
         <link rel="stylesheet" href="general.css">
         
 
@@ -15,8 +16,10 @@
         <div id="container">
             <div class="header">
                 <a href="guestPage.html" draggable="false">
-                    <img src="BurgerShot-HDLogo.svg" width="180px" style="margin-top: -2px;" draggable="false">
+                    <img class="imgGrande" src="img/BurgerShot-HDLogo.svg" width="180px" style="margin-top: -5px;" draggable="false">  
+                   <!--  <img class="imgPiccola" src="logo-piccolo.png" width="68px" style="margin-top: -5px; display: none;" draggable="false"> -->
                 </a>
+                <a  href="#" class="Barrette" onclick="toggleMenuRidimensionato()">☰</a>
                 <nav class="navigat" style="text-align: right;">
                     
                     <li class="navigat"><a id="Accedi" href="#" data-target="#myModalLogin" data-toggle="modal" class="access-link" onclick="openModalLogin()">Accedi</a></li>
@@ -32,6 +35,7 @@
                         <a id="Dashboard" href="Dashboard/dashboard.html" class="access-link" style="display: none;">Dashboard</a>
                         <a id="idUtente" href="#" class="access-link" style="font-size: 15px;"> 00000000 </a>
                     </div>
+                   
                     
                     <li class="navigat"><a href="#IdContatti" class="navigat">Contatti</a></li>
                     <li class="navigat"><a href="Prenota/prenota.html" class="navigat">Prenota</a></li>
@@ -39,39 +43,47 @@
                     <li class="navigat"><a href="Menu/menu.html" class="navigat">Menu</a></li>
 
                 </nav>
-                <!--a href="google.com" style="float: right; line-height: 45px; margin-right: 10px; text-decoration: none; color: white; font-family: Montserrat, Sans-serif;font-size: 14px; font-weight: 600; text-transform: uppercase;"> Accedi </a-->
+                <div class="navigatRidimensionato" id="navigatRidimensionato" style="display: none;" >
+                    <a id="Accedi" href="#" data-target="#myModalLogin" data-toggle="modal" class="access-link" onclick="openModalLogin()">Accedi</a>
+                    <a id="Profilo" style="display: none;" onclick="toggleProfiloTendina()">Profilo</a>
+                    
+                    <a href="#IdContatti" class="navigat">Contatti</a>
+                    <a href="Prenota/prenota.html" class="navigat">Prenota</a>
+                    <a href="Ordina/ordina.html" class="navigat">Ordina</a>
+                    <a href="Menu/menu.html" class="navigat">Menu</a>
+                </div>
             </div>
             <div class="MainBlock">
                 <div class="BloccoMenu" id="IdMenu">
                     <div class="MenuImgCont">
-                        <img src="Menu/menu.png" draggable="false" alt="Errore Caricamento Immagine">
+                        <img src="img/Panino.png" draggable="false" alt="Errore Caricamento Immagine">
                     </div>
                     <div class="MenuButtonCont">
-                        <p>Esplodi il nostro fantastico menù, non potrai fare a meno di prendere qualcosa, anche perché se non lo fai veniamo a cercarti a casa :D</p>
+                        <p>Esplora il nostro fantastico menù, lasciati ispirare dai panini più buoni della costa occidentale. Non potrai più farne a meno!</p>
                         <a href="Menu/menu.html">
-                            <button class="b1">Menu</button>
+                            <button class="b1">MENU</button>
                         </a>
                     </div>
                 </div>
                 <div class="BloccoMenu" id="IdOrdina">
                     <div class="MenuImgCont">
-                        <img src="Ordina/ordina.jpeg" draggable="false" alt="Errore Caricamento Immagine">
+                        <img src="img/ordina.png" draggable="false" alt="Errore Caricamento Immagine">
                     </div>
                     <div class="MenuButtonCont">
-                        <p>Siamo affilitati con JustEat e Deliveroo, possibile che devi venire a romprere a noi  > (</p>
+                        <p>Ordina direttamente dal nostro sito per assicurarti la migliore qualità al miglior prezzo e vieni a ritirare il tuo ordine quando vuoi.</p>
                         <a href="Ordina/ordina.html">
-                            <button class="b1">Ordina</button>
+                            <button class="b1">ORDINA</button>
                         </a>
                     </div>
                 </div>
                 <div class="BloccoMenu" id="IdPrenota">
                     <div class="MenuImgCont">
-                        <img src="Prenota/prenota.avif" draggable="false" alt="Errore Caricamento Immagine">
+                        <img src="img/Interno1.png" draggable="false" alt="Errore Caricamento Immagine">
                     </div>
                     <div class="MenuButtonCont">
-                        <p>Vuoi venire a mangiare da noi? Chiama al telefono :D</p>
+                        <p>Vieni a provare i nostri prodotti direttamente nel nostro ristorante! Non perdere l'occasione, prenota subito il tuo tavolo.</p>
                         <a href="Prenota/prenota.html">
-                            <button class="b1">Prenota</button>
+                            <button class="b1">PRENOTA</button>
                         </a>
                     </div>
                 </div>
@@ -84,7 +96,7 @@
                             <p>Telefono: <a href="tel:33333333333"> 33333333333 </a></p>
                             <p>Email: <a href="mailto:info@burgershot.com">info@burgershot.com</a></p>
                             <p>Indirizzo: <a href="#" onclick="SetNavigatore()">San Andreas Avenue, 333</a></p>  <!--TODO STessa cosa per telefono ed email-->
-                            <img src="esternoBurger.jpg" alt="immagine burger" draggable="false" height="200px" width = "300px">
+                            <img src="img/esternoBurger.jpg" alt="immagine burger" draggable="false" height="200px" width = "300px">
                         </div>
                     </div>
                 </div>

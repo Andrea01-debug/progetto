@@ -30,5 +30,6 @@ files {
 	'html/Dashboard/Prenotazioni/*',
 	'html/Dashboard/Ordini/*',
 	'html/Dashboard/Profilo/*',
+	'html/img/*',
 	
 }

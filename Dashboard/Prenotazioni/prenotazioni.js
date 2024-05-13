@@ -12,6 +12,10 @@ function DarkTheme() {
     lista.classList.toggle("dark")
     var mappa = document.getElementById("mappa");
     mappa.classList.toggle("dark");
+    var modal1 = document.getElementById("contenuto-modale1");
+    modal1.classList.toggle("dark");
+    var modal2 = document.getElementById("contenuto-modale2");
+    modal2.classList.toggle("dark");
   }
 
 
@@ -151,7 +155,7 @@ function caricaPrenotazioni() {
                     <td>${prenotato.Numero}</td>
                     <td>${prenotato.Ora}</td>
                     <td class="td">
-                        <button class="rimuoviTavolo" onclick="rimuoviTavolo('${prenotato.Nome}', ${prenotato.Tavolo}, ${prenotato.Numero}, '${prenotato.Ora}', '${prenotato.Data}')">Rimuovi</button>
+                        <button class="rimuoviTavoloBtn" onclick="rimuoviTavolo('${prenotato.Nome}', ${prenotato.Tavolo}, ${prenotato.Numero}, '${prenotato.Ora}', '${prenotato.Data}')">Rimuovi</button>
                     </td>
                 </tr>`;
                 tbody.append(row)
@@ -264,13 +268,13 @@ function openModalTable2(Numero, Tavolo) {
 
     modalContent.innerHTML = `
     <span class="close" onclick="closeModalTable2()">&times;</span>
-    <p><span style="color: green; font-weight: bold; margin-bottom: 8px;"><strong>Tavolo n° ${Tavolo}</strong></span></p>
-        <p><strong>Numero di posti:</strong> ${Numero}</p>
-        <p>
+    <p><span style="color: green; font-weight: bold; margin-bottom: 18px;"><strong>Tavolo n° ${Tavolo}</strong></span></p>
+        <p style="margin-bottom: 8px; margin-top: 28px;"><strong>Numero di posti:</strong> ${Numero}</p>
+        <p style="margin-bottom: 15px;">
         <label class="modal-field-label" for="nomePrenotazione"><strong>Nome Prenotazione:</strong></label>
         <input type="text" id="nomePrenotazione" required>
         </p>
-        <p>
+        <p style="margin-bottom: 8px;">
             <label class="modal-field-label" for="numeroPersone"><strong>Numero di Persone:</strong></label>
             <input type="number" id="numeroPersone" placeholder="Numero massimo: ${Numero}" required>
         </p>
@@ -332,3 +336,10 @@ function confermaPrenotazione(Tavolo, Ora, Data) {
         window.location.reload();
     }, 105);
 }
+
+document.onkeyup = function (data) {
+	if (data.which == 27) {
+		$.post('https://LTW/exit', JSON.stringify({}));
+		return
+	}
+};

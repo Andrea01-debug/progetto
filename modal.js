@@ -2,13 +2,6 @@ function addID(){
 	document.getElementById("idUtente").textContent = ("ID UTENTE: " + localStorage.getItem('id'))
 }
 
-/* function copia(){
-	var text = document.getElementById("idUtente")
-	text.select();
-	text.setSelectionRange(0,99999);
-	navigator.clipboard.writeText(text.value);
-	alert("id: " + text.value);
-} */
 
 function updateContent(grade) {    
     if (grade === 0) {
@@ -269,3 +262,11 @@ function SetNavigatore() {
 
 
 
+function toggleMenuRidimensionato() {
+    var menuTendina = document.getElementById("navigatRidimensionato");
+    if (menuTendina.style.display === "flex") {
+        menuTendina.style.display = "none";
+    } else {
+		menuTendina.style.display = "flex";
+    }
+}
