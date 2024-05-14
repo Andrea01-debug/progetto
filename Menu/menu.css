@@ -1,3 +1,14 @@
+@font-face { font-family: FlameSans-Bold; src: url('../flame-font/FlameBold.otf'); } 
+      h2,h3,h4 {
+         font-family: FlameSans-Bold
+      }
+@font-face { font-family: FlameSans-Regular; src: url('../flame-font/FlameRegular.otf'); } 
+      body {
+         font-family: FlameSans-Regular
+      }
+
+
+
 .Oggetto {
     font-size: 30px;
     font-style: italic;
@@ -87,7 +98,7 @@ h3 {
     justify-content: center;
     align-items: center;
     font-size: 3em;
-    font-family: 'italic', cursive;
+    /* font-family: 'italic', cursive; */
     font-weight: bold;
     border-radius: 20px;
     position: absolute;
