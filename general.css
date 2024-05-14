@@ -1,3 +1,15 @@
+@font-face { font-family: FlameSans-Bold; src: url('flame-font/FlameBold.otf'); } 
+      h2,h3,h4 {
+         font-family: FlameSans-Bold
+      }
+@font-face { font-family: FlameSans-Regular; src: url('flame-font/FlameRegular.otf'); } 
+      body {
+         font-family: FlameSans-Regular
+      }
+
+
+
+
 * {
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -7,7 +19,7 @@
 
 
 body { 
-  font-family: 'Work Sans', sans-serif;
+  /* font-family: 'Work Sans', sans-serif; */
   background: none;
   overflow: hidden;
   display: flex;
@@ -87,7 +99,7 @@ body {
     text-decoration: none;
     background: #3a8cf1c9;
     color: #ffffff;
-    font-family: Montserrat, Sans-serif;
+    /* font-family: Montserrat, Sans-serif; */
     font-size: 1.5vw;
     cursor: pointer;
     text-align: center;
@@ -140,41 +152,40 @@ body {
 }
 
 .MenuButtonCont {
-height: 20%;
-width: 25%;
-font-weight: bold;
-color: rgb(0, 0, 0);
-font-size: 1vw;
-position: absolute; /* Posiziona il contenitore dei pulsanti sopra l'immagine */
-top: 50%;
-left: 75%;
-transform: translate(-50%, -50%);
-background-color: #ffffffaf;
-border-radius: 30px;
-padding: 3%;
-padding-top: 1%;
-text-align: center;
-text-align: justify;
-display: flex;
-flex-direction: column; 
-justify-content: space-between;
-align-items: center;
-    
+  height: 20%;
+  width: 25%;
+  font-weight: bold;
+  color: rgb(0, 0, 0);
+  font-size: 1vw;
+  position: absolute; /* Posiziona il contenitore dei pulsanti sopra l'immagine */
+  top: 50%;
+  left: 75%;
+  transform: translate(-50%, -50%);
+  background-color: #ffffffaf;
+  border-radius: 30px;
+  padding: 3%;
+  padding-top: 1%;
+  text-align: center;
+  text-align: justify;
+  display: flex;
+  flex-direction: column; 
+  justify-content: space-between;
+  align-items: center;
 }
 
 .access-link {
-    cursor: pointer;
-    color: #fff;
-    text-decoration: none;
+  cursor: pointer;
+  color: #fff;
+  text-decoration: none;
 }
 
 .access-link:hover {
-    color: #ec8a00;
+  color: #ec8a00;
 }
 
 
 .MenumapCont{
-  grid-area: a;
+  grid-area: b;
   position: relative; 
   margin-left: 15px;
 }
@@ -183,7 +194,7 @@ align-items: center;
   text-align:center; 
   background-color: rgba(240, 248, 255, 0.553); 
   color: black;
-  grid-area: b;
+  grid-area: a;
 }
 
 
@@ -192,6 +203,9 @@ align-items: center;
   flex-wrap: wrap;
   justify-content: space-evenly;
   padding: 10px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 .BloccoMenuCont{

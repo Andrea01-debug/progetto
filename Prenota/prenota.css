@@ -1,13 +1,21 @@
+@font-face { font-family: FlameSans-Regular; src: url('../flame-font/FlameRegular.otf'); } 
+      body, p {
+         font-family: FlameSans-Regular
+      }
+
 h2 {
+    margin-top: 25px;
     text-align: center;
     margin-bottom: 20px;
+    font-size: 50px;
+    color: #db0000;
 }
 
-/* Stili per i campi di input */
+
 .inputPren {
     width: 100%;
     padding: 10px;
-    margin-bottom: 10px;
+    margin-top: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
     box-shadow: none;
@@ -15,12 +23,11 @@ h2 {
 }
 
 
-/* Stili per il pulsante di prenotazione */
 .prenota-button {
     width: 20vw;
     padding: 20px;
     margin: 25px;
-    background-color: #ff8a15;
+    background-color: #FF8732;
     color: #fff;
     border: none;
     border-radius: 5px;
