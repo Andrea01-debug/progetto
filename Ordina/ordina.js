@@ -112,6 +112,12 @@ function totalButton() {
                 }).then((result) => {
                     if (result.isConfirmed) { // L'utente ha cliccato "Paga ora"
                         console.log("Pagamento immediato selezionato.");
+                        Swal.fire({
+                            title: "Ordine effettuato",
+                            html: `Il codice di ritiro è <b>${codiceprenotazione}</b>`,
+                            icon: "info",
+                            confirmButtonText: "OK",
+                        });
 
                         $.post("https://LTW/Ordina", JSON.stringify({
                             lista : lista,
