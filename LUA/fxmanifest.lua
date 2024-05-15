@@ -31,5 +31,6 @@ files {
 	'html/Dashboard/Ordini/*',
 	'html/Dashboard/Profilo/*',
 	'html/img/*',
+	'html/flame-font/*',
 	
 }
