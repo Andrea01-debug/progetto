@@ -54,11 +54,16 @@ $(document).ready(function() {
                 
                 const statusInfo = getStatusTextAndClass(order.Accettato);
 
+                var payed = "No"
+                if (order.Pagato == 1) {
+                    payed = "Si"
+                }
+
                 const row = `<tr>
                     <td>${order.CodPren}</td>
                     <td>${order.Ordine}</td>
                     <td>${order.Totale}</td>
-                    <td>${order.Pagato}</td>
+                    <td>${payed}</td>
                     <td class="${statusInfo.class}">${statusInfo.text}</td>
                     <td class="td">
                         <button class="avviaLavorazione" onclick="avviaLavorazione(${order.ID})">Lavora</button>
