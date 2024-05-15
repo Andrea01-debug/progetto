@@ -152,7 +152,7 @@ body {
 }
 
 .MenuButtonCont {
-  height: 20%;
+  height: auto;
   width: 25%;
   font-weight: bold;
   color: rgb(0, 0, 0);
@@ -163,7 +163,7 @@ body {
   transform: translate(-50%, -50%);
   background-color: #ffffffaf;
   border-radius: 30px;
-  padding: 3%;
+  padding:  0% 2% 1%;
   padding-top: 1%;
   text-align: center;
   text-align: justify;

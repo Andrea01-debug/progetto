@@ -574,3 +574,7 @@ th:hover {
 .delete-button:hover { /* Effetto  apertura cestino del mouse in ordini */
   transform: rotate(-15deg);
 }
+
+.employee-item h3{
+  font-family: 'Work Sans', sans-serif;
+}
