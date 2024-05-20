@@ -1,21 +1,36 @@
+
+.contenitore {
+    display: flex;
+    align-items:start;
+    justify-content: end;
+    flex-direction: row;
+}
+
 .lista {
     float: left;
-    width: 30%;
+    width: 40%;
     height: 100vh;
     overflow-y: auto;
+    overflow-x: none;
+
     padding: 5px;
     box-sizing: border-box;
     background-color: aliceblue;
+    font-size: 1vw;
 }
 
 .lista.dark {
     float: left;
-    width: 30%;
+    width: 40%;
     height: 100vh;
     overflow-y: auto;
+    overflow-x: none;
+
+
     padding: 5px;
     box-sizing: border-box;
     background-color: rgb(40,43,48);
+    font-size: 1vw;
 }
 
 .lista ul {
@@ -37,7 +52,7 @@
 
 .mappa {
     float: left;
-    width: 70%;
+    width: 60%;
     height: 100vh;
     background-color: aliceblue;
     position: relative;
@@ -45,7 +60,7 @@
 
 .mappa.dark {
     float: left;
-    width: 70%;
+    width: 60%;
     height: 100vh;
     background-color: rgb(40,43,48);
     position: relative;

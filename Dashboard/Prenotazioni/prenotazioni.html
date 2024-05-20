@@ -108,66 +108,66 @@
           <input type="date" id="date-input" name="data" class="input-date" onchange="caricaPrenotazioni(); aggiornaMappa()">
           <input class="inputPren input-time" type="time" id="time" name="time" onchange="aggiornaMappa()">
         </div>
-        
-        <div id="lista" class="lista" style="height: 57vh; ">
-          <h3 style="text-align: center; margin-top: 2%; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">LISTA PRENOTAZIONI</h3>
-          <div class="lista-prenotazioni" style="margin-top: 3%;">
-            <table id="tabellaPrenotazioni">
-              <thead>
-                <tr>
-                  <th onclick="sortTable(0)">Nome</th>
-                  <th onclick="sortTable(1)">Tav</th>
-                  <th onclick="sortTable(2)">Pers</th>
-                  <th onclick="sortTable(3)">Ora</th>
-                  <th>Azioni</th>
-                </tr>
-              </thead>
-              <tbody>
-                  <!-- JS -->
-              </tbody>
-            </table>
+        <div class="contenitore">
+          <div id="lista" class="lista" style="height: 57vh; ">
+            <h3 style="text-align: center; margin-top: 2%; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">LISTA PRENOTAZIONI</h3>
+            <div class="lista-prenotazioni" style="margin-top: 3%;">
+              <table id="tabellaPrenotazioni">
+                <thead>
+                  <tr>
+                    <th onclick="sortTable(0)">Nome</th>
+                    <th onclick="sortTable(1)">Tav</th>
+                    <th onclick="sortTable(2)">Pers</th>
+                    <th onclick="sortTable(3)">Ora</th>
+                    <th>Azioni</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <!-- JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+          
+          <div class="mappa" id="mappa">
+              <h2></h2>
+              <img src="MappaBurger.png" usemap="#tavoli" width="790" height="543" id="mappaImg">
+              <div class="area" id="1" style="left: 254px; top: 56px; width: 70px; height: 66px;"></div>
+              <div class="area" id="2" style="left: 455px; top: 55px; width: 73px; height: 73px;"></div>
+              <div class="area" id="3" style="left: 240px; top: 288px; width: 73px; height: 65px;"></div>
+              <div class="area" id="4" style="left: 478px; top: 286px; width: 73px; height: 71px;"></div>
+              <div class="area" id="5" style="left: 58px; top: 408px; width: 78px; height: 78px;"></div>
+              <div class="area" id="6" style="left: 660px; top: 419px; width: 74px; height: 74px;"></div>
+              <div class="area" id="7" style="left: 0px; top: 170px; width: 149px; height: 66px;"></div>
+              <div class="area" id="8" style="left: 0px; top: 290px; width: 148px; height: 65px;"></div>
+              <div class="area" id="9" style="left: 196px; top: 404px; width: 74px; height: 137px;"></div>
+              <div class="area" id="10" style="left: 526px; top: 414px; width: 69px; height: 128px;"></div>
+              <div class="area" id="11" style="left: 658px; top: 299px; width: 131px; height: 64px;"></div>
+              <div class="area" id="12" style="left: 658px; top: 183px; width: 131px; height: 66px;"></div>
+              <div class="area" id="13" style="left: 228px; top: 157px; width: 74px; height: 72px;"></div>
+              <div class="area" id="14" style="left: 484px; top: 158px; width: 76px; height: 76px;"></div>
+
+
+              <!-- <map name="tavoli">
+                <area target="" alt="Tavolo1"  href="" coords="254,55,322,120" shape="rect" id="Tavolo1" data-status="libero">
+                <area target="" alt="Tavolo2" title="Tavolo2" href="" coords="455,54,525,126" shape="rect" id="Tavolo2" data-status="libero">
+                <area target="" alt="Tavolo3" title="Tavolo3" href="" coords="240,288,313,353" shape="rect" id="Tavolo3" data-status="libero">
+                <area target="" alt="Tavolo4" title="Tavolo4" href="" coords="478,286,550,356" shape="rect" id="Tavolo4" data-status="libero">
+                <area target="" alt="Tavolo5" title="Tavolo5" href="" coords="58,409,134,484" shape="rect" id="Tavolo5" data-status="libero">
+                <area target="" alt="Tavolo6" title="Tavolo6" href="" coords="660,419,733,491" shape="rect" id="Tavolo6" data-status="libero">
+                <area target="" alt="Tavolo7" title="Tavolo7" href="" coords="0,170,148,235" shape="rect" id="Tavolo7" data-status="libero">
+                <area target="" alt="Tavolo8" title="Tavolo8" href="" coords="0,290,146,352" shape="rect" id="Tavolo8" data-status="libero">
+                <area target="" alt="Tavolo9" title="Tavolo9" href="" coords="196,404,268,541" shape="rect" id="Tavolo9" data-status="libero">
+                <area target="" alt="Tavolo10" title="Tavolo10" href="" coords="526,414,594,541" shape="rect" id="Tavolo10" data-status="libero">
+                <area target="" alt="Tavolo11" title="Tavolo11" href="" coords="658,299,788,361" shape="rect" id="Tavolo11" data-status="libero">
+                <area target="" alt="Tavolo12" title="Tavolo12" href="" coords="658,183,788,246" shape="rect" id="Tavolo12" data-status="libero">
+                <area target="" alt="Tavolo13" title="Tavolo13" href="" coords="228,157,302,229" shape="rect" id="Tavolo13" data-status="libero">
+                <area target="" alt="Tavolo14" title="Tavolo14" href="" coords="484,158,558,231" shape="rect" id="Tavolo14" data-status="libero">
+              </map> -->
           </div>
         </div>
-        
-        <div class="mappa" id="mappa">
-            <h2></h2>
-            <img src="MappaBurger.png" usemap="#tavoli" width="790" height="543" id="mappaImg">
-            <div class="area" id="1" style="left: 254px; top: 56px; width: 70px; height: 66px;"></div>
-            <div class="area" id="2" style="left: 455px; top: 55px; width: 73px; height: 73px;"></div>
-            <div class="area" id="3" style="left: 240px; top: 288px; width: 73px; height: 65px;"></div>
-            <div class="area" id="4" style="left: 478px; top: 286px; width: 73px; height: 71px;"></div>
-            <div class="area" id="5" style="left: 58px; top: 408px; width: 78px; height: 78px;"></div>
-            <div class="area" id="6" style="left: 660px; top: 419px; width: 74px; height: 74px;"></div>
-            <div class="area" id="7" style="left: 0px; top: 170px; width: 149px; height: 66px;"></div>
-            <div class="area" id="8" style="left: 0px; top: 290px; width: 148px; height: 65px;"></div>
-            <div class="area" id="9" style="left: 196px; top: 404px; width: 74px; height: 137px;"></div>
-            <div class="area" id="10" style="left: 526px; top: 414px; width: 69px; height: 128px;"></div>
-            <div class="area" id="11" style="left: 658px; top: 299px; width: 131px; height: 64px;"></div>
-            <div class="area" id="12" style="left: 658px; top: 183px; width: 131px; height: 66px;"></div>
-            <div class="area" id="13" style="left: 228px; top: 157px; width: 74px; height: 72px;"></div>
-            <div class="area" id="14" style="left: 484px; top: 158px; width: 76px; height: 76px;"></div>
-
-
-            <!-- <map name="tavoli">
-              <area target="" alt="Tavolo1"  href="" coords="254,55,322,120" shape="rect" id="Tavolo1" data-status="libero">
-              <area target="" alt="Tavolo2" title="Tavolo2" href="" coords="455,54,525,126" shape="rect" id="Tavolo2" data-status="libero">
-              <area target="" alt="Tavolo3" title="Tavolo3" href="" coords="240,288,313,353" shape="rect" id="Tavolo3" data-status="libero">
-              <area target="" alt="Tavolo4" title="Tavolo4" href="" coords="478,286,550,356" shape="rect" id="Tavolo4" data-status="libero">
-              <area target="" alt="Tavolo5" title="Tavolo5" href="" coords="58,409,134,484" shape="rect" id="Tavolo5" data-status="libero">
-              <area target="" alt="Tavolo6" title="Tavolo6" href="" coords="660,419,733,491" shape="rect" id="Tavolo6" data-status="libero">
-              <area target="" alt="Tavolo7" title="Tavolo7" href="" coords="0,170,148,235" shape="rect" id="Tavolo7" data-status="libero">
-              <area target="" alt="Tavolo8" title="Tavolo8" href="" coords="0,290,146,352" shape="rect" id="Tavolo8" data-status="libero">
-              <area target="" alt="Tavolo9" title="Tavolo9" href="" coords="196,404,268,541" shape="rect" id="Tavolo9" data-status="libero">
-              <area target="" alt="Tavolo10" title="Tavolo10" href="" coords="526,414,594,541" shape="rect" id="Tavolo10" data-status="libero">
-              <area target="" alt="Tavolo11" title="Tavolo11" href="" coords="658,299,788,361" shape="rect" id="Tavolo11" data-status="libero">
-              <area target="" alt="Tavolo12" title="Tavolo12" href="" coords="658,183,788,246" shape="rect" id="Tavolo12" data-status="libero">
-              <area target="" alt="Tavolo13" title="Tavolo13" href="" coords="228,157,302,229" shape="rect" id="Tavolo13" data-status="libero">
-              <area target="" alt="Tavolo14" title="Tavolo14" href="" coords="484,158,558,231" shape="rect" id="Tavolo14" data-status="libero">
-            </map> -->
-        </div>
-      </div>
       
-
+    </div>
 
       <div id="ModaleTavoli1" class="modal-table">
         <div class="contenuto-modale" id="contenuto-modale1">

@@ -8,8 +8,6 @@
       }
 
 
-
-
 * {
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -29,11 +27,13 @@ body {
 .modal-content h2{
   color: rgb(0, 0, 0);
   font-size: 35px;
+  font-family: FlameSans-Regular
 }
 
 .modal-content p{
   color: rgb(0, 0, 0);
   font-size: 20px;
+  font-family: FlameSans-Regular
 }
 
 #container {

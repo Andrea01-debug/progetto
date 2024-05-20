@@ -62,7 +62,7 @@ $(document).ready(function() {
                 const row = `<tr>
                     <td>${order.CodPren}</td>
                     <td>${order.Ordine}</td>
-                    <td>${order.Totale}</td>
+                    <td>${parseFloat(order.Totale)}</td>
                     <td>${payed}</td>
                     <td class="${statusInfo.class}">${statusInfo.text}</td>
                     <td class="td">

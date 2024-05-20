@@ -1,5 +1,6 @@
 local QBCore = exports['qb-core']:GetCoreObject()
 id = 0
+globale = 0
 
 RegisterNUICallback('RegistraUtente', function(data, cb)
     TriggerServerEvent("LTW:RegistraServer", data.username, data.password, data.nome, data.cognome, data.data, data.domanda, data.risposta)
@@ -78,6 +79,11 @@ RegisterNUICallback('GetOrdiniServer', function(data, cb)
     cb('ok')
 end)
 
+RegisterNUICallback('SetNavigatore', function(data, cb)
+    TriggerEvent("LTW:SetNavigatore")
+    cb('ok')
+end)
+
 RegisterNUICallback('GetPrenotazioniServer', function(data, cb)
     TriggerServerEvent('LTW:GetPrenotazioniServer', data.valore)
     cb('ok')
@@ -150,6 +156,32 @@ end)
 
 RegisterNUICallback("exit", function(data)
     SetDisplay(false)
+end)
+
+RegisterNetEvent("LTW:SetNavigatore", function()
+    if globale == 0 then
+        blip = AddBlipForCoord(-1179.17, -879.69, 13.24)
+        globale = 1
+        SetBlipRoute(blip, true)
+        SetBlipSprite(blip, 8)
+        SetBlipColour(blip, 3)
+        BeginTextCommandSetBlipName('STRING')
+        AddTextComponentSubstringPlayerName('BurgerShot')
+        EndTextCommandSetBlipName(blip)
+    end
+end)
+
+Citizen.CreateThread(function()
+    while true do
+        if globale then
+            local coords = GetEntityCoords(PlayerPedId())
+            if #(vector3(-1179.17, -879.69, 13.24) - coords) < 20 then
+                RemoveBlip(blip)
+                globale = 0
+            end
+        end
+        Wait(100)
+    end
 end)
 
 RegisterNetEvent("LTW:ErroreRegistrazione")
