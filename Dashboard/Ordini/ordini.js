@@ -113,7 +113,7 @@ $(document).ready(function() {
         });
     };
 
-    // Ordinamento tabella ------- da vedere meglio TODO
+    // Ordinamento tabella
     window.sortTable = function(columnIndex) {
         const table = document.getElementById("ordineTable");
         let switching = true;

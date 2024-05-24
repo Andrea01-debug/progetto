@@ -128,6 +128,8 @@ function DarkTheme() {
   });
   var barra = document.getElementById("Barra");
   barra.classList.toggle("dark")
+  var scrollOrd = document.getElementById("table-container");
+  scrollOrd.classList.toggle("dark")
 }
 
 function updateContent(grade) {    

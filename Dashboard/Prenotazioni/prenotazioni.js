@@ -131,6 +131,44 @@ document.addEventListener('DOMContentLoaded', function () {
 $(document).ready(function() {
     caricaPrenotazioni();
     aggiornaMappa();
+
+    window.sortTable = function(columnIndex) {
+        const table = document.getElementById("tabellaPrenotazioni");
+        let switching = true;
+        let shouldSwitch;
+        let direction = "asc";
+        let switchcount = 0;
+
+        while (switching) {
+            switching = false;
+            let rows = table.rows;
+
+            for (var i = 1; i < (rows.length - 1); i++) {
+                shouldSwitch = false;
+                let x = rows[i].getElementsByTagName("TD")[columnIndex];
+                let y = rows[i + 1].getElementsByTagName("TD")[columnIndex];
+
+                if (direction == "asc" && x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                    shouldSwitch = true;
+                    break;
+                } else if (direction == "desc" && x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                    shouldSwitch = true;
+                    break;
+                }
+            }
+
+            if (shouldSwitch) {
+                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                switching = true;
+                switchcount++;
+            } else {
+                if (switchcount === 0 && direction === "asc") {
+                    direction = "desc";
+                    switching = true;
+                }
+            }
+        }
+    };
 })
 
 function caricaPrenotazioni() {
