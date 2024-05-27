@@ -61,7 +61,7 @@
             <form id="FormPrenotazione" method="post">
                 <p>
                     Nome Prenotazione: <input class="inputPren" type="text" id="nomepren" name="nome" placeholder="Mario" required><br><br>
-                    Numero di persone: <input class="inputPren" type="number" id="numeropren" name="numero" placeholder="4" required><br><br>
+                    Numero di persone: <input class="inputPren" type="number" id="numeropren" name="numero" placeholder="4" min="1" max="5" required><br><br>
                     Data: <input class="inputPren" type="date" id="datapren" name="data" required onchange="setMinTime()" ><br><br>
                     Ora: <input class="inputPren" type="time" id="timepren" name="time" required ><br><br>                    
                 </p>
@@ -110,7 +110,7 @@
                 <div class="input-group">
                         <label>Nome:</label><input type="text" id="nome" name="nome" placeholder="Mario" required>
                         <label>Cognome: </label><input type="text" id="cognome" name="cognome" placeholder="Rossi" required>
-                        <label>Data di Nascita: </label><input type="date" id="data" name="data" required>
+                        <label>Data di Nascita: </label><input type="date" id="data" name="data" min="2010-01-01" required>
                         <label>Username: </label><input type="text" id="usernamelog" name="usernamelog" placeholder="Username" required>
                         <label>Password: </label><input type="password" id="passwordlog" name="passwordlog" placeholder="Password" required>
                         <label>Domanda di sicurezza:</label> 

@@ -352,7 +352,7 @@ input.Bottone:checked + .etichetta:after {
   display: flex;
   flex-direction: column;
   overflow-y: auto; /* Consente lo scrolling verticale */
-  max-height: 400px; 
+  max-height: 50vh; 
   border: 1px solid #ccc;
   padding: 10px;
   background-color: #f9f9f9;
@@ -365,7 +365,7 @@ input.Bottone:checked + .etichetta:after {
   display: flex;
   flex-direction: column;
   overflow-y: auto; /* Consente lo scrolling verticale */
-  max-height: 400px; 
+  max-height: 50vh;  
   border: 1px solid #282b30;
   padding: 10px;
   background-color: #282b30;
