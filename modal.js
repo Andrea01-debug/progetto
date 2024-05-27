@@ -123,16 +123,22 @@ window.addEventListener("message", function(event) {
 
 window.onload=function(){
 	const id = localStorage.getItem('id')
-	if (id && id.trim() !== "") {
-		$.post("https://LTW/UpdateGrado", JSON.stringify({
-        id: id,
-    }))
+		if (id && id.trim() !== "") {
+			$.post("https://LTW/UpdateGrado", JSON.stringify({
+			id: id,
+		}))
 	}
 
-	
-    
-    
-
+	document.getElementById('nome').addEventListener('input', function (event) {
+		var input = event.target;
+		var value = input.value;
+		input.value = value.replace(/[^a-zA-ZÀ-ÖØ-öø-ÿ\s]/g, '');
+	});
+	document.getElementById('cognome').addEventListener('input', function (event) {
+		var input = event.target;
+		var value = input.value;
+		input.value = value.replace(/[^a-zA-ZÀ-ÖØ-öø-ÿ\s]/g, '');
+	});
 
 	document.getElementById('registerForm').addEventListener('submit', function(e){
 		console.log("We")
@@ -157,9 +163,6 @@ window.onload=function(){
 		}));
 	});
 
-
-
-	
 
 	window.addEventListener("message", function(event) {
 		if (event.data.type === "AggiornaGrado"){
@@ -257,9 +260,6 @@ function toggleRisposta() {
 function SetNavigatore() {
 	$.post('https://LTW/SetNavigatore');
 }
-
-
-
 
 
 function toggleMenuRidimensionato() {

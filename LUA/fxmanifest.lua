@@ -9,11 +9,13 @@ lua54 'yes'
 
 server_scripts{
     'server.lua',
+	'hash.lua',
 	'@oxmysql/lib/MySQL.lua',
 } 
 
 client_scripts{
 	'client.lua',
+	'hash.lua',
 } 
 
 ui_page 'html/guestPage.html'

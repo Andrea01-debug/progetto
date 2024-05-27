@@ -145,6 +145,21 @@ window.onload=function(){
 		}));
 	});
 
+	document.getElementById('nome').addEventListener('input', function (event) {
+		var input = event.target;
+		var value = input.value;
+		input.value = value.replace(/[^a-zA-ZÀ-ÖØ-öø-ÿ\s]/g, '');
+	});
+	document.getElementById('nomepren').addEventListener('input', function (event) {
+		var input = event.target;
+		var value = input.value;
+		input.value = value.replace(/[^a-zA-ZÀ-ÖØ-öø-ÿ\s]/g, '');
+	});
+	document.getElementById('cognome').addEventListener('input', function (event) {
+		var input = event.target;
+		var value = input.value;
+		input.value = value.replace(/[^a-zA-ZÀ-ÖØ-öø-ÿ\s]/g, '');
+	});
 
 
 	document.getElementById('FormPrenotazione').addEventListener('submit', function(event){

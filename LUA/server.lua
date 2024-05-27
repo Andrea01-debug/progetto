@@ -83,6 +83,9 @@ RegisterNetEvent("LTW:RegistraServer", function(username, password, nome, cognom
     local player = QBCore.Functions.GetPlayer(source)
     local src = source
     local ID = math.random(11111111,99999999)
+    print(password)
+    local hashpsw = sha256(password)
+    print(hashpsw)
     MySQL.Async.fetchAll('SELECT NomeUtente FROM ltwtable WHERE NomeUtente = @username', {
         ['@username'] = username,
     }, function(result)
@@ -93,7 +96,7 @@ RegisterNetEvent("LTW:RegistraServer", function(username, password, nome, cognom
         else
             MySQL.Async.insert("INSERT INTO ltwtable (NomeUtente, Password, CitizenID, Nome, Cognome, Data, Domanda, Risposta, ID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", {
                 username,
-                password,
+                hashpsw,
                 player.PlayerData.citizenid,
                 nome,
                 cognome,
@@ -111,11 +114,12 @@ end)
 RegisterNetEvent("LTW:LoginServer", function(username, password)
     local src = source
     local player = QBCore.Functions.GetPlayer(src)
-
+    local hashpsw = sha256(password)
+    print(hashpsw)
     -- Verifica se il nome utente e la password corrispondono
     MySQL.Async.fetchAll('SELECT * FROM ltwtable WHERE NomeUtente = @username AND Password = @password', {
         ['@username'] = username,
-        ['@password'] = password,
+        ['@password'] = hashpsw,
     }, function(result)
         if result and #result > 0 then
             -- Controlla se l'utente è già nella sessione
@@ -193,6 +197,7 @@ end
 
 RegisterNetEvent("LTW:ResetPswServer", function(username, data, domanda, risposta, password)    
     local src = source
+    local hashpsw = sha256(password)
     MySQL.Async.fetchAll('SELECT NomeUtente, Data, Domanda, Risposta FROM ltwtable WHERE NomeUtente = @username AND Data = @data AND Domanda = @domanda AND Risposta = @risposta', {
         ['@username'] = username,
         ['@data'] = data,
@@ -204,7 +209,7 @@ RegisterNetEvent("LTW:ResetPswServer", function(username, data, domanda, rispost
             --print("source:", src)
             TriggerClientEvent("QBCore:Notify", src, "Cambio psw riuscito", 'success')
             MySQL.Async.execute('UPDATE ltwtable SET password = @password WHERE NomeUtente = @username AND Data = @data AND Domanda = @domanda AND Risposta = @risposta', {
-                ['@password'] = password,
+                ['@password'] = hashpsw,
                 ['@username'] = username,
                 ['@data'] = data,
                 ['@domanda'] = domanda,

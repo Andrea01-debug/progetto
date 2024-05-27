@@ -60,8 +60,7 @@ $.post("https://LTW/UpdateGrado", JSON.stringify({
 
 window.addEventListener("message", function(event) {
     if (event.data.type === "AggiornaGrado"){
-      console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-      console.log(event.data.grade);
+      //console.log(event.data.grade);
       localStorage.setItem('grade', event.data.grade);
 
     }
@@ -137,7 +136,7 @@ function updateContent(grade) {
     /* document.getElementById("tooltip").style.display = "none";
     document.getElementById("gestioneDipendenti").style.display = "none"; */
   } else if (grade == 1) {
-    console.log("grado 1")
+    //console.log("grado 1")
     document.getElementById("dashboardDefault").style.display = "none";
     document.getElementById("dashboardDipendenti").style.display = "block";
     
@@ -148,18 +147,17 @@ function updateContent(grade) {
     document.getElementById("dashboadAmministratore").style.display = "block";
     document.getElementById("gestioneDipendenti").style.display = "block";
     
-    console.log("grado 2")
+    //console.log("grado 2")
   } else {
-    console.log("grado Pinguino")
+    //console.log("grado Pinguino")
   }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-	console.log("DOM CARICATO Dashboard");
+	//console.log("DOM CARICATO Dashboard");
     const grade = localStorage.getItem('grade');
-    console.log(grade);
+    //console.log(grade);
     if (grade) {
-
         updateContent(parseInt(grade));
     }
 	
