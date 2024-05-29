@@ -170,7 +170,7 @@ RegisterNetEvent("LTW:PrenotaUnTavolo", function(nome, numero, data, ora)
                     time[1],
                     j
                 })
-                TriggerClientEvent("QBCore:Notify", src, "Tavolo prenotato!", 'success')
+                --TriggerClientEvent("QBCore:Notify", src, "Tavolo prenotato!", 'success')
                 TriggerClientEvent("LTW:validLogin", src, 'Tavolo prenotato con successo')
                 check = false
             end
@@ -179,7 +179,8 @@ RegisterNetEvent("LTW:PrenotaUnTavolo", function(nome, numero, data, ora)
         j = j + 1;
     end
     if check == true then
-        TriggerClientEvent("QBCore:Notify", src, "Non è stato possibile prenotare un tavolo, cambia giorno o ora", 'error')
+        --TriggerClientEvent("QBCore:Notify", src, "Non è stato possibile prenotare un tavolo, cambia giorno o ora", 'error')
+        TriggerClientEvent("LTW:InvalidLogin", src, 'Non è stato possibile prenotare un tavolo, cambia giorno o ora')
     end
 
 

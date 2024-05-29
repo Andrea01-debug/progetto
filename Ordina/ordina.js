@@ -115,7 +115,7 @@ function totalButton() {
                         Swal.fire({
                             title: "Ordine effettuato",
                             html: `Il codice di ritiro è <b>${codiceprenotazione}</b>`,
-                            icon: "info",
+                            icon: "success",
                             confirmButtonText: "OK",
                         });
 
@@ -131,7 +131,7 @@ function totalButton() {
                         Swal.fire({
                             title: "Ordine effettuato",
                             html: `Il codice di ritiro è <b>${codiceprenotazione}</b>`,
-                            icon: "info",
+                            icon: "success",
                             confirmButtonText: "OK",
                         });
                         $.post("https://LTW/Ordina", JSON.stringify({

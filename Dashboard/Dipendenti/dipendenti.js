@@ -139,7 +139,9 @@ function unpromoteEmployee(nome, userId) {
       title: "Gestione Dipendente",
       html: `Vuoi davvero Retrocedere <b>${nome}</b> ? `,
       icon: "info",
+      showCancelButton: true,
       confirmButtonText: "OK",
+      cancelButtonText: "Annulla",
   }).then((result) => {
     if (result.isConfirmed) {
       const id = localStorage.getItem('id')
@@ -162,7 +164,9 @@ function promoteEmployee(nome, userId) {
       title: "Gestione Dipendente",
       html: `Vuoi davvero Promuovere <b>${nome}</b> ? `,
       icon: "info",
+      showCancelButton: true,
       confirmButtonText: "OK",
+      cancelButtonText: "Annulla",
   }).then((result) => {
     if (result.isConfirmed) {
       const id = localStorage.getItem('id')
@@ -187,7 +191,9 @@ function fireEmployee(nome, userId) {
       title: "Gestione Dipendente",
       html: `Vuoi davvero Licenziare <b>${nome}</b> ? `,
       icon: "info",
+      showCancelButton: true,
       confirmButtonText: "OK",
+      cancelButtonText: "Annulla",
     }).then((result) => {
       if (result.isConfirmed) {
         const id = localStorage.getItem('id')

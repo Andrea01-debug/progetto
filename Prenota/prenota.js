@@ -71,6 +71,9 @@ function openLogout() {
     
     // Rimozione utente dal localStorage al logout
     localStorage.removeItem('grade');
+    localStorage.removeItem('id'); 
+    localStorage.removeItem('data');
+    localStorage.removeItem('ora');
     console.log("Utente disconnesso e localStorage cancellato.");
     
     // Aggiorna il contenuto della pagina se ci si disconnette

@@ -58,9 +58,13 @@ function openLogout() {
 	console.log("ESCIIIIIIIIIIII")
     // Invia un messaggio al client Lua per indicare il logout
     $.post("https://LTW/LogoutUser", JSON.stringify({}));
-    
+    console.log(localStorage)
     // Rimuove l'utente dal localStorage
     localStorage.removeItem('grade'); 
+    localStorage.removeItem('id');
+    localStorage.removeItem('data');
+    localStorage.removeItem('ora');
+
     //console.log("Utente disconnesso e localStorage cancellato.");
     
     // Aggiorna il contenuto della pagina per riflettere il logout
