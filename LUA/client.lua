@@ -154,6 +154,11 @@ RegisterNetEvent("LTW:client:usaTablet", function()
 end)
 
 
+-- Le pagine NUI chiedono se la UI e' aperta (le pagine partono nascoste o vengono ricaricate durante la navigazione)
+RegisterNUICallback("GetDisplay", function(data, cb)
+    cb(display == true)
+end)
+
 RegisterNUICallback("exit", function(data)
     SetDisplay(false)
 end)
@@ -173,14 +178,17 @@ end)
 
 Citizen.CreateThread(function()
     while true do
-        if globale then
+        local attesa = 1000
+        -- Controllo frequente solo mentre il navigatore e' attivo
+        if globale == 1 then
+            attesa = 100
             local coords = GetEntityCoords(PlayerPedId())
             if #(vector3(-1179.17, -879.69, 13.24) - coords) < 20 then
                 RemoveBlip(blip)
                 globale = 0
             end
         end
-        Wait(100)
+        Wait(attesa)
     end
 end)
 

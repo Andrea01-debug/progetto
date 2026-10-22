@@ -9,11 +9,11 @@
         
 
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="modal.js"></script>
     </head>
     <body>
-        <div id="container">
+        <div id="container" style="display: none;">
             <div class="header">
                 <a href="guestPage.html" draggable="false">
                     <img class="imgGrande" src="img/BurgerShot-HDLogo.svg" width="180px" style="margin-top: -5px;" draggable="false">  
@@ -191,6 +191,14 @@
                 document.addEventListener("DOMContentLoaded", function() {
                     const container = document.getElementById("container");
                     const scrollBtn = document.getElementById("scrollBtn");
+
+                    // Il contenitore parte nascosto (evita il lampo all'ingresso nel server): se la UI e' gia' aperta, ad esempio
+                    // tornando alla home da un'altra pagina, lo mostra
+                    $.post("https://LTW/GetDisplay", "{}", function (visibile) {
+                        if (visibile === true) {
+                            $("#container").show();
+                        }
+                    }, "json");
 
                     container.addEventListener("scroll", function() {
                         if (container.scrollTop > 50) { 

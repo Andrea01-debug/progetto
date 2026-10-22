@@ -1,8 +1,8 @@
-@font-face { font-family: FlameSans-Bold; src: url('flame-font/FlameBold.otf'); } 
+@font-face { font-family: FlameSans-Bold; src: url('flame-font/Flame-Bold.woff') format('woff'); } 
       h2,h3,h4 {
          font-family: FlameSans-Bold
       }
-@font-face { font-family: FlameSans-Regular; src: url('flame-font/FlameRegular.otf'); } 
+@font-face { font-family: FlameSans-Regular; src: url('flame-font/Flame-Regular.woff') format('woff'); } 
       body {
          font-family: FlameSans-Regular
       }

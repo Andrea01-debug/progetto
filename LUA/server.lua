@@ -8,6 +8,7 @@ end) ]]
 local QBCore = exports['qb-core']:GetCoreObject()
 local sessionTable = {}
 local i = 1
+local MAX_ORDINI = 200 -- massimo di ordini mostrati nella dashboard
 local tavoli = {
     [1] = {
         ["numero"] = 1,
@@ -155,35 +156,38 @@ end)
 
 RegisterNetEvent("LTW:PrenotaUnTavolo", function(nome, numero, data, ora)
     local src = source
-    local check = true
-    local j = 1
     local time = strsplit(ora, ":")
-    --print(QBCore.Debug(time))
-    while(check and j < #tavoli) do
-        if tonumber(numero) <= tavoli[j]["dim"] then
-            local result = MySQL.Sync.fetchAll('SELECT * FROM ltwPrenota WHERE Data = ? AND Ora = ? AND Tavolo = ?', { data , time[1] , j})
-            if #result == 0 then
-                MySQL.Async.insert("INSERT INTO ltwPrenota (Nome, Numero, Data, Ora, Tavolo) VALUES (?, ?, ?, ?, ?)", {
-                    nome,
-                    numero,
-                    data,
-                    time[1],
-                    j
-                })
-                --TriggerClientEvent("QBCore:Notify", src, "Tavolo prenotato!", 'success')
-                TriggerClientEvent("LTW:validLogin", src, 'Tavolo prenotato con successo')
-                check = false
-            end
-        end
-        Wait(5)
-        j = j + 1;
-    end
-    if check == true then
-        --TriggerClientEvent("QBCore:Notify", src, "Non è stato possibile prenotare un tavolo, cambia giorno o ora", 'error')
+    numero = tonumber(numero)
+
+    if not numero or not time[1] then
         TriggerClientEvent("LTW:InvalidLogin", src, 'Non è stato possibile prenotare un tavolo, cambia giorno o ora')
+        return
     end
 
+    -- Tavoli già occupati in quel giorno e a quell'ora, con una sola query
+    local occupati = {}
+    for _, riga in ipairs(MySQL.query.await('SELECT Tavolo FROM ltwPrenota WHERE Data = ? AND Ora = ?', { data, time[1] }) or {}) do
+        occupati[tonumber(riga.Tavolo)] = true
+    end
 
+    -- Primo tavolo libero abbastanza grande
+    for j = 1, #tavoli do
+        if numero <= tavoli[j]["dim"] and not occupati[j] then
+            MySQL.insert.await("INSERT INTO ltwPrenota (Nome, Numero, Data, Ora, Tavolo) VALUES (?, ?, ?, ?, ?)", {
+                nome,
+                numero,
+                data,
+                time[1],
+                j
+            })
+            --TriggerClientEvent("QBCore:Notify", src, "Tavolo prenotato!", 'success')
+            TriggerClientEvent("LTW:validLogin", src, 'Tavolo prenotato con successo')
+            return
+        end
+    end
+
+    --TriggerClientEvent("QBCore:Notify", src, "Non è stato possibile prenotare un tavolo, cambia giorno o ora", 'error')
+    TriggerClientEvent("LTW:InvalidLogin", src, 'Non è stato possibile prenotare un tavolo, cambia giorno o ora')
 end)
 
 function usernameExists(username)
@@ -238,7 +242,8 @@ end)
 
 RegisterNetEvent("LTW:GetOrdiniServer",function()
     local src = source
-    MySQL.Async.fetchAll('SELECT * FROM ltwordina', {
+    -- Colonne esplicite e al massimo MAX_ORDINI righe (le piu' recenti, in ordine di ID)
+    MySQL.Async.fetchAll(('SELECT * FROM (SELECT ID, Ordine, Totale, Accettato, CodPren, Pagato FROM ltwordina ORDER BY ID DESC LIMIT %d) ultimi ORDER BY ID ASC'):format(MAX_ORDINI), {
     }, function(result)
         --QBCore.Debug(result)
         TriggerClientEvent("LTW:GetOrdiniClient", src, result)
@@ -307,7 +312,7 @@ RegisterNetEvent("LTW:ConfermaPrenotazioneServer",function(Nome, Tavolo, Numero,
     local tavolo = tavoli[Tavolo]
     local ora = strsplit( Ora,":")[1]
     if Numero <= tavolo["dim"] then
-        MySQL.Sync.insert("INSERT INTO ltwPrenota (Nome, Numero, Data, Ora, Tavolo) VALUES (?, ?, ?, ?, ?)", {
+        MySQL.insert.await("INSERT INTO ltwPrenota (Nome, Numero, Data, Ora, Tavolo) VALUES (?, ?, ?, ?, ?)", {
             Nome,
             Numero,
             Data,
@@ -381,49 +386,22 @@ end)
 
 RegisterNetEvent("LTW:DashboardData", function()
     local src = source
-    local NDip
-    local NOrdini
-    local NPrenot
-    local Saldo
 
+    -- Una sola query: dipendenti assunti, ordini in attesa, tavoli prenotati in questo orario e saldo
+    local result = MySQL.query.await([[
+        SELECT
+            (SELECT COUNT(*) FROM ltwtable WHERE grado > 0) AS dipendenti,
+            (SELECT COUNT(*) FROM ltwordina WHERE Accettato = 0) AS ordini,
+            (SELECT COUNT(*) FROM ltwprenota WHERE Data = ? AND Ora = ?) AS prenotazioni,
+            (SELECT amount FROM management_funds WHERE job_name = ? AND type = 'boss' LIMIT 1) AS saldo
+    ]], { os.date("%Y-%m-%d"), os.date("%H"), "burgershot" })
+    local riga = result and result[1] or {}
 
-    -- Dipendenti assunti
-    MySQL.Async.fetchAll('SELECT grado FROM ltwtable WHERE grado > 0', function(result)
-        NDip = #result
-    end)
-
-    -- Numero di Ordini
-    MySQL.Async.fetchAll('SELECT ID FROM ltwordina WHERE Accettato = 0', function(result)
-        NOrdini = #result
-    end)
-
-    -- Numero Tavoli Prenotati
-    local temp = os.date("%Y-%m-%d")
-    --print(temp)
-    --print(type(temp))
-    MySQL.Async.fetchAll('SELECT * FROM ltwprenota WHERE Data = @Data AND Ora = @Ora', {
-        ['@Data'] = temp,
-        ['@Ora'] = os.date("%H"),
-    }, function(result)
-        NPrenot = #result
-        --print(NPrenot)
-        --print(type(os.date("%x")))
-    end)
-    
-    -- Saldo
-
-    MySQL.Async.fetchAll('SELECT amount FROM management_funds WHERE job_name = @nome and type = "boss"', {
-        ['@nome'] = "burgershot"
-    }, function(result)
-        Saldo = result[1].amount
-    end)
-    
-    Wait(400)
     local data = {
-        dipendenti = NDip,
-        ordini = NOrdini,
-        prenotazione = NPrenot,
-        soldi = Saldo .. " $",
+        dipendenti = riga.dipendenti or 0,
+        ordini = riga.ordini or 0,
+        prenotazione = riga.prenotazioni or 0,
+        soldi = (riga.saldo or 0) .. " $",
     }
     TriggerClientEvent("LTW:Dashboard", src, data)
     
@@ -446,8 +424,8 @@ end)
 RegisterNetEvent("LTW:LicenziaDipendenteServer", function(userId, proprioId)
     local src = source
 
-    local risultato = MySQL.Sync.fetchAll('SELECT grado FROM ltwtable WHERE ID = ?', {proprioId})
-    local MIOGRADO = risultato[1].grado
+    local risultato = MySQL.query.await('SELECT grado FROM ltwtable WHERE ID = ?', {proprioId})
+    local MIOGRADO = risultato[1] and risultato[1].grado
 
     if MIOGRADO == 2 then
 
@@ -465,16 +443,16 @@ RegisterNetEvent("LTW:PromuoviDipendenteServer", function(userId, proprioId)
     local src = source
     --print(userId)
 
-    local risultato = MySQL.Sync.fetchAll('SELECT grado FROM ltwtable WHERE ID = ?', {proprioId})
-    local MIOGRADO = risultato[1].grado
+    local risultato = MySQL.query.await('SELECT grado FROM ltwtable WHERE ID = ?', {proprioId})
+    local MIOGRADO = risultato[1] and risultato[1].grado
 
     if MIOGRADO == 2 then
-        local result = MySQL.Sync.fetchAll('SELECT grado FROM ltwtable WHERE ID = ?', {userId})
+        local result = MySQL.query.await('SELECT grado FROM ltwtable WHERE ID = ?', {userId})
         --QBCore.Debug(result)
         --print(result[1])
-        grado = result[1].grado
+        local grado = result[1] and result[1].grado
 
-        if grado < 2 then
+        if grado and grado < 2 then
             MySQL.Async.execute('UPDATE ltwtable SET Grado = @grado WHERE ID = @id', {
                 ['@grado'] = grado + 1 ,
                 ['@id'] = userId,
@@ -491,18 +469,18 @@ end)
 RegisterNetEvent("LTW:RetrocediDipendenteServer", function(userId, proprioId)
     local src = source
 
-    local risultato = MySQL.Sync.fetchAll('SELECT grado FROM ltwtable WHERE ID = ?', {proprioId})
-    local MIOGRADO = risultato[1].grado
+    local risultato = MySQL.query.await('SELECT grado FROM ltwtable WHERE ID = ?', {proprioId})
+    local MIOGRADO = risultato[1] and risultato[1].grado
     --print("MIOGRADO")
     --print(MIOGRADO)
     if MIOGRADO == 2 then
 
-        local result = MySQL.Sync.fetchAll('SELECT grado FROM ltwtable WHERE ID = ?', {userId})
+        local result = MySQL.query.await('SELECT grado FROM ltwtable WHERE ID = ?', {userId})
         --QBCore.Debug(result)
         --print(result[1])
-        grado = result[1].grado
+        local grado = result[1] and result[1].grado
 
-        if grado > 1 then
+        if grado and grado > 1 then
             MySQL.Async.execute('UPDATE ltwtable SET Grado = @grado WHERE ID = @id', {
                 ['@grado'] = grado - 1 ,
                 ['@id'] = userId,
@@ -571,12 +549,19 @@ RegisterNetEvent("LTW:AndamentoPrenotazioni", function()
     }
 
     for i = 0, 6 do
-        temp = os.time() - (86400 * i)
-        data["Giorni"][i+1] = os.date("%Y-%m-%d", temp)
-        
-        result = MySQL.Sync.fetchAll('SELECT COUNT(*) test FROM ltwprenota WHERE Data = ?', { data["Giorni"][i+1] })
-        
-        data["Numero"][i+1] = result[1]["test"]
+        data["Giorni"][i+1] = os.date("%Y-%m-%d", os.time() - (86400 * i))
+    end
+
+    -- Una sola query per tutti e 7 i giorni
+    local result = MySQL.query.await('SELECT CAST(Data AS CHAR) AS giorno, COUNT(*) AS numero FROM ltwprenota WHERE Data IN (?, ?, ?, ?, ?, ?, ?) GROUP BY giorno', data["Giorni"])
+
+    local conteggi = {}
+    for _, riga in ipairs(result or {}) do
+        conteggi[riga.giorno] = riga.numero
+    end
+
+    for i, giorno in ipairs(data["Giorni"]) do
+        data["Numero"][i] = conteggi[giorno] or 0
     end
 
     --print(QBCore.Debug(data))
