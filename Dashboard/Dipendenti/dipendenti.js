@@ -286,7 +286,7 @@ function addEmployee() {
             employeeItem.setAttribute("data-name", `${employee.Nome} ${employee.Cognome}`);
             employeeItem.setAttribute("data-user-id", employee.ID);
             employeeItem.innerHTML = `
-                <img src="profilo.jpg" alt="Foto Profilo" class="profile-pic">
+                <img src="../../img/profilo.jpg" alt="Foto Profilo" class="profile-pic">
                 <div class="employee-info">
                     <h3>${employee.Nome} ${employee.Cognome}</h3>
                     <p>Grado: ${employee.Grado}</p>
